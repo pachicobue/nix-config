@@ -2,6 +2,7 @@
 {
   fonts = {
     packages = with pkgs; [
+      noto-fonts
       noto-fonts-cjk-serif
       noto-fonts-cjk-sans
       noto-fonts-emoji
@@ -19,10 +20,13 @@
           "Noto Color Emoji"
         ];
         monospace = [
-          "Monaspice Nerd Font"
+          "MonaspiceNe Nerd Font Mono"
+          "MonaspiceRn Nerd Font Mono"
+          "MonaspiceXe Nerd Font Mono"
+          "MonaspiceAr Nerd Font Mono"
           "Noto Color Emoji"
         ];
-        emoji = [ "Noro Color Emoji"];
+        emoji = [ "Noro Color Emoji" ];
       };
     };
   };

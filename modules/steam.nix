@@ -7,10 +7,6 @@
     localNetworkGameTransfers.openFirewall = true;
   };
   nixpkgs.config.packageOverrides = pkgs: {
-    steam = pkgs.steam.override {
-      extraPkgs = pkgs: with pkgs;[
-        migu
-      ];
-    };
+    steam = pkgs.steam.override { extraPkgs = pkgs: with pkgs; [ noto-fonts-cjk ]; };
   };
 }

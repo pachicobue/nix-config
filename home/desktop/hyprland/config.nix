@@ -4,6 +4,7 @@
     "$terminal" = "kitty";
     "$menu" = "walker";
     exec-once = [
+      "wayvnc 0.0.0.0"
       "fcitx5 -d -r"
       "fcitx5-remote -r"
       "mako"

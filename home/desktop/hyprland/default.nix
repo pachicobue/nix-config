@@ -22,5 +22,6 @@ in
     pavucontrol
     wl-clipboard
     cliphist
+    wayvnc
   ];
 }

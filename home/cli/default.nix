@@ -3,7 +3,7 @@
   imports = [
     ./cli-tools.nix
     ./direnv.nix
-    ./editor
+    ./helix.nix
     ./git.nix
     ./shell.nix
   ];

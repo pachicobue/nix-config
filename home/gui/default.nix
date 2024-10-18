@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
+    ./emacs.nix
     ./firefox.nix
     ./term.nix
     ./theme.nix

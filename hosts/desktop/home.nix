@@ -5,8 +5,8 @@
     ../../home/gui
     ../../home/desktop/hyprland
   ];
-  services.emacs.defaultEditor = true;
+  programs.helix.defaultEditor = true;
   programs.zsh.shellAliases = {
-    e = "emacsclient";
+    e = "emacsclient -r";
   };
 }

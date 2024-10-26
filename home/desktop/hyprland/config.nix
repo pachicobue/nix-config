@@ -4,13 +4,13 @@
     "$terminal" = "kitty";
     "$menu" = "walker";
     exec-once = [
-      "wayvnc 0.0.0.0"
       "fcitx5 -d -r"
       "fcitx5-remote -r"
       "mako"
       "waybar"
       "[workspace special silent] $terminal"
       "[workspace 1 silent] firefox"
+      "[workspace 1 silent] emacs-client -r"
     ];
     windowrule = [ "pseudo, noblur, class:(fcitx)" ];
     windowrulev2 = [ "noblur,class:^()$,title:^()$" ];
@@ -19,7 +19,7 @@
       kb_options = [ "ctrl:nocaps" ];
       repeat_delay = 300;
       repeat_rate = 30;
-      follow_mouse = 2;
+      follow_mouse = 1;
       sensitivity = lib.mkDefault (0.0);
     };
     general = {

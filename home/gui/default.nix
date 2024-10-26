@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
-    ./emacs.nix
+    ./emacs
     ./firefox.nix
     ./term.nix
     ./theme.nix

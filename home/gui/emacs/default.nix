@@ -1,25 +1,30 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   programs.emacs = {
     enable = true;
+    package = pkgs.emacs30-pgtk;
     extraPackages = epkgs: with epkgs; [
+      # Package Manager
+      setup
+      # Appearance
       ef-themes
       dimmer
-      nano-modeline
       moody
       minions
       mlscroll
-
-      imenu-list
+      nerd-icons
+      nerd-icons-corfu
       spacious-padding
-
+      perfect-margin
+      centaur-tabs
+      # File Manager
       treemacs
       treemacs-nerd-icons
       treemacs-icons-dired
       treemacs-magit
       activities
       diff-hl
-
+      # Mini Buffer
       vertico
       vertico-posframe
       consult
@@ -30,19 +35,21 @@
       marginalia
       orderless
       embark
-      
+      # Editting
       meow
       vundo
       corfu
       corfu-terminal
+      cape
+      prescient
       puni
       which-key
       visual-regexp
-
+      # Highlight
       rainbow-mode
       rainbow-delimiters
       hl-todo
-
+      # Language
       reformatter
       (treesit-grammars.with-grammars
         (p:
@@ -69,8 +76,6 @@
           ]))
       eglot
       aggressive-indent
-      clojure-mode
-      clojure-ts-mode
       eros
       markdown-mode
       nix-ts-mode
@@ -78,14 +83,16 @@
       org-side-tree
       rust-mode
       cargo
-
+      # Linting
       flycheck
+      # Version Control
       magit
+      magit-file-icons
       difftastic
+      # Develop Environment
+      envrc
     ];
-    extraConfig = ''
-      (use-package )
-    '';
+    extraConfig = lib.readFile ./init.el;
   };
   services.emacs = {
     enable = true;

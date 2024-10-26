@@ -5,9 +5,10 @@
     "$mainMod" = "SUPER";
     "$subMod" = "ALT";
     bind = [
+      "$subMod, SPACE, exec, $menu"
+      "$subMod, TAB, togglespecialworkspace"
       "$mainMod, T, exec, $terminal"
       "$mainMod, C, killactive"
-      "$mainMod, SPACE, exec, $menu"
       "$mainMod, H, movefocus, l"
       "$mainMod, L, movefocus, r"
       "$mainMod, K, movefocus, u"
@@ -25,7 +26,6 @@
       "$mainMod, 7, workspace, 7"
       "$mainMod, 8, workspace, 8"
       "$mainMod, 9, workspace, 9"
-      "$mainMod, TAB, togglespecialworkspace"
       "$mainMod SHIFT, 1, movetoworkspace, 1"
       "$mainMod SHIFT, 2, movetoworkspace, 2"
       "$mainMod SHIFT, 3, movetoworkspace, 3"

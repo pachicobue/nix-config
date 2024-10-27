@@ -62,7 +62,7 @@ in
     desktop = mkHomeManagerConfiguration {
       system = "x86_64-linux";
       username = "sho";
-      overlays = [];
+      overlays = [ inputs.fenix.overlays.default ];
       modules = [ ./desktop/home.nix ];
     };
   };

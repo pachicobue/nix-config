@@ -6,7 +6,12 @@
       noto-fonts-cjk-serif
       noto-fonts-cjk-sans
       noto-fonts-emoji
-      (nerdfonts.override { fonts = [ "Monaspace" ]; })
+      (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
+      # MoralerspaceNF
+      "${pkgs.fetchzip {
+        url = "https://github.com/yuru7/moralerspace/releases/download/v1.0.2/MoralerspaceNF_v1.0.2.zip";
+        sha256 = "0dsf0na17v31sinpm5541kg9gmc7f3dzhyph6gi8ickisp14f6mw";
+      }}"
     ];
     fontDir.enable = true;
     fontconfig = {
@@ -20,10 +25,11 @@
           "Noto Color Emoji"
         ];
         monospace = [
-          "MonaspiceNe Nerd Font Mono"
-          "MonaspiceRn Nerd Font Mono"
-          "MonaspiceXe Nerd Font Mono"
-          "MonaspiceAr Nerd Font Mono"
+          "Moralerspace Neon NF"
+          "Moralerspace Radon NF"
+          "Moralerspace Xenon NF"
+          "Moralerspace Argon NF"
+          "Moralerspace Krypton NF"
           "Noto Color Emoji"
         ];
         emoji = [ "Noro Color Emoji" ];

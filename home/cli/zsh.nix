@@ -1,13 +1,16 @@
-{ pkgs, ... }:
+{ ... }:
 {
   programs.zsh = {
     enable = true;
 
     defaultKeymap = "emacs";
-    dotDir = ".config.zsh";
+    dotDir = ".config/zsh";
     autocd = true;
-    enableCompletion = true;
     autosuggestion.enable = true;
+    enableCompletion = true;
+    history = {
+      ignoreAllDups = true;
+    };
     historySubstringSearch.enable = true;
     syntaxHighlighting.enable = true;
 
@@ -17,10 +20,5 @@
       ll = "ls -l";
       la = "ls -a";
     };
-  };
-  programs.starship = {
-    enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
   };
 }

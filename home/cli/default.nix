@@ -1,10 +1,18 @@
 { ... }:
 {
   imports = [
-    ./cli-tools.nix
+    ./bat.nix
+    ./bottom.nix
     ./direnv.nix
-    ./helix.nix
+    ./fastfetch.nix
+    ./fd.nix
+    ./fzf.nix
     ./git.nix
-    ./shell.nix
+    ./mcfly.nix
+    ./helix.nix
+    ./lazygit.nix
+    ./ripgrep.nix
+    ./starship.nix
+    ./zsh.nix
   ];
 }

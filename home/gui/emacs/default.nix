@@ -10,13 +10,14 @@
       ef-themes
       dimmer
       moody
+      nano-modeline
       minions
       mlscroll
+      nyan-mode
       nerd-icons
       nerd-icons-corfu
       spacious-padding
       perfect-margin
-      centaur-tabs
       # File Manager
       treemacs
       treemacs-nerd-icons

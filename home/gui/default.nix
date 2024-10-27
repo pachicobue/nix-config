@@ -3,8 +3,8 @@
   imports = [
     ./emacs
     ./firefox.nix
-    ./term.nix
-    ./theme.nix
+    ./kitty.nix
+    ./mangohud.nix
   ];
   home.packages = with pkgs; [
     webcord

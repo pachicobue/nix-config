@@ -10,7 +10,7 @@
       "waybar"
       "[workspace special silent] $terminal"
       "[workspace 1 silent] firefox"
-      "[workspace 1 silent] emacs-client -r"
+      "[workspace 1 silent] emacsclient -r"
     ];
     windowrule = [ "pseudo, noblur, class:(fcitx)" ];
     windowrulev2 = [ "noblur,class:^()$,title:^()$" ];
@@ -19,7 +19,7 @@
       kb_options = [ "ctrl:nocaps" ];
       repeat_delay = 300;
       repeat_rate = 30;
-      follow_mouse = 1;
+      follow_mouse = 0;
       sensitivity = lib.mkDefault (0.0);
     };
     general = {
@@ -36,6 +36,7 @@
         size = 3;
         passes = 1;
       };
+      dim_inactive = true;
     };
     dwindle = {
       pseudotile = true;

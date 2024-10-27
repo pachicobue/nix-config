@@ -3,7 +3,6 @@
   programs.helix = {
     enable = true;
     settings = {
-      theme = lib.mkDefault "catppuccin_mocha";
       editor = {
         middle-click-paste = false;
         bufferline = "always";

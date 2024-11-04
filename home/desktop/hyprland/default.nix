@@ -18,7 +18,7 @@ in
     hypridle
     walker
     wleave
-    brightnessctl
+    waypipe
     pavucontrol
     wl-clipboard
     cliphist

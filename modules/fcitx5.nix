@@ -7,7 +7,7 @@
       waylandFrontend = true;
       addons = with pkgs; [
         fcitx5-mozc
-        fcitx5-skk
+        fcitx5-gtk
       ];
     };
   };

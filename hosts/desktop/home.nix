@@ -9,6 +9,6 @@
   ];
   programs.helix.defaultEditor = true;
   programs.zsh.shellAliases = {
-    e = "emacsclient";
+    e = "emacsclient -n";
   };
 }

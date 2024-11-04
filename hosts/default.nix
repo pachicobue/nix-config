@@ -55,14 +55,18 @@ in
       system = "x86_64-linux";
       hostname = "nixos-desktop";
       username = "sho";
-      modules = [  ./desktop/nixos.nix ];
+      modules = [ ./desktop/nixos.nix ];
     };
   };
   home = {
     desktop = mkHomeManagerConfiguration {
       system = "x86_64-linux";
       username = "sho";
-      overlays = [ inputs.fenix.overlays.default ];
+      overlays = [
+        inputs.fenix.overlays.default
+	inputs.emacs-overlay.overlays.package
+        inputs.emacs-overlay.overlays.emacs
+      ];
       modules = [ ./desktop/home.nix ];
     };
   };

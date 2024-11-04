@@ -14,6 +14,11 @@
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-stable.follows = "nixpkgs-stable";
+    };
   };
 
   outputs =
@@ -28,33 +33,34 @@
       ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
     in
-      {
-        packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
-        overlays = import ./overlays { inherit inputs; };
+    {
+      packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+      overlays = import ./overlays { inherit inputs; };
 
-        nixosConfigurations = (import ./hosts inputs).nixos;
-        homeConfigurations = (import ./hosts inputs).home;
+      nixosConfigurations = (import ./hosts inputs).nixos;
+      homeConfigurations = (import ./hosts inputs).home;
 
-        formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
-        devShells = forAllSystems (
-          system:
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
+      devShells = forAllSystems (
+        system:
         let
           pkgs = inputs.nixpkgs.legacyPackages.${system};
-          in
-          {
-            default = pkgs.mkShell {
-              packages = [
-                pkgs.home-manager
-                pkgs.nix-prefetch-github
-                (pkgs.writeScriptBin "switch-home" ''
-                  home-manager switch --flake ".#$@" --show-trace
-                '')
-                (pkgs.writeScriptBin "switch-nixos" ''
-                  sudo nixos-rebuild switch --flake ".#$@" --show-trace
-                '')
-              ];
-            };
-          }
-        );
-      };
+        in
+        {
+          default = pkgs.mkShell {
+            packages = [
+              pkgs.home-manager
+              pkgs.nix-prefetch-github
+              pkgs.nvfetcher
+              (pkgs.writeScriptBin "switch-home" ''
+                home-manager switch --flake ".#$@" --show-trace
+              '')
+              (pkgs.writeScriptBin "switch-nixos" ''
+                sudo nixos-rebuild switch --flake ".#$@" --show-trace
+              '')
+            ];
+          };
+        }
+      );
+    };
 }

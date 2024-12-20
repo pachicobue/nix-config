@@ -31,6 +31,10 @@
     :unless (server-running-p)
     :config
     (server-start))
+  (leaf *esc-not-meta
+    :config
+    (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
+    (setq-default x-alt-keysym 'meta))
   (leaf *c-source-defined
     :leaf-defer nil
     :hook
@@ -46,7 +50,11 @@
     (setq-default gc-cons-percentage 0.2
                   gc-cons-threshold (* 128 1024 1024)
                   garbage-collection-messages t)
-    (add-to-list 'default-frame-alist '(font . "Moralerspace Neon NF")))
+    (add-to-list 'default-frame-alist '(font . "Moralerspace Neon NF"))
+    (add-to-list 'default-frame-alist '(alpha-background . 0.8)))
+  (leaf select
+    :config
+    (setopt select-enable-clipboard nil))
   (leaf cus-edit
     :config
     (setopt custom-files null-device))
@@ -146,30 +154,6 @@
     (moody-replace-mode-line-front-space)
     (moody-replace-mode-line-buffer-identification)
     (moody-replace-eldoc-minibuffer-message-function))
-  (leaf nano-modeline
-    :ensure t
-    :require t ;; Needed
-    :hook
-    ((prog-mode-hook            . nano-modeline-prog-mode)
-     (text-mode-hook            . nano-modeline-text-mode)
-     (org-mode-hook             . nano-modeline-org-mode)
-     (pdf-view-mode-hook        . nano-modeline-pdf-mode)
-     (mu4e-headers-mode-hook    . nano-modeline-mu4e-headers-mode)
-     (mu4e-view-mode-hook       . nano-modeline-mu4e-message-mode)
-     (elfeed-show-mode-hook     . nano-modeline-elfeed-entry-mode)
-     (elfeed-search-mode-hook   . nano-modeline-elfeed-search-mode)
-     (term-mode-hook            . nano-modeline-term-mode)
-     (xwidget-webkit-mode-hook  . nano-modeline-xwidget-mode)
-     (messages-buffer-mode-hook . nano-modeline-message-mode)
-     (org-capture-mode-hook     . nano-modeline-org-capture-mode)
-     (org-agenda-mode-hook      . nano-modeline-org-agenda-mode))
-    :config
-    (nano-modeline-text-mode +1)
-    (setopt nano-modeline-padding '(0.20 . 0.25))
-    (leaf *simpify-modeline
-      :config
-      (line-number-mode -1)
-      (setq-default mode-line-format (delete '(vc-mode vc-mode) mode-line-format))))
   (leaf minions
     :ensure t
     :config
@@ -228,7 +212,7 @@
     :config
     (setopt ef-themes-mixed-fonts t
             ef-themes-variable-pitch-ui t)
-    (ef-themes-select 'ef-melissa-light)))
+    (ef-themes-select 'ef-night)))
 
 (leaf *History
   :config
@@ -304,9 +288,9 @@
            ("S-TAB" . corfu-prev))
     :config
     (setopt corfu-auto t
-            corfu-auto-delay 0
-            corfu-popupinfo-delay 0
-            corfu-auto-prefix 1
+            corfu-auto-delay 0.0
+            corfu-popupinfo-delay 0.0
+            corfu-auto-prefix 2
             corfu-cycle t
             corfu-preselect 'prompt
             corfu-quit-no-match 'separator)
@@ -325,7 +309,7 @@
 
 (leaf *Language
   :config
-  (use-package reformatter ;; leaf won't work...Why??
+  (use-package reformatter ;; leaf does not work properly...Why?
     :ensure t
     :hook
     (((nix-mode nix-ts-mode) . nixfmt-on-save-mode)
@@ -403,7 +387,27 @@
     :ensure t
     :config
     (setopt rust-mode-treesitter-derive t
-            rust-formatter-on-save t)))
+            rust-formatter-on-save t))
+  (leaf aggressive-indent
+    :ensure t
+    :hook
+    (emacs-lisp-mode-hook . aggressive-indent-mode))
+  (leaf whitespace
+    :config
+    (setopt whitespace-style
+            '(face
+              ;; indentation
+              tabs
+              tab-mark
+              ;; spaces
+              ;; space-mark
+              ;; newline
+              ;; newline-mark
+              trailing
+              ;; lines-tail
+              ))
+    :hook
+    ((text-mode-hook prog-mode-hook) . (lambda () (whitespace-mode +1)))))
 
 (leaf *Keybind
   :config
@@ -411,22 +415,64 @@
     :require t
     :ensure t
     :config
-    (setopt meow-use-clipboard t)
+    (defun helix-A-command ()
+      (interactive)
+      (meow-line 1)
+      (meow-append))
+    (defun helix-I-command ()
+      (interactive)
+      (meow-join 1)
+      (meow-append))
+    (defun helix-J-command ()
+      (interactive)
+      (meow-join -1)
+      (meow-kill))
+    (defun my-comment-dwim (arg)
+      (interactive "*P")
+      (if (use-region-p)
+          (comment-or-uncomment-region (region-beginning) (region-end))
+        (comment-or-uncomment-region (line-beginning-position) (line-end-position))))
+
+    (setopt meow-use-clipboard nil)
+    (setopt meow-selection-command-fallback
+            '((meow-change . meow-change-char)
+              (meow-kill . meow-delete)
+              (meow-cancel-selection . keyboard-quit)
+              (meow-pop-selection . meow-pop-grab)
+              (meow-beacon-change . meow-beacon-change-char)))
     (defun meow-setup ()
       (setopt meow-cheatsheet-layout 'meow-cheatsheet-layout-qwerty)
+      (setopt meow-leader-key "SPC")
+      (meow-leader-define-key
+       '("w" . save-buffer)
+       '("y" . meow-clipboard-save)
+       '("p" . meow-clipboard-yank)
+       '("c" . my-comment-dwim))
       (meow-motion-overwrite-define-key
        '("j" . meow-next)
-       '("k" . meow-prev)
-       '("<excape>" . ignore))
+       '("k" . meow-prev))
       (meow-normal-define-key
        '("h" . meow-left)
        '("j" . meow-next)
        '("k" . meow-prev)
-       '("l" . meow-right)))
+       '("l" . meow-right)
+       '("w" . meow-next-word)
+       '("b" . meow-back-word)
+       '("d" . meow-kill)
+       '("y" . meow-save)
+       '("p" . meow-yank)
+       '("o" . meow-open-below)
+       '("O" . meow-open-above)
+       '("u" . undo-only)
+       '("U" . undo-redo)
+       '("x" . meow-line)
+       '("A" . helix-A-command)
+       '("I" . helix-I-command)
+       '("J" . helix-J-command)
+       )
+      )
     (meow-setup)
     (meow-global-mode +1)))
-
-(provide 'init)
 
 ;; Local Variables:
 ;; indent-tabs-mode: nil

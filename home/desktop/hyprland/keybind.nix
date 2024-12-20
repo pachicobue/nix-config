@@ -5,8 +5,7 @@
     "$mainMod" = "SUPER";
     "$subMod" = "ALT";
     bind = [
-      "$subMod, SPACE, exec, $menu"
-      "$subMod, TAB, togglespecialworkspace"
+      "$mainMod, SPACE, exec, $menu"
       "$mainMod, T, exec, $terminal"
       "$mainMod, C, killactive"
       "$mainMod, H, movefocus, l"
@@ -17,16 +16,18 @@
       "$mainMod SHIFT, L, movewindow, r"
       "$mainMod SHIFT, K, movewindow, u"
       "$mainMod SHIFT, J, movewindow, d"
-      "$mainMod, 1, workspace, 1"
-      "$mainMod, 2, workspace, 2"
-      "$mainMod, 3, workspace, 3"
-      "$mainMod, 4, workspace, 4"
-      "$mainMod SHIFT, 1, movetoworkspace, 1"
-      "$mainMod SHIFT, 2, movetoworkspace, 2"
-      "$mainMod SHIFT, 3, movetoworkspace, 3"
-      "$mainMod SHIFT, 4, movetoworkspace, 4"
-      "$mainMod SHIFT, 0, movetoworkspace, special"
-
+      "$mainMod, A, workspace, 1"
+      "$mainMod, S, workspace, 2"
+      "$mainMod, D, workspace, 3"
+      "$mainMod, F, workspace, 4"
+      "$subMod, TAB, togglespecialworkspace"
+      "$mainMod, G, togglespecialworkspace"
+      "$mainMod SHIFT, A, movetoworkspace, 1"
+      "$mainMod SHIFT, S, movetoworkspace, 2"
+      "$mainMod SHIFT, D, movetoworkspace, 3"
+      "$mainMod SHIFT, F, movetoworkspace, 4"
+      "$mainMod SHIFT, G, movetoworkspace, special"
+      "$subMod SHIFT, TAB, togglespecialworkspace"
     ];
   };
 }

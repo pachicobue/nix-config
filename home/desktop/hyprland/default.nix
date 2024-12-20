@@ -7,7 +7,10 @@ in
     ./config.nix
     ./keybind.nix
     ./waybar.nix
+    ./hypridle.nix
+    ./hyprpaper.nix
     ./mako.nix
+    ./walker.nix
   ];
   wayland.windowManager.hyprland = {
     inherit package;
@@ -15,12 +18,10 @@ in
     systemd.enable = true;
   };
   home.packages = with pkgs; [
-    hypridle
-    walker
     wleave
-    waypipe
     pavucontrol
     wl-clipboard
-    cliphist
+    hyprshade
+    hyprshot
   ];
 }

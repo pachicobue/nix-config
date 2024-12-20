@@ -27,16 +27,13 @@
           tooltip = false;
         };
         "hyprland/workspaces" = {
-          disable-scroll = false;
           all-outputs = true;
           on-click = "activate";
-          on-scroll-up = "hyprctl dispatch workspace e+1";
-          on-scroll-down = "hyprctl dispatch workspace e-1";
           persistent-workspaces = {
-            "1" = [];
-            "2" = [];
-            "3" = [];
-            "4" = [];
+            "1" = [ ];
+            "2" = [ ];
+            "3" = [ ];
+            "4" = [ ];
           };
         };
         pulseaudio = {
@@ -44,7 +41,11 @@
           format-icons = {
             headphone = "";
             headset = "";
-            default = [ "" "" ""];
+            default = [
+              ""
+              ""
+              ""
+            ];
           };
           on-click = "pavucontrol";
         };
@@ -56,6 +57,7 @@
         };
         clock = {
           format = "  {:%H:%M}";
+          tooltip = false;
         };
         "custom/powermenu" = {
           format = "";

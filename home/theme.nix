@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ inputs, ... }:
 {
   imports = [
     inputs.catppuccin.homeManagerModules.catppuccin
@@ -19,6 +19,7 @@
   programs.starship.catppuccin.enable = true;
   programs.waybar.catppuccin.enable = true;
   programs.zsh.syntaxHighlighting.catppuccin.enable = true;
+  programs.hyprlock.catppuccin.enable = true;
   services.mako.catppuccin.enable = true;
   wayland.windowManager.hyprland.catppuccin.enable = true;
 }

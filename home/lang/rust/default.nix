@@ -8,7 +8,8 @@
       "rust-src"
       "rustc"
       "rustfmt"
+      "rust-analyzer"
     ])
-    rust-analyzer-nightly
+    cargo-make
   ];
 }

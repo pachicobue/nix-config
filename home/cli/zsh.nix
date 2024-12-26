@@ -14,7 +14,14 @@
     historySubstringSearch.enable = true;
     syntaxHighlighting.enable = true;
 
+    initExtra = ''
+      if [[ -o interactive ]]; then
+        exec nu
+      fi
+    '';
+
     shellAliases = {
+      e = "hx";
       rm = "rm -i";
       cp = "cp -i";
       ll = "ls -l";

@@ -1,6 +1,5 @@
 {
   config,
-  username,
   hostname,
   ...
 }:
@@ -12,12 +11,23 @@
       enable = true;
       trustedInterfaces = [ "tailscale0" ];
       allowedUDPPorts = [ config.services.tailscale.port ];
+      allowedTCPPorts = [
+        22
+        80
+        443
+        5900
+      ];
     };
   };
-  # systemd.services.NetworkManager-wait-online.enable = false;
   services.tailscale = {
     enable = true;
     openFirewall = true;
   };
-  users.users."${username}".extraGroups = [ "networkmanager" ];
+  services.openssh = {
+    enable = true;
+    ports = [ 22 ];
+    settings = {
+      PasswordAuthentication = true;
+    };
+  };
 }

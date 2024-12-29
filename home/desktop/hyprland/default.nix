@@ -19,6 +19,7 @@ in
   };
   home.packages = with pkgs; [
     wleave
+    wayvnc
     pavucontrol
     wl-clipboard
     hyprshade

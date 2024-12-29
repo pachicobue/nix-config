@@ -1,6 +1,9 @@
 { pkgs, ... }:
 {
   imports = [
+    ./kitty.nix
+    ./foot.nix
+    ./alacritty.nix
     ./emacs
     ./firefox.nix
   ];

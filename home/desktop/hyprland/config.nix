@@ -10,7 +10,6 @@
       "waybar"
       "hyprshade on blue-light-filter"
       "[workspace special silent] $terminal"
-      "[workspace special silent] emacs"
       "[workspace 1 silent] firefox"
     ];
     windowrule = [ "pseudo, noblur, class:(fcitx)" ];

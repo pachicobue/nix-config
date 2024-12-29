@@ -1,12 +1,9 @@
-
 def colorScheme [] {
   [ "default", "default-light", "gruvbox", "gruvbox-light", "nord", "nord-light" ]
 }
-
 def widgetType [] {
   [ "cpu", "mem", "net", "proc", "temp", "disk", "bat" ]
 }
-
 # Yet another cross-platform graphical process/system monitor.
 export extern "btm" [
   --autohide-time                           # Hide time-scale in graphs automatically

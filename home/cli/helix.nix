@@ -1,7 +1,16 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 {
   programs.helix = {
     enable = true;
+    extraPackages = with pkgs; [
+      clang-tools
+      vscode-langservers-extracted
+      lua-language-server
+      markdown-oxide
+      nil
+      nixfmt-rfc-style
+      taplo
+    ];
     settings = {
       editor = {
         middle-click-paste = false;
@@ -25,8 +34,19 @@
         indent-guides.render = true;
       };
       keys = {
-        insert.j.k = "normal_mode";
+        insert = {
+          C-x = {
+            C-s = ":write";
+            k = ":buffer-close";
+          };
+          j.k = "normal_mode";
+        };
         normal = {
+          C-tab = ":buffer-next";
+          C-x = {
+            C-s = ":write";
+            k = ":buffer-close";
+          };
           H = ":buffer-previous";
           L = ":buffer-next";
           space = {
@@ -45,6 +65,18 @@
           };
         };
       };
+    };
+    languages = {
+      language = [
+        {
+          name = "nix";
+          auto-format = true;
+          formatter = {
+            command = "nixfmt";
+            args = [ "-" ];
+          };
+        }
+      ];
     };
   };
 }

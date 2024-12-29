@@ -1,10 +1,12 @@
 args: {
   imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
+    # include NixOS-WSL modules
+    <nixos-wsl/modules>
     ../../modules/core.nix
-    ../../modules/fonts.nix
   ];
+
+  wsl.enable = true;
+  wsl.defaultUser = "sho";
 
   users.users."${args.username}" = {
     isNormalUser = true;

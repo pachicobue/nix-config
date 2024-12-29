@@ -57,6 +57,12 @@ in
       username = "sho";
       modules = [ ./desktop/nixos.nix ];
     };
+    wsl = mkNixosSystem {
+      system = "x86_64-linux";
+      hostname = "nixos-wsl";
+      username = "sho";
+      modules = [ ./wsl/nixos.nix ];
+    };
   };
   home = {
     desktop = mkHomeManagerConfiguration {
@@ -64,10 +70,20 @@ in
       username = "sho";
       overlays = [
         inputs.fenix.overlays.default
-	inputs.emacs-overlay.overlays.package
+        inputs.emacs-overlay.overlays.package
         inputs.emacs-overlay.overlays.emacs
       ];
       modules = [ ./desktop/home.nix ];
+    };
+    wsl = mkHomeManagerConfiguration {
+      system = "x86_64-linux";
+      username = "sho";
+      overlays = [
+        inputs.fenix.overlays.default
+        inputs.emacs-overlay.overlays.package
+        inputs.emacs-overlay.overlays.emacs
+      ];
+      modules = [ ./wsl/home.nix ];
     };
   };
 }

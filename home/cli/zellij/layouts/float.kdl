@@ -1,17 +1,19 @@
 layout {
-    pane size=1 borderless=true {
-        plugin location="zellij:tab-bar"
-    }
-    pane
-    floating_panes {
-        pane {
-            x "10%"
-            y "10%"
-            width "80%"
-            height "80%"
+    tab hide_floating_panes=true {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
         }
-    }
-    pane size=1 borderless=true {
-       plugin location="zellij:status-bar"
+        pane
+        floating_panes {
+            pane {
+                x "10%"
+                y "10%"
+                width "80%"
+                height "80%"
+            }
+        }
+        pane size=1 borderless=true {
+           plugin location="zellij:status-bar"
+        }
     }
 }

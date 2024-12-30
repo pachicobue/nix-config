@@ -12,7 +12,6 @@
   programs.gh = {
     enable = true;
     extensions = [
-      (import ./gh-q.nix pkgs)
       pkgs.gh-dash
       pkgs.gh-markdown-preview
     ];

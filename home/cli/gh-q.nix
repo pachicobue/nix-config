@@ -31,12 +31,12 @@ stdenvNoCC.mkDerivation {
   postFixup = ''
     wrapProgram "$out/bin/gh-q" --prefix PATH : "${binPath}"
   '';
-  meta = with lib; {
+  meta = {
     description = "A gh extension to clone GitHub repositories using fzf and ghq.";
     homepage = "https://github.com/kawarimidoll/gh-q";
-    license = licenses.mit;
-    maintainers = with maintainers; [ ];
+    license = lib.licenses.mit;
+    maintainers = with lib.maintainers; [ ];
     mainProgram = "gh-q";
-    platforms = platforms.all;
+    platforms = lib.platforms.all;
   };
 }

@@ -14,6 +14,7 @@
     ./ripgrep.nix
     ./starship.nix
     ./zsh.nix
+    ./zoxide.nix
 
     ./nushell
     ./zellij

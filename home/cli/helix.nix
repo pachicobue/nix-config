@@ -10,6 +10,8 @@
       nil
       nixfmt-rfc-style
       taplo
+      pkgs.rust-analyzer
+      pkgs.rustfmt
     ];
     settings = {
       editor = {
@@ -69,11 +71,36 @@
     languages = {
       language = [
         {
+          name = "cpp";
+          auto-format = true;
+          formatter = {
+            command = "clang-format";
+          };
+        }
+        {
+          name = "rust";
+          auto-format = true;
+          formatter = {
+            command = "rustfmt";
+          };
+        }
+        {
           name = "nix";
           auto-format = true;
           formatter = {
             command = "nixfmt";
             args = [ "-" ];
+          };
+        }
+        {
+          name = "toml";
+          auto-format = true;
+          formatter = {
+            command = "taplo";
+            args = [
+              "format"
+              "-"
+            ];
           };
         }
       ];

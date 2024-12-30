@@ -1,8 +1,7 @@
 { ... }:
 {
   imports = [
-    ./c++
-    ./python
-    ./rust
+    # ./c++
+    # ./python
   ];
 }

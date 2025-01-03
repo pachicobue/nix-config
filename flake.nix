@@ -35,9 +35,6 @@
       forAllSystems = nixpkgs.lib.genAttrs systems;
     in
     {
-      packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
-      overlays = import ./overlays { inherit inputs; };
-
       nixosConfigurations = (import ./hosts inputs).nixos;
       homeConfigurations = (import ./hosts inputs).home;
 

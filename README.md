@@ -1,8 +1,6 @@
 # nixos-dotfiles
 
-Nix OS configurations.
-
-## Features
+Nix OS configurations
 
 ## Installation
 
@@ -25,9 +23,7 @@ Nix OS configurations.
 
 ## Credits
 
-| Name | License |
-| ---- | ------- |
-|[Misterio77/nix-starter-configs](https://github.com/Misterio77/nix-starter-configs/tree/main/standard) | CC0-1.0 |
+- [Misterio77/nix-starter-configs](https://github.com/Misterio77/nix-starter-configs/tree/main/standard)
 
 ## License
 

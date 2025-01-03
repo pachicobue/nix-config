@@ -20,5 +20,7 @@
 
     ./nushell
     ./zellij
+
+    ./ai.nix
   ];
 }

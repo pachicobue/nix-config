@@ -1,8 +1,18 @@
-{ pkgs, username, ... }:
+{
+  pkgs,
+  username,
+  system,
+  inputs,
+  ...
+}:
 {
   time.timeZone = "Asia/Tokyo";
   i18n.defaultLocale = "ja_JP.UTF-8";
-  environment.systemPackages = with pkgs; [ vim git ];
+  environment.systemPackages = with pkgs; [
+    inputs.agenix.packages."${system}".default
+    vim
+    git
+  ];
 
   virtualisation.docker = {
     enable = true;
@@ -38,4 +48,15 @@
     };
   };
   nixpkgs.config.allowUnfree = true;
+
+  age.identityPaths = [
+    "/home/${username}/.ssh/id_ed25519"
+  ];
+  age.secrets = {
+    anthropic_api_secret = {
+      file = ../secrets/anthropic_apikey.age;
+      path = "/home/${username}/.secrets/anthropic_apikey";
+      mode = "644";
+    };
+  };
 }

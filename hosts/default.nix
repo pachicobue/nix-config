@@ -10,7 +10,12 @@ let
     inputs.nixpkgs.lib.nixosSystem {
       inherit system modules;
       specialArgs = {
-        inherit inputs hostname username;
+        inherit
+          inputs
+          hostname
+          username
+          system
+          ;
       };
     };
   mkHomeManagerConfiguration =
@@ -55,13 +60,19 @@ in
       system = "x86_64-linux";
       hostname = "nixos-desktop";
       username = "sho";
-      modules = [ ./desktop/nixos.nix ];
+      modules = [
+        inputs.agenix.nixosModules.default
+        ./desktop/nixos.nix
+      ];
     };
     wsl = mkNixosSystem {
       system = "x86_64-linux";
       hostname = "nixos-wsl";
       username = "sho";
-      modules = [ ./wsl/nixos.nix ];
+      modules = [
+        inputs.agenix.nixosModules.default
+        ./wsl/nixos.nix
+      ];
     };
   };
   home = {
@@ -73,17 +84,21 @@ in
         inputs.emacs-overlay.overlays.package
         inputs.emacs-overlay.overlays.emacs
       ];
-      modules = [ ./desktop/home.nix ];
+      modules = [
+        inputs.agenix.homeManagerModules.default
+        ./desktop/home.nix
+      ];
     };
     wsl = mkHomeManagerConfiguration {
       system = "x86_64-linux";
       username = "sho";
       overlays = [
         inputs.fenix.overlays.default
-        inputs.emacs-overlay.overlays.package
-        inputs.emacs-overlay.overlays.emacs
       ];
-      modules = [ ./wsl/home.nix ];
+      modules = [
+        inputs.agenix.homeManagerModules.default
+        ./wsl/home.nix
+      ];
     };
   };
 }

@@ -17,7 +17,14 @@
       pkgs.rustfmt
       pkgs.lsp-ai
     ];
+    themes = {
+      catppuccin_transparent = {
+        "inherits" = "catppuccin_mocha";
+        "ui.background" = "none";
+      };
+    };
     settings = {
+      theme = "catppuccin_transparent";
       editor = {
         middle-click-paste = false;
         bufferline = "always";

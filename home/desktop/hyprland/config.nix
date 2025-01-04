@@ -1,7 +1,7 @@
 { ... }:
 {
   wayland.windowManager.hyprland.settings = {
-    "$terminal" = "alacritty";
+    "$terminal" = "foot";
     "$menu" = "walker";
     exec-once = [
       "fcitx5 -d -r"

@@ -5,22 +5,22 @@
   ];
   catppuccin = {
     flavor = "mocha";
-    pointerCursor.enable = true;
   };
-  i18n.inputMethod.fcitx5.catppuccin.enable = true;
 
-  programs.alacritty.catppuccin.enable = true;
-  programs.bat.catppuccin.enable = true;
-  programs.bottom.catppuccin.enable = true;
-  programs.foot.catppuccin.enable = true;
-  programs.git.delta.catppuccin.enable = true;
-  programs.kitty.catppuccin.enable = true;
-  programs.lazygit.catppuccin.enable = true;
-  programs.skim.catppuccin.enable = true;
-  programs.starship.catppuccin.enable = true;
-  programs.waybar.catppuccin.enable = true;
-  programs.zsh.syntaxHighlighting.catppuccin.enable = true;
-  programs.hyprlock.catppuccin.enable = true;
-  services.mako.catppuccin.enable = true;
-  wayland.windowManager.hyprland.catppuccin.enable = true;
+  catppuccin.cursors.enable = true;
+  catppuccin.fcitx5.enable = true;
+  catppuccin.alacritty.enable = true;
+  catppuccin.bat.enable = true;
+  catppuccin.bottom.enable = true;
+  catppuccin.foot.enable = true;
+  catppuccin.delta.enable = true;
+  catppuccin.kitty.enable = true;
+  catppuccin.lazygit.enable = true;
+  catppuccin.skim.enable = true;
+  catppuccin.starship.enable = true;
+  catppuccin.waybar.enable = true;
+  catppuccin.zsh-syntax-highlighting.enable = true;
+  catppuccin.hyprlock.enable = true;
+  catppuccin.mako.enable = true;
+  catppuccin.hyprland.enable = true;
 }

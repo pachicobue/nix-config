@@ -5,7 +5,7 @@
     server.enable = true;
     settings = {
       main = {
-        font = "Moralerspace Neon NF:size=14";
+        font = "Moralerspace Neon NF:size=12";
         dpi-aware = "yes";
       };
       cursor = {

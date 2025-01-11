@@ -4,7 +4,6 @@
     ./atuin.nix
     ./bat.nix
     ./bottom.nix
-    ./cargo-make.nix
     ./direnv.nix
     ./fastfetch.nix
     ./fd.nix

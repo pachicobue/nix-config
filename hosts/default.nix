@@ -79,11 +79,9 @@ in
     desktop = mkHomeManagerConfiguration {
       system = "x86_64-linux";
       username = "sho";
-      overlays = [
-        inputs.fenix.overlays.default
-        inputs.emacs-overlay.overlays.package
-        inputs.emacs-overlay.overlays.emacs
-      ];
+      overlays =
+        [
+        ];
       modules = [
         inputs.agenix.homeManagerModules.default
         ./desktop/home.nix
@@ -92,9 +90,9 @@ in
     wsl = mkHomeManagerConfiguration {
       system = "x86_64-linux";
       username = "sho";
-      overlays = [
-        inputs.fenix.overlays.default
-      ];
+      overlays =
+        [
+        ];
       modules = [
         inputs.agenix.homeManagerModules.default
         ./wsl/home.nix

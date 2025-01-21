@@ -5,17 +5,13 @@ args: {
     ../../modules/core.nix
     ../../modules/audio.nix
     ../../modules/tuigreet.nix
-    # ../../modules/gnome.nix
     ../../modules/clock.nix
     ../../modules/fonts.nix
     ../../modules/fcitx5.nix
     ../../modules/network.nix
     ../../modules/nvidia.nix
     ../../modules/steam.nix
-    # ../../modules/kanata.nix
-    ../../modules/qmk.nix
-    ../../modules/corne_keyboard.nix
-    ../../modules/keyball_keyboard.nix
+    ../../modules/qemu.nix
   ];
 
   # Bootloader.

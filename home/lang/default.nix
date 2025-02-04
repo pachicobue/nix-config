@@ -1,7 +1,7 @@
 { ... }:
 {
   imports = [
-    # ./c++
-    # ./python
+    ./c++
+    ./python
   ];
 }

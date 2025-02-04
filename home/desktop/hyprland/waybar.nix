@@ -23,7 +23,7 @@
         "custom/launcher" = {
           interval = "once";
           format = "";
-          on-click = "walker";
+          on-click = "fuzzel";
           tooltip = false;
         };
         "hyprland/workspaces" = {

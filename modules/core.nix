@@ -39,15 +39,7 @@
     };
   };
   nixpkgs.config.allowUnfree = true;
-
   age.identityPaths = [
     "/home/${username}/.ssh/id_ed25519"
   ];
-  age.secrets = {
-    anthropic_api_secret = {
-      file = ../secrets/anthropic_apikey.age;
-      path = "/home/${username}/.secrets/anthropic_apikey";
-      mode = "644";
-    };
-  };
 }

@@ -1,5 +1,8 @@
-{ ... }:
+{ pkgs, ... }:
 {
+  home.packages = [
+    pkgs.libsixel
+  ];
   programs.foot = {
     enable = true;
     server.enable = true;

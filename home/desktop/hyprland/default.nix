@@ -7,10 +7,9 @@ in
     ./config.nix
     ./keybind.nix
     ./waybar.nix
-    ./hypridle.nix
     ./hyprpaper.nix
     ./mako.nix
-    ./walker.nix
+    ./fuzzel.nix
   ];
   wayland.windowManager.hyprland = {
     inherit package;
@@ -19,7 +18,6 @@ in
   };
   home.packages = with pkgs; [
     wleave
-    wayvnc
     pavucontrol
     wl-clipboard
     hyprshade

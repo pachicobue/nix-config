@@ -7,6 +7,8 @@
     bind = [
       "$mainMod, SPACE, exec, $menu"
       "$mainMod, T, exec, $terminal"
+      "$mainMod, O, exec, $obsidian"
+      "$mainMod, B, exec, $browser"
       "$mainMod, C, killactive"
       "$mainMod, H, movefocus, l"
       "$mainMod, L, movefocus, r"

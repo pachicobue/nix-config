@@ -1,6 +1,9 @@
 { pkgs, ... }:
 {
   environment = {
-    systemPackages = [ pkgs.qemu ];
+    systemPackages = [
+      pkgs.qemu
+      pkgs.quickemu
+    ];
   };
 }

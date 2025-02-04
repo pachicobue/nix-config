@@ -23,4 +23,5 @@
   catppuccin.hyprlock.enable = true;
   catppuccin.mako.enable = true;
   catppuccin.hyprland.enable = true;
+  catppuccin.fuzzel.enable = true;
 }

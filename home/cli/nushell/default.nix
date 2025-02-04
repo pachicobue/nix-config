@@ -36,6 +36,7 @@ in
       ll = "ls -l";
       la = "ls -a";
       e = "hx";
+      g = "lazygit";
     };
     extraEnv = "$env.PATH = ($env.PATH | split row (char esep) | prepend ($env.HOME + '/.cargo/bin') | uniq)";
     extraConfig = builtins.foldl' (acc: name: acc + "\n" + (use name)) baseConfig completions;

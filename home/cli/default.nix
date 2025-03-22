@@ -4,6 +4,7 @@
     ./atuin.nix
     ./bat.nix
     ./bottom.nix
+    ./carapace.nix
     ./direnv.nix
     ./fastfetch.nix
     ./fd.nix
@@ -13,10 +14,10 @@
     ./lazygit.nix
     ./ripgrep.nix
     ./starship.nix
+    ./yazi.nix
     ./zsh.nix
     ./zoxide.nix
 
-    ./nushell
     ./zellij
     ./smartcat
   ];
@@ -27,5 +28,6 @@
     du-dust
     procs
     xh
+    scooter
   ];
 }

@@ -12,6 +12,7 @@ args: {
     ../../modules/nvidia.nix
     ../../modules/steam.nix
     ../../modules/qemu.nix
+    ../../modules/fprintd.nix
   ];
 
   # Bootloader.

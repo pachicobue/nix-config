@@ -14,7 +14,8 @@
       "pueued -d"
       "[workspace special silent] $terminal"
       "[workspace 1 silent] $browser"
-      "[workspace 2 silent] $obsidian"
+      "[workspace 2 silent] steam"
+      "[workspace 3 silent] $obsidian"
     ];
     windowrule = [ "pseudo, noblur, class:(fcitx)" ];
     windowrulev2 = [ "noblur,class:^()$,title:^()$" ];

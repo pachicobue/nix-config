@@ -1,8 +1,7 @@
 { ... }:
 {
-  programs.atuin = {
+  programs.carapace = {
     enable = true;
     enableZshIntegration = true;
-    flags = [ "--disable-up-arrow" ];
   };
 }

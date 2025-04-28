@@ -14,20 +14,20 @@
     ./lazygit.nix
     ./ripgrep.nix
     ./starship.nix
+    ./tmux.nix
     ./yazi.nix
     ./zsh.nix
     ./zoxide.nix
 
-    ./zellij
+    # ./zellij
     ./smartcat
   ];
   home.packages = with pkgs; [
-    pueue
-    glow
     wl-clipboard
     du-dust
     procs
     xh
     scooter
+    ouch
   ];
 }

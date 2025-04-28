@@ -18,6 +18,7 @@
   catppuccin.lazygit.enable = true;
   catppuccin.skim.enable = true;
   catppuccin.starship.enable = true;
+  catppuccin.tmux.enable = true;
   catppuccin.waybar.enable = true;
   catppuccin.zsh-syntax-highlighting.enable = true;
   catppuccin.hyprlock.enable = true;

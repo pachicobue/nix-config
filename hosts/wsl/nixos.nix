@@ -3,6 +3,8 @@ args: {
     # include NixOS-WSL modules
     <nixos-wsl/modules>
     ../../modules/core.nix
+    ../../modules/fonts.nix
+    ../../modules/fcitx5.nix
   ];
 
   wsl.enable = true;

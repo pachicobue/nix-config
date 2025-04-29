@@ -19,7 +19,6 @@ in
   home.packages = with pkgs; [
     wleave
     pavucontrol
-    wl-clipboard
     hyprshade
     hyprshot
   ];

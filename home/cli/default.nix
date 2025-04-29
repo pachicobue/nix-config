@@ -19,11 +19,10 @@
     ./zsh.nix
     ./zoxide.nix
 
-    # ./zellij
+    ./zellij
     ./smartcat
   ];
   home.packages = with pkgs; [
-    wl-clipboard
     du-dust
     procs
     xh

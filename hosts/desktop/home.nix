@@ -3,6 +3,7 @@
   imports = [
     ../../home/theme.nix
     ../../home/cli
+    ../../home/cli/wayland.nix
     ../../home/gui
     ../../home/desktop/hyprland
     # ../../home/desktop/gnome

@@ -16,17 +16,20 @@ args: {
   ];
 
   # Bootloader.
-  boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
-    };
-    grub = {
-      enable = true;
-      efiSupport = true;
-      device = "nodev";
-      useOSProber = true;
-    };
-  };
+  boot.loader.grub.enable = true;
+  boot.loader.grub.device = "/dev/vda";
+  boot.loader.grub.useOSProber = true;
+  # boot.loader = {
+  #   efi = {
+  #     canTouchEfiVariables = true;
+  #   };
+  #   grub = {
+  #     enable = true;
+  #     efiSupport = true;
+  #     device = "nodev";
+  #     useOSProber = true;
+  #   };
+  # };
 
   users.users."${args.username}" = {
     isNormalUser = true;

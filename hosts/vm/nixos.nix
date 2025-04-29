@@ -13,6 +13,7 @@ args: {
     # ../../modules/steam.nix
     # ../../modules/qemu.nix
     # ../../modules/fprintd.nix
+    ../../modules/gnome.nix
   ];
 
   # Bootloader.

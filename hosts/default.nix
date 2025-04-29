@@ -74,6 +74,15 @@ in
         ./wsl/nixos.nix
       ];
     };
+    vm = mkNixosSystem {
+      system = "x86_64-linux";
+      hostname = "nixos-vm";
+      username = "sho";
+      modules = [
+        inputs.agenix.nixosModules.default
+        ./vm/nixos.nix
+      ];
+    };
   };
   home = {
     desktop = mkHomeManagerConfiguration {
@@ -94,6 +103,16 @@ in
       modules = [
         inputs.agenix.homeManagerModules.default
         ./wsl/home.nix
+      ];
+    };
+    vm = mkHomeManagerConfiguration {
+      system = "x86_64-linux";
+      username = "sho";
+      overlays = [
+      ];
+      modules = [
+        inputs.agenix.homeManagerModules.default
+        ./vm/home.nix
       ];
     };
   };

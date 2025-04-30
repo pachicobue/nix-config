@@ -24,6 +24,7 @@
     ./smartcat
   ];
   home.packages = with pkgs; [
+    pueue
     du-dust
     procs
     xh

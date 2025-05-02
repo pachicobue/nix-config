@@ -79,8 +79,6 @@
             "." = "file_picker_in_current_buffer_directory";
             x = ":buffer-close";
             X = ":buffer-close!";
-            o = ":buffer-close-others";
-            O = ":buffer-close-others!";
             q = ":quit";
             Q = ":quit!";
           };

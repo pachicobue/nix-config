@@ -7,7 +7,7 @@
     ../../home/gui/foot.nix
     ../../home/gui/obsidian.nix
     ../../home/gui/firefox.nix
-    ../../home/gui/mathematica
+    # ../../home/gui/mathematica
     ../../home/gui/webcord.nix
     ../../home/desktop/hyprland
     # ../../home/desktop/gnome

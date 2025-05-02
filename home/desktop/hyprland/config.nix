@@ -7,15 +7,13 @@
     "$obsidian" = "NIXOS_OZONE_WL=1 obsidian";
     exec-once = [
       "fcitx5 -d -r"
-      "fcitx5-remote -r"
       "mako"
       "waybar"
       "hyprshade on blue-light-filter"
       "pueued -d"
       "[workspace special silent] $terminal"
       "[workspace 1 silent] $browser"
-      "[workspace 2 silent] steam"
-      "[workspace 3 silent] $obsidian"
+      "[workspace 2 silent] $obsidian"
     ];
     windowrule = [ "pseudo, noblur, class:(fcitx)" ];
     windowrulev2 = [ "noblur,class:^()$,title:^()$" ];

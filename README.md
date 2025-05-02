@@ -7,9 +7,8 @@ Nix OS configurations
 ### NixOS Desktop (native)
 
 1. `nix develop --extra-experimental-features nix-commands --extra-experimental-features flakes`
-2. `switch-nixos desktop`
-3. `switch-home desktop`
-4. (optional) `direnv allow`
+2. `switch desktop`
+3. (optional) `direnv allow`
 
 ### NixOS on WSL2
 
@@ -17,13 +16,12 @@ Nix OS configurations
     - https://nix-community.github.io/NixOS-WSL/#quick-start
     - https://nix-community.github.io/NixOS-WSL/how-to/change-username.html
 1. `nix develop --extra-experimental-features nix-commands --extra-experimental-features flakes`
-2. `switch-nixos wsl --impure`
-3. `switch-home wsl`
-4. (optional) `direnv allow`
+2. `switch wsl`
+3. (optional) `direnv allow`
 
 ## Credits
 
-- [Misterio77/nix-starter-configs](https://github.com/Misterio77/nix-starter-configs/tree/main/standard)
+- [numtide/blueprint](https://github.com/numtide/blueprint)
 
 ## License
 

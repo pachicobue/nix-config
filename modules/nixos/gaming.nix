@@ -1,5 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
+  programs.gamemode.enable = true;
+  programs.gamescope.enable = true;
   programs.steam = {
     enable = true;
     fontPackages = with pkgs; [
@@ -7,6 +9,7 @@
     ];
   };
   environment.systemPackages = with pkgs; [
-    lutris-unwrapped
+    mangohud
+    lutris
   ];
 }

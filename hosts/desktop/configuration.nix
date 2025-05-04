@@ -13,7 +13,7 @@ in
     flake.modules.nixos.audio
     flake.modules.nixos.nvidia
     flake.modules.nixos.fcitx
-    flake.modules.nixos.tailscale
+    flake.modules.nixos.network
     flake.modules.nixos.gaming
   ];
 

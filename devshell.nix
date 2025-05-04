@@ -2,9 +2,7 @@
 pkgs.mkShell {
   # Add build dependencies
   packages = with pkgs; [
-    home-manager
-    nix-prefetch-github
-    nvfetcher
+    ragenix
     (writeScriptBin "switch" ''
       sudo nixos-rebuild switch --flake ".#$@" --show-trace
     '')

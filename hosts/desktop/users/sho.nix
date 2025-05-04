@@ -1,9 +1,4 @@
-{
-  pkgs,
-  flake,
-  inputs,
-  ...
-}:
+{ flake, ... }:
 {
   home.stateVersion = "24.11";
   imports = [

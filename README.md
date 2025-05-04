@@ -1,8 +1,10 @@
-# nixos-dotfiles
+# nix-config
 
-Nix OS configurations
+Nix OSの設定ファイル
 
-## Installation
+## レポジトリを
+
+## Install手順
 
 ### NixOS Desktop (native)
 

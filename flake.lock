@@ -529,6 +529,23 @@
         "type": "github"
       }
     },
+    "my-nix-secret": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1746387385,
+        "narHash": "sha256-oWjN8Evh2k3GXuP3fXkxDDaeoTBqR2D+YqRCwew839I=",
+        "ref": "refs/heads/main",
+        "rev": "2e58b51683721d68c617d5408c53b88a0e87d64b",
+        "shallow": true,
+        "type": "git",
+        "url": "ssh://git@github.com/pachicobue/nix-secret.git"
+      },
+      "original": {
+        "shallow": true,
+        "type": "git",
+        "url": "ssh://git@github.com/pachicobue/nix-secret.git"
+      }
+    },
     "nixos-wsl": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -659,6 +676,7 @@
         "catppuccin": "catppuccin",
         "home-manager": "home-manager_2",
         "hyprland": "hyprland",
+        "my-nix-secret": "my-nix-secret",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_5"
       }

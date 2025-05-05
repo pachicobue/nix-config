@@ -2,24 +2,35 @@
 
 Nix OSの設定ファイル
 
-## レポジトリを
+## 準備
 
-## Install手順
+### Native
 
-### NixOS Desktop (native)
+- [NixOS_Installation_Guide)](https://nixos.wiki/wiki/NixOS_Installation_Guide) に従う
 
-1. `nix develop --extra-experimental-features nix-commands --extra-experimental-features flakes`
-2. `switch desktop`
-3. (optional) `direnv allow`
+### WSL2
+
+- [NixOS-WSL](https://github.com/nix-community/NixOS-WSL) にしたがってWSL環境立ち上げ
+    - https://nix-community.github.io/NixOS-WSL/#quick-start
+    - https://nix-community.github.io/NixOS-WSL/how-to/change-username.html
+        - `hosts/wsl/users` の名前と同じにしておく
+
+## インストール手順
+
+- `nix develop --extra-experimental-features nix-commands --extra-experimental-features flakes`
+- githubにssh鍵を登録（flakeでプライベートレポジトリをpullするため）
+    - `ssh-keygen`
+    - `gh ssh-key add ~/.ssh/id_ed25519.pub`
+
+### NixOS Desktop
+
+- （nix-secret更新後のみ）`nix flake update my-nix-secret`
+- `switch desktop`
 
 ### NixOS on WSL2
 
-0. Follow [NixOS-WSL](https://github.com/nix-community/NixOS-WSL)'s insturction.
-    - https://nix-community.github.io/NixOS-WSL/#quick-start
-    - https://nix-community.github.io/NixOS-WSL/how-to/change-username.html
-1. `nix develop --extra-experimental-features nix-commands --extra-experimental-features flakes`
-2. `switch wsl`
-3. (optional) `direnv allow`
+- （nix-secret更新後のみ）`nix flake update my-nix-secret`
+- `switch wsl`
 
 ## Credits
 

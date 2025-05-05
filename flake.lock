@@ -532,10 +532,10 @@
     "my-nix-secret": {
       "flake": false,
       "locked": {
-        "lastModified": 1746387385,
-        "narHash": "sha256-oWjN8Evh2k3GXuP3fXkxDDaeoTBqR2D+YqRCwew839I=",
+        "lastModified": 1746420540,
+        "narHash": "sha256-v4NkAStYuhh+6gTj7Rg8Xn6UrA8QM3P3EtihMyEOvuU=",
         "ref": "refs/heads/main",
-        "rev": "2e58b51683721d68c617d5408c53b88a0e87d64b",
+        "rev": "47d4dcf7ea834aedacc8ad9b3d327d8f018577b3",
         "shallow": true,
         "type": "git",
         "url": "ssh://git@github.com/pachicobue/nix-secret.git"

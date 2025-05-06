@@ -4,7 +4,7 @@
     git = {
       enable = true;
       userName = "pachicobue";
-      userEmail = "tigerssho@gmail.com";
+      userEmail = "12893287+pachicobue@users.noreply.github.com";
       delta.enable = true;
       extraConfig = {
         init.defaultBranch = "main";

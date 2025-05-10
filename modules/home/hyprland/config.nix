@@ -9,7 +9,6 @@
       "fcitx5 -d -r"
       "mako"
       "waybar"
-      "hyprctl hyprsunset temperature 2500"
       "[workspace special silent] $terminal"
       "[workspace 1 silent] $browser"
       "[workspace 2 silent] $obsidian"

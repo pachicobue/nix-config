@@ -3,6 +3,7 @@
   programs.ghostty = {
     enable = true;
     enableZshIntegration = true;
+    # clearDefaultKeybinds = true;
     settings = {
       font-size = 12;
       window-padding-x = 10;

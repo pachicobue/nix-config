@@ -9,6 +9,8 @@ in
     flake.modules.nixos.${defaultUser}
     flake.modules.nixos.common
 
+    flake.modules.nixos.yubikey
+
     flake.modules.nixos.virtualization
     flake.modules.nixos.audio
     flake.modules.nixos.nvidia

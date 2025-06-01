@@ -18,7 +18,6 @@
     ./common/zoxide.nix
   ];
   home.packages = with pkgs; [
-    bitwarden-cli
     procs
     scooter
     ouch

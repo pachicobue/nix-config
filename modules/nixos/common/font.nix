@@ -22,6 +22,7 @@
           "Moralerspace Xenon NF"
           "Moralerspace Argon NF"
           "Moralerspace Krypton NF"
+          "Noto Sans Mono CJK JP"
         ];
       };
     };

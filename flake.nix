@@ -15,7 +15,6 @@
     };
     agenix.url = "github:yaxitech/ragenix";
     catppuccin.url = "github:catppuccin/nix";
-    hyprland.url = "github:hyprwm/Hyprland";
 
     my-nix-secret = {
       url = "git+ssh://git@github.com/pachicobue/nix-secret.git?shallow=1";

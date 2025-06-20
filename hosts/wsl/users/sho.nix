@@ -7,7 +7,6 @@
 
     # flake.modules.home.ai
   ];
-  home.stateVersion = "24.11";
   home.sessionVariables = {
     EDITOR = "hx";
   };

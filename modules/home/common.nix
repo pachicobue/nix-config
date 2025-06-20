@@ -1,5 +1,6 @@
 { pkgs, ... }:
 {
+  home.stateVersion = "25.05";
   imports = [
     ./common/atuin.nix
     ./common/bat.nix

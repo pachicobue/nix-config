@@ -1,6 +1,5 @@
 { flake, ... }:
 {
-  home.stateVersion = "24.11";
   imports = [
     flake.modules.home.common
     flake.modules.home.common-wayland
@@ -10,8 +9,10 @@
     flake.modules.home.ghostty
     flake.modules.home.firefox
     flake.modules.home.obsidian
-    flake.modules.home.vesktop
     flake.modules.home.zed
+    flake.modules.home.discord
+    flake.modules.home.proton-pass
+    flake.modules.home.udiskie
 
     ## Installer not placed in repository. Place&Install manually!
     # flake.modules.home.mathematica

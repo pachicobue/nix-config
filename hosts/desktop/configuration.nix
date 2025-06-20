@@ -9,6 +9,7 @@ in
     flake.modules.nixos.${defaultUser}
     flake.modules.nixos.common
 
+    flake.modules.nixos.udisk
     flake.modules.nixos.yubikey
 
     flake.modules.nixos.virtualization
@@ -17,6 +18,7 @@ in
     flake.modules.nixos.fcitx
     flake.modules.nixos.network
     flake.modules.nixos.gaming
+    flake.modules.nixos.hyprland
   ];
 
   # Bootloader.

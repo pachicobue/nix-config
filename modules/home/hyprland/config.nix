@@ -4,14 +4,12 @@
     "$terminal" = "ghostty";
     "$menu" = "fuzzel";
     "$browser" = "firefox-beta";
-    "$obsidian" = "NIXOS_OZONE_WL=1 obsidian";
     exec-once = [
       "fcitx5 -d -r"
       "mako"
       "waybar"
       "[workspace special silent] $terminal"
       "[workspace 1 silent] $browser"
-      "[workspace 2 silent] $obsidian"
     ];
     windowrule = [ "pseudo, noblur, class:(fcitx)" ];
     windowrulev2 = [ "noblur,class:^()$,title:^()$" ];

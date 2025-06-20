@@ -1,6 +1,6 @@
 { ... }:
 {
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.05";
   nixpkgs.config.allowUnfree = true;
   nix = {
     gc = {

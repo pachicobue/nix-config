@@ -10,8 +10,8 @@
       window-padding-x = 10;
       window-padding-y = 5;
       window-padding-balance = true;
-      background-opacity = 0.85;
-      background-blur-radius = 20;
+      background-opacity = 0.8;
+      background-blur = 20;
     };
   };
 }

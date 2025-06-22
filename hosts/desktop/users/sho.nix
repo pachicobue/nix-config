@@ -14,6 +14,8 @@
     flake.modules.home.proton-pass
     flake.modules.home.udiskie
 
+    flake.modules.home.ai
+
     ## Installer not placed in repository. Place&Install manually!
     # flake.modules.home.mathematica
 

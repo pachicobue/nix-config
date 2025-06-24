@@ -1,7 +1,8 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   programs.helix = {
     enable = true;
+    package = inputs.helix.packages.${pkgs.stdenv.hostPlatform.system}.helix;
     extraPackages = with pkgs; [
       bash-language-server
       clang-tools

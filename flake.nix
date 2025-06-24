@@ -15,6 +15,7 @@
     };
     agenix.url = "github:yaxitech/ragenix";
     catppuccin.url = "github:catppuccin/nix";
+    helix.url = "github:helix-editor/helix";
 
     my-nix-secret = {
       url = "git+ssh://git@github.com/pachicobue/nix-secret.git?shallow=1";

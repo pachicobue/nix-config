@@ -14,6 +14,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     agenix.url = "github:yaxitech/ragenix";
+    pre-commit-hooks.url = "github:cachix/git-hooks.nix";
     catppuccin.url = "github:catppuccin/nix";
     helix.url = "github:helix-editor/helix";
 
@@ -28,5 +29,6 @@
     inputs:
     inputs.blueprint {
       inherit inputs;
+      prefix = "nix/";
     };
 }

@@ -6,10 +6,14 @@
     "$browser" = "firefox-beta";
     exec-once = [
       "fcitx5 -d -r"
+      "fusuma -d"
       "mako"
       "waybar"
       "[workspace special silent] $terminal"
       "[workspace 1 silent] $browser"
+    ];
+    exec = [
+      "hyprctl hyprsunset temperature 3000"
     ];
     windowrule = [ "pseudo, noblur, class:(fcitx)" ];
     windowrulev2 = [ "noblur,class:^()$,title:^()$" ];
@@ -17,8 +21,6 @@
     input = {
       kb_layout = "us";
       kb_options = [ "ctrl:nocaps" ];
-      repeat_delay = 300;
-      repeat_rate = 30;
       follow_mouse = 1;
     };
     general = {
@@ -26,23 +28,37 @@
       gaps_out = 20;
       border_size = 2;
       resize_on_border = true;
-      allow_tearing = false;
+      allow_tearing = true;
     };
     animations = {
       enabled = true;
+      animation = [
+        "specialWorkspace,1,4,default,slidefadevert -50%"
+      ];
     };
     decoration = {
       rounding = 10;
-      blur = {
-        enabled = false;
-        size = 3;
-        passes = 1;
-      };
       dim_inactive = true;
+      dim_strength = 0.2;
     };
-    dwindle = {
-      pseudotile = true;
-      preserve_split = true;
+    cursor = {
+      hide_on_key_press = true;
+    };
+    misc = {
+      middle_click_paste = false;
+      mouse_move_enables_dpms = true;
+      focus_on_activate = true;
+    };
+    plugin = {
+      hyprbars = {
+        enabled = false;
+      };
+      hyprexpo = {
+        columns = 3;
+        gap_size = 5;
+        workspace_method = "center current";
+        enable_gesture = false;
+      };
     };
   };
 }

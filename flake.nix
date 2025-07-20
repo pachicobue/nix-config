@@ -13,8 +13,17 @@
       url = "github:numtide/blueprint";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    agenix.url = "github:yaxitech/ragenix";
-    pre-commit-hooks.url = "github:cachix/git-hooks.nix";
+    treefmt = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
+
     catppuccin.url = "github:catppuccin/nix";
     helix.url = "github:helix-editor/helix";
 

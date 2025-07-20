@@ -1,7 +1,6 @@
-{ ... }:
+{ pkgs, ... }:
 {
-  imports = [
-    # ./ai/smartcat.nix
-    ./ai/claude_code.nix
+  home.packages = with pkgs; [
+    claude-code
   ];
 }

@@ -1,9 +1,9 @@
 { ... }:
 {
-  programs.fuzzel = {
+  boot.plymouth = {
     enable = true;
   };
-  catppuccin.fuzzel = {
+  catppuccin.plymouth = {
     enable = true;
   };
 }

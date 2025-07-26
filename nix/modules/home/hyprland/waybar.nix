@@ -1,5 +1,8 @@
 { ... }:
 {
+  catppuccin.waybar = {
+    enable = true;
+  };
   programs.waybar = {
     enable = true;
     settings = {
@@ -61,7 +64,7 @@
         };
         "custom/powermenu" = {
           format = "";
-          on-click = "wleave";
+          on-click = "wlogout";
           tooltip = false;
         };
       };

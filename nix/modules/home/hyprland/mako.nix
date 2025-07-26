@@ -6,4 +6,7 @@
       default-timeout = 5000;
     };
   };
+  catppuccin.mako = {
+    enable = true;
+  };
 }

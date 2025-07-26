@@ -7,7 +7,7 @@
     exec-once = [
       "fcitx5 -d -r"
       "fusuma -d"
-      "mako"
+      # "mako"
       "waybar"
       "[workspace special silent] $terminal"
       "[workspace 1 silent] $browser"
@@ -46,7 +46,7 @@
     };
     misc = {
       middle_click_paste = false;
-      mouse_move_enables_dpms = true;
+      mouse_move_enables_dpms = false;
       focus_on_activate = true;
     };
     plugin = {

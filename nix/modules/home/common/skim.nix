@@ -1,10 +1,10 @@
 { ... }:
 {
-  programs.starship = {
+  programs.skim = {
     enable = true;
     enableZshIntegration = true;
   };
-  catppuccin.starship = {
+  catppuccin.skim = {
     enable = true;
   };
 }

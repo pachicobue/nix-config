@@ -9,4 +9,7 @@
     }
   ];
   programs.zsh.enable = true;
+  catppuccin.tty = {
+    enable = true;
+  };
 }

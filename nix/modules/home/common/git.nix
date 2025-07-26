@@ -19,13 +19,19 @@
       ];
     };
 
-    git-cliff = {
-      enable = true;
-    };
-
-    lazygit = {
+    gitui = {
       enable = true;
     };
   };
-
+  catppuccin = {
+    delta = {
+      enable = true;
+    };
+    gitui = {
+      enable = true;
+    };
+    gh-dash = {
+      enable = true;
+    };
+  };
 }

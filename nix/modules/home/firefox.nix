@@ -29,4 +29,10 @@
     package = pkgs.firefox-beta;
     languagePacks = [ "ja" ];
   };
+  catppuccin.firefox.profiles = {
+    default = {
+      enable = true;
+      force = true;
+    };
+  };
 }

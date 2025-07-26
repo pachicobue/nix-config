@@ -9,6 +9,7 @@ in
     flake.modules.nixos.${defaultUser}
     flake.modules.nixos.common
 
+    # flake.modules.nixos.plymouth
     flake.modules.nixos.bluetooth
     flake.modules.nixos.udisk
     flake.modules.nixos.yubikey
@@ -20,6 +21,7 @@ in
     flake.modules.nixos.network
     flake.modules.nixos.gaming
     flake.modules.nixos.hyprland
+    flake.modules.nixos.keyboard
   ];
 
   # Bootloader.
@@ -33,6 +35,9 @@ in
       device = "nodev";
       useOSProber = true;
     };
+  };
+  catppuccin.grub = {
+    enable = true;
   };
 
   # Auto login

@@ -1,5 +1,9 @@
 { inputs, pkgs, ... }:
 {
+  catppuccin.helix = {
+    enable = true;
+    useItalics = true;
+  };
   programs.helix = {
     enable = true;
     package = inputs.helix.packages.${pkgs.stdenv.hostPlatform.system}.helix;
@@ -22,14 +26,7 @@
       rustfmt
       haskell-language-server
     ];
-    themes = {
-      catppuccin_transparent = {
-        "inherits" = "catppuccin_mocha";
-        "ui.background" = "none";
-      };
-    };
     settings = {
-      theme = "catppuccin_transparent";
       editor = {
         middle-click-paste = false;
         completion-trigger-len = 4;

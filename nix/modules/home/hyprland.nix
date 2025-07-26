@@ -5,12 +5,22 @@
     ./hyprland/keybind.nix
 
     ./hyprland/fuzzel.nix
-    ./hyprland/hyprpaper.nix
     ./hyprland/hyprpolkitagent.nix
     ./hyprland/hyprsunset.nix
-    ./hyprland/mako.nix
-    ./hyprland/waybar.nix
+    # ./hyprland/mako.nix
+    # ./hyprland/waybar.nix
+    ./hyprland/wpaperd.nix
+    # ./hyprland/wlogout.nix
+    ./hyprland/hyprpanel.nix
   ];
+  catppuccin = {
+    hyprland = {
+      enable = true;
+    };
+    cursors = {
+      enable = true;
+    };
+  };
   wayland.windowManager.hyprland = {
     enable = true;
     systemd.enable = true;
@@ -18,8 +28,8 @@
     portalPackage =
       inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     plugins = [
-      inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
-      inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
+      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
+      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
     ];
   };
   services.fusuma = {
@@ -59,7 +69,6 @@
   };
   home.packages = with pkgs; [
     fusuma
-    wleave
     pavucontrol
     hyprshot
   ];

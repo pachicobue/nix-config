@@ -1,4 +1,9 @@
 { ... }:
 {
-  programs.bottom.enable = true;
+  programs.bottom = {
+    enable = true;
+  };
+  catppuccin.bottom = {
+    enable = true;
+  };
 }

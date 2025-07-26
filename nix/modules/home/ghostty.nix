@@ -10,8 +10,9 @@
       window-padding-x = 10;
       window-padding-y = 5;
       window-padding-balance = true;
-      background-opacity = 0.8;
-      background-blur = 20;
     };
+  };
+  catppuccin.ghostty = {
+    enable = true;
   };
 }

@@ -1,9 +1,10 @@
 { ... }:
 {
-  programs.fuzzel = {
+  programs.wlogout = {
     enable = true;
+
   };
-  catppuccin.fuzzel = {
+  catppuccin.wlogout = {
     enable = true;
   };
 }

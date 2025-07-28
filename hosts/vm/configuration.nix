@@ -1,15 +1,8 @@
-{ flake, ... }:
+{ inputs, ... }:
 let
   defaultUser = "sho";
 in
 {
-  imports = [
-    flake.modules.nixos.${defaultUser}
-    ./hardware-configuration.nix
-    flake.modules.nixos.common
-
-    flake.modules.nixos.fcitx
-  ];
 
   # Bootloader.
   boot.loader = {

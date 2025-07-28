@@ -4,8 +4,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-This is a personal NixOS configuration using Nix Flakes with the following structure:
-- Uses numtide/blueprint as the base flake architecture
+This is a personal NixOS configuration using standard Nix Flakes with the following structure:
+- Standard flake.nix with nixosConfigurations and devShells
 - Multi-machine support: desktop, WSL, and VM configurations
 - Modular design with separate NixOS and Home Manager modules
 - Japanese/English environment with Hyprland on desktop/VM, minimal on WSL
@@ -15,7 +15,7 @@ This is a personal NixOS configuration using Nix Flakes with the following struc
 ### Development Environment
 ```bash
 # Enter development shell (required first)
-nix develop --extra-experimental-features nix-commands --extra-experimental-features flakes
+nix develop --extra-experimental-features nix-command --extra-experimental-features flakes
 
 # Apply configuration changes
 switch desktop    # For desktop configuration
@@ -43,8 +43,7 @@ gh ssh-key add ~/.ssh/id_ed25519.pub
 ## Architecture Overview
 
 ### Flake Structure
-- `flake.nix`: Main entry point using blueprint framework
-- `devshell.nix`: Development environment with custom `switch` command
+- `flake.nix`: Main entry point with standard nixosConfigurations and devShells
 - Private secrets via `my-nix-secret` flake dependency
 
 ### Configuration Hierarchy

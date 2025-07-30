@@ -1,5 +1,8 @@
-{ inputs, pkgs, ... }:
 {
+  inputs,
+  pkgs,
+  ...
+}: {
   catppuccin.helix = {
     enable = true;
     useItalics = true;
@@ -18,7 +21,7 @@
       dhall-lsp-server
       texlab
       nil
-      nixfmt-rfc-style
+      alejandra
       taplo
       ruff
       pyright
@@ -31,9 +34,6 @@
         middle-click-paste = false;
         completion-trigger-len = 4;
         bufferline = "always";
-        color-modes = true;
-        true-color = true;
-        undercurl = true;
         cursor-shape = {
           insert = "bar";
           normal = "block";
@@ -66,8 +66,7 @@
           space = {
             w = ":write";
             W = ":write-all";
-            f = "file_picker";
-            "." = "file_picker_in_current_buffer_directory";
+            F = "file_picker_in_current_buffer_directory";
             x = ":buffer-close";
             X = ":buffer-close!";
             q = ":quit";
@@ -81,12 +80,6 @@
         {
           name = "cpp";
           auto-format = true;
-          formatter = {
-            command = "clang-format";
-          };
-          language-servers = [
-            "clangd"
-          ];
         }
         {
           name = "rust";
@@ -94,36 +87,21 @@
           formatter = {
             command = "rustfmt";
           };
-          language-servers = [
-            "rust-analyzer"
-          ];
         }
         {
           name = "python";
           auto-format = true;
-          language-servers = [
-            "ruff"
-            "pyright"
-          ];
         }
         {
           name = "nix";
           auto-format = true;
           formatter = {
-            command = "nixfmt";
-            args = [ "-" ];
+            command = "alejandra";
           };
         }
         {
           name = "toml";
           auto-format = true;
-          formatter = {
-            command = "taplo";
-            args = [
-              "format"
-              "-"
-            ];
-          };
         }
       ];
     };

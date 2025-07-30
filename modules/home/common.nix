@@ -2,8 +2,7 @@
   pkgs,
   inputs,
   ...
-}:
-{
+}: {
   home.stateVersion = "25.05";
   home.shellAliases = {
     e = "$EDITOR";
@@ -38,7 +37,6 @@
     accent = "pink";
   };
   home.packages = with pkgs; [
-    rip2
     procs
     scooter
     ouch

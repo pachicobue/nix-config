@@ -1,24 +1,24 @@
-{ flake, ... }:
 {
+  hostname,
+  username,
+}: {...}: {
   imports = [
-    flake.modules.home.common
-    flake.modules.home.common-wayland
-
-    flake.modules.home.hyprland
-
-    flake.modules.home.cava
-    flake.modules.home.spotify-player
-    flake.modules.home.ghostty
-    flake.modules.home.firefox
-    flake.modules.home.obsidian
-    flake.modules.home.zed
-    flake.modules.home.discord
-    flake.modules.home.proton-pass
-    flake.modules.home.udiskie
-    flake.modules.home.ai
+    ../../../modules/home/common.nix
+    ../../../modules/home/common-wayland.nix
+    ../../../modules/home/hyprland.nix
+    ../../../modules/home/cava.nix
+    ../../../modules/home/spotify-player.nix
+    ../../../modules/home/ghostty.nix
+    ../../../modules/home/firefox.nix
+    ../../../modules/home/obsidian.nix
+    ../../../modules/home/zed.nix
+    ../../../modules/home/discord.nix
+    ../../../modules/home/proton-pass.nix
+    ../../../modules/home/udiskie.nix
+    ../../../modules/home/ai.nix
 
     ## Installer not placed in repository. Place&Install manually!
-    # flake.modules.home.mathematica
+    # ../../../modules/home/mathematica.nix
   ];
   home.sessionVariables = {
     EDITOR = "hx";

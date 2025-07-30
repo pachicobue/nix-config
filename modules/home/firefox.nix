@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   programs.firefox = {
     enable = true;
     profiles.default = {
@@ -20,19 +19,17 @@
         "browser.translations.mostRecentTargetLanguages" = "ja";
         "browser.tabs.closeWindowWithLastTab" = false;
         "sidebar.verticalTabs" = true;
-        "extensions.pictureinpicture.enable_picture_in_picture_overrides" = true;
       };
       extensions = {
         force = true;
       };
     };
     package = pkgs.firefox-beta;
-    languagePacks = [ "ja" ];
+    languagePacks = ["ja"];
   };
   catppuccin.firefox.profiles = {
     default = {
       enable = true;
-      force = true;
     };
   };
 }

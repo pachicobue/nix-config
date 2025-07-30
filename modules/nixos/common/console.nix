@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   # TTY program supports nerdfont
   services.kmscon.enable = true;
   services.kmscon.fonts = [
@@ -8,7 +7,6 @@
       package = pkgs.moralerspace-nf;
     }
   ];
-  programs.zsh.enable = true;
   catppuccin.tty = {
     enable = true;
   };

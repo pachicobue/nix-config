@@ -17,6 +17,10 @@
 
     catppuccin.url = "github:catppuccin/nix";
     helix.url = "github:helix-editor/helix";
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     my-nix-secret = {
       url = "git+ssh://git@github.com/pachicobue/nix-secret.git?shallow=1";

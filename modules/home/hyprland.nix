@@ -10,10 +10,6 @@
     ./hyprland/fuzzel.nix
     ./hyprland/hyprpolkitagent.nix
     ./hyprland/hyprsunset.nix
-    # ./hyprland/mako.nix
-    # ./hyprland/waybar.nix
-    ./hyprland/wpaperd.nix
-    # ./hyprland/wlogout.nix
     ./hyprland/hyprpanel.nix
   ];
   catppuccin = {

@@ -17,11 +17,15 @@
 
     catppuccin.url = "github:catppuccin/nix";
     helix.url = "github:helix-editor/helix";
-
-    my-nix-secret = {
-      url = "git+ssh://git@github.com/pachicobue/nix-secret.git?shallow=1";
-      flake = false;
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # my-nix-secret = {
+    #   url = "git+ssh://git@github.com/pachicobue/nix-secret.git?shallow=1";
+    #   flake = false;
+    # };
   };
 
   outputs = {
@@ -31,11 +35,11 @@
   } @ inputs: let
     hosts = [
       {
-        hostname = "desktop";
+        hostname = "coconut";
         system = "x86_64-linux";
       }
       {
-        hostname = "wsl2";
+        hostname = "plum";
         system = "x86_64-linux";
       }
     ];

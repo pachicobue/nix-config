@@ -51,6 +51,26 @@
         "type": "github"
       }
     },
+    "disko": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1753140376,
+        "narHash": "sha256-7lrVrE0jSvZHrxEzvnfHFE/Wkk9DDqb+mYCodI5uuB8=",
+        "owner": "nix-community",
+        "repo": "disko",
+        "rev": "545aba02960caa78a31bd9a8709a0ad4b6320a5c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "disko",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -433,23 +453,6 @@
         "type": "github"
       }
     },
-    "my-nix-secret": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1746420540,
-        "narHash": "sha256-v4NkAStYuhh+6gTj7Rg8Xn6UrA8QM3P3EtihMyEOvuU=",
-        "ref": "refs/heads/main",
-        "rev": "47d4dcf7ea834aedacc8ad9b3d327d8f018577b3",
-        "shallow": true,
-        "type": "git",
-        "url": "ssh://git@github.com/pachicobue/nix-secret.git"
-      },
-      "original": {
-        "shallow": true,
-        "type": "git",
-        "url": "ssh://git@github.com/pachicobue/nix-secret.git"
-      }
-    },
     "nixos-wsl": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -576,11 +579,11 @@
     "root": {
       "inputs": {
         "catppuccin": "catppuccin",
+        "disko": "disko",
         "helix": "helix",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
         "hyprland-plugins": "hyprland-plugins",
-        "my-nix-secret": "my-nix-secret",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_5"
       }

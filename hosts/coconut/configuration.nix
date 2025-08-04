@@ -24,14 +24,26 @@
     ../../modules/nixos/keyboard.nix
   ];
 
-  # Boot Loader
-  boot.loader = {
-    grub.enable = false;
-    systemd-boot.enable = false;
-    limine = {
-      enable = true;
-      efiSupport = true;
-      enableEditor = true;
+  boot = {
+    # Kernel
+    kernelPackages = pkgs.linuxPackages_zen;
+    consoleLogLevel = 3;
+    # tmp is RAM
+    tmp = {
+      useTmpfs = true;
+    };
+    # Boot Loader
+    loader = {
+      grub.enable = false;
+      systemd-boot.enable = false;
+      limine = {
+        enable = true;
+        secureBoot = {
+          enable = true;
+        };
+        efiSupport = true;
+        enableEditor = true;
+      };
     };
   };
 
@@ -66,5 +78,10 @@
       shell = pkgs.zsh;
     };
     groups.sho = {};
+  };
+
+  # Theme
+  catppuccin = {
+    plymouth.enable = true;
   };
 }

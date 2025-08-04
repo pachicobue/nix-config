@@ -13,6 +13,7 @@ in {
   # NixOS configs
   imports = [
     ./hardware-configuration.nix
+    ./impermanence.nix
     ./disko-config.nix
     inputs.disko.nixosModules.disko
     (import ./configuration.nix {inherit hostname;})

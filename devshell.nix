@@ -21,9 +21,8 @@ in
         packages = with pkgs; [
           git
           github-cli
+          alejandra
           nh
-          sbctl
-          cryptsetup
           (writeScriptBin "switch" ''
             nh os switch . --hostname "$@"
           '')

@@ -8,8 +8,6 @@
           type = "gpt";
           partitions = {
             ESP = {
-              label = "boot";
-              name = "ESP";
               type = "EF00";
               size = "2G";
               content = {
@@ -17,44 +15,56 @@
                 format = "vfat";
                 mountpoint = "/boot";
                 mountOptions = [
-                  "defaults"
                   "umask=0077"
                 ];
               };
             };
-            luks = {
+            root = {
               size = "100%";
-              label = "luks";
               content = {
                 type = "btrfs";
-                extraArgs = ["-L" "nixos" "-f"];
+                extraArgs = ["-f"];
                 subvolumes = {
                   "/root" = {
                     mountpoint = "/";
-                    mountOptions = ["subvol=root" "compress=zstd" "noatime"];
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
                   };
                   "/root-blank" = {
-                    mountOptions = ["subvol=root-blank" "nodatacow" "noatime"];
+                    mountOptions = [
+                      "nodatacow"                        
+                      "noatime"
+                    ];
                   };
-                  "/home" = {
-                    mountpoint = "/home";
-                    mountOptions = ["subvol=home" "compress=zstd" "noatime"];
+                  "/persistent" = {
+                    mountpoint = "/persistent";
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
                   };
                   "/nix" = {
                     mountpoint = "/nix";
-                    mountOptions = ["subvol=nix" "compress=zstd" "noatime"];
-                  };
-                  "/persist" = {
-                    mountpoint = "/persist";
-                    mountOptions = ["subvol=persist" "compress=zstd" "noatime"];
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
                   };
                   "/log" = {
                     mountpoint = "/var/log";
-                    mountOptions = ["subvol=log" "compress=zstd" "noatime"];
+                    mountOptions = [
+                      "compress=zstd"                        
+                      "noatime"
+                    ];
                   };
                   "/lib" = {
                     mountpoint = "/var/lib";
-                    mountOptions = ["subvol=lib" "compress=zstd" "noatime"];
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
                   };
                 };
               };
@@ -64,7 +74,4 @@
       };
     };
   };
-  fileSystems."/persist".neededForBoot = true;
-  fileSystems."/var/log".neededForBoot = true;
-  fileSystems."/var/lib".neededForBoot = true;
 }

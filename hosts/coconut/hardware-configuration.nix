@@ -7,7 +7,9 @@
   pkgs,
   modulesPath,
   ...
-}: {
+}:
+
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -19,9 +21,9 @@
     "nvme"
     "usbhid"
   ];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-intel"];
-  boot.extraModulePackages = [];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-intel" ];
+  boot.extraModulePackages = [ ];
 
   # fileSystems managed by disko
   # fileSystems."/" = {

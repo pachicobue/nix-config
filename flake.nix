@@ -10,10 +10,10 @@
     };
 
     hyprland.url = "github:hyprwm/Hyprland";
-    # hyprland-plugins = {
-    #   url = "github:hyprwm/hyprland-plugins";
-    #   inputs.hyprland.follows = "hyprland";
-    # };
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
 
     catppuccin.url = "github:catppuccin/nix";
     helix.url = "github:helix-editor/helix";
@@ -21,7 +21,6 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    impermanence.url = "github:nix-community/impermanence";
 
     # my-nix-secret = {
     #   url = "git+ssh://git@github.com/pachicobue/nix-secret.git?shallow=1";

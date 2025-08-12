@@ -1,5 +1,5 @@
 {...}: {
-  programs.wlogout = {
+  programs.spotify-player = {
     enable = true;
   };
 }

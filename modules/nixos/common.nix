@@ -5,5 +5,6 @@
     common/nix.nix
     common/locale.nix
     common/direnv.nix
+    common/theme.nix
   ];
 }

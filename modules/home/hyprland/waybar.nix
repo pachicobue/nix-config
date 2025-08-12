@@ -1,8 +1,4 @@
-{ ... }:
-{
-  catppuccin.waybar = {
-    enable = true;
-  };
+{...}: {
   programs.waybar = {
     enable = true;
     settings = {
@@ -33,10 +29,10 @@
           all-outputs = true;
           on-click = "activate";
           persistent-workspaces = {
-            "1" = [ ];
-            "2" = [ ];
-            "3" = [ ];
-            "4" = [ ];
+            "1" = [];
+            "2" = [];
+            "3" = [];
+            "4" = [];
           };
         };
         pulseaudio = {
@@ -106,7 +102,7 @@
       #workspaces button.active {
         color: @crust;
         background: @overlay2;
-        border: none; 
+        border: none;
       }
 
       #custom-launcher,

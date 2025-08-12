@@ -15,17 +15,17 @@
       inputs.hyprland.follows = "hyprland";
     };
 
-    catppuccin.url = "github:catppuccin/nix";
+    stylix.url = "github:danth/stylix";
     helix.url = "github:helix-editor/helix";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # my-nix-secret = {
-    #   url = "git+ssh://git@github.com/pachicobue/nix-secret.git?shallow=1";
-    #   flake = false;
-    # };
+    my-nix-secret = {
+      url = "github:pachicobue/nix-secret";
+      flake = false;
+    };
   };
 
   outputs = {
@@ -40,6 +40,10 @@
       }
       {
         hostname = "plum";
+        system = "x86_64-linux";
+      }
+      {
+        hostname = "sandbox";
         system = "x86_64-linux";
       }
     ];

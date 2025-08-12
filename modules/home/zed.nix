@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   programs.zed-editor = {
     enable = true;
     extraPackages = with pkgs; [
@@ -12,15 +11,9 @@
       nil
     ];
     extensions = [
-      "catppuccin-icons"
       "nix"
     ];
     userSettings = {
-      buffer_font_family = "Moralerspace Neon NF";
-      buffer_font_features = {
-        calt = false;
-      };
-      buffer_font_size = 14;
       current_line_highlight = "gutter";
       scroll_beyond_last_line = "off";
       vim_mode = true;

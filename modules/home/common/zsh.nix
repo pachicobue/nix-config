@@ -1,9 +1,8 @@
-{ ... }:
-{
+{config, ...}: {
   programs.zsh = {
     enable = true;
     defaultKeymap = "emacs";
-    dotDir = ".config/zsh";
+    dotDir = "${config.home.homeDirectory}/.config/zsh";
     autocd = true;
     autosuggestion.enable = true;
     enableCompletion = true;
@@ -16,8 +15,5 @@
     };
     historySubstringSearch.enable = true;
     syntaxHighlighting.enable = true;
-  };
-  catppuccin.zsh-syntax-highlighting = {
-    enable = true;
   };
 }

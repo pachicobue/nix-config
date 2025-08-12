@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   programs = {
     git = {
       enable = true;
@@ -19,19 +18,11 @@
       ];
     };
 
-    gitui = {
-      enable = true;
-    };
-  };
-  catppuccin = {
-    delta = {
+    lazygit = {
       enable = true;
     };
     gitui = {
-      enable = true;
-    };
-    gh-dash = {
-      enable = true;
+      enable = false;
     };
   };
 }

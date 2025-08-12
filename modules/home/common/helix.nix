@@ -3,10 +3,6 @@
   pkgs,
   ...
 }: {
-  catppuccin.helix = {
-    enable = true;
-    useItalics = true;
-  };
   programs.helix = {
     enable = true;
     package = inputs.helix.packages.${pkgs.stdenv.hostPlatform.system}.helix;

@@ -8,7 +8,6 @@
 
   # System modules
   imports = [
-    inputs.catppuccin.nixosModules.catppuccin
     inputs.nixos-wsl.nixosModules.default
 
     ../../modules/nixos/common.nix

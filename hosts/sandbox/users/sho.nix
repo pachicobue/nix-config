@@ -6,10 +6,9 @@
     ../../../modules/home/common.nix
     ../../../modules/home/common-wayland.nix
     ../../../modules/home/hyprland.nix
-
     ../../../modules/home/cava.nix
-    ../../../modules/home/spotify.nix
-    ../../../modules/home/alacritty.nix
+    ../../../modules/home/spotify-player.nix
+    ../../../modules/home/ghostty.nix
     ../../../modules/home/firefox.nix
     ../../../modules/home/obsidian.nix
     ../../../modules/home/zed.nix

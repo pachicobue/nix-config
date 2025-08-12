@@ -1,6 +1,6 @@
 {
+  config,
   pkgs,
-  inputs,
   ...
 }: {
   home.stateVersion = "25.05";
@@ -9,33 +9,32 @@
     rm = "rm -i";
     cp = "cp -i";
   };
+  xdg.userDirs = {
+    enable = true;
+    download = "${config.home.homeDirectory}/Downloads";
+    desktop = "${config.home.homeDirectory}/Desktop";
+    documents = "${config.home.homeDirectory}/Documents";
+    music = "${config.home.homeDirectory}/Musics";
+    pictures = "${config.home.homeDirectory}/Pictures";
+    videos = "${config.home.homeDirectory}/Videos";
+  };
 
   imports = [
-    inputs.catppuccin.homeModules.catppuccin
-
     ./common/atuin.nix
     ./common/bat.nix
     ./common/btop.nix
-    ./common/bottom.nix
     ./common/carapace.nix
-    ./common/fastfetch.nix
     ./common/fd.nix
     ./common/git.nix
     ./common/helix.nix
     ./common/lsd.nix
     ./common/pueue.nix
     ./common/ripgrep.nix
-    ./common/skim.nix
     ./common/starship.nix
     ./common/zathura.nix
     ./common/zsh.nix
     ./common/zoxide.nix
   ];
-  catppuccin = {
-    enable = false;
-    flavor = "mocha";
-    accent = "pink";
-  };
   home.packages = with pkgs; [
     procs
     scooter

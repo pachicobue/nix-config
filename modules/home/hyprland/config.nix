@@ -1,26 +1,24 @@
-{ ... }:
-{
+{config, ...}: {
   wayland.windowManager.hyprland.settings = {
-    "$terminal" = "ghostty";
+    "$terminal" = "alacritty";
     "$menu" = "fuzzel";
     "$browser" = "firefox-beta";
     exec-once = [
+      "hyprpanel"
+      "hyprctl setcursor ${config.stylix.cursor.name} 24"
       "fcitx5 -d -r"
       "fusuma -d"
-      # "mako"
-      "waybar"
       "[workspace special silent] $terminal"
       "[workspace 1 silent] $browser"
     ];
     exec = [
-      "hyprctl hyprsunset temperature 3000"
     ];
-    windowrule = [ "pseudo, noblur, class:(fcitx)" ];
-    windowrulev2 = [ "noblur,class:^()$,title:^()$" ];
+    windowrule = ["pseudo, noblur, class:(fcitx)"];
+    windowrulev2 = ["noblur,class:^()$,title:^()$"];
     monitor = "HDMI-A-1,highrr,0x0,1";
     input = {
       kb_layout = "us";
-      kb_options = [ "ctrl:nocaps" ];
+      kb_options = ["ctrl:nocaps"];
       follow_mouse = 1;
     };
     general = {
@@ -48,17 +46,6 @@
       middle_click_paste = false;
       mouse_move_enables_dpms = false;
       focus_on_activate = true;
-    };
-    plugin = {
-      hyprbars = {
-        enabled = false;
-      };
-      hyprexpo = {
-        columns = 3;
-        gap_size = 5;
-        workspace_method = "center current";
-        enable_gesture = false;
-      };
     };
   };
 }

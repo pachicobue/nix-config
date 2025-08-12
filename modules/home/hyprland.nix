@@ -8,28 +8,14 @@
     ./hyprland/keybind.nix
 
     ./hyprland/fuzzel.nix
-    ./hyprland/hyprpolkitagent.nix
-    ./hyprland/hyprsunset.nix
     ./hyprland/hyprpanel.nix
   ];
-  catppuccin = {
-    hyprland = {
-      enable = true;
-    };
-    cursors = {
-      enable = true;
-    };
-  };
   wayland.windowManager.hyprland = {
     enable = true;
     systemd.enable = true;
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     portalPackage =
       inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-    plugins = [
-      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
-      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
-    ];
   };
   services.fusuma = {
     enable = true;

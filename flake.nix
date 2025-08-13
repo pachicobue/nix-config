@@ -42,32 +42,57 @@
         hostname = "plum";
         system = "x86_64-linux";
       }
+    ];
+    vms = [
       {
-        hostname = "sandbox";
+        hostname = "minimal";
         system = "x86_64-linux";
+      }
+      {
+        hostname = "minimal";
+        system = "aarch64-linux";
       }
     ];
   in {
-    nixosConfigurations = builtins.listToAttrs (
-      map ({
-        hostname,
-        system,
-      }: {
-        name = hostname;
-        value = (
-          nixpkgs.lib.nixosSystem {
-            inherit system;
-            specialArgs = {inherit inputs;};
-            modules = [
-              (import ./hosts/${hostname} {inherit hostname;})
-              home-manager.nixosModules.home-manager
-            ];
-          }
-        );
-      })
-      hosts
-    );
-
+    nixosConfigurations =
+      builtins.listToAttrs (
+        map ({
+          hostname,
+          system,
+        }: {
+          name = hostname;
+          value = (
+            nixpkgs.lib.nixosSystem {
+              inherit system;
+              specialArgs = {inherit inputs;};
+              modules = [
+                (import ./host/${hostname} {inherit hostname;})
+                home-manager.nixosModules.home-manager
+              ];
+            }
+          );
+        })
+        hosts
+      )
+      // builtins.listToAttrs (
+        map ({
+          hostname,
+          system,
+        }: {
+          name = "vm/${hostname}";
+          value = (
+            nixpkgs.lib.nixosSystem {
+              inherit system;
+              specialArgs = {inherit inputs;};
+              modules = [
+                (import ./vm/${hostname}.nix {inherit hostname;})
+                home-manager.nixosModules.home-manager
+              ];
+            }
+          );
+        })
+        vms
+      );
     devShells = import ./devshell.nix inputs;
   };
 }

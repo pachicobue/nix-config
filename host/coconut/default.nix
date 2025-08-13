@@ -3,7 +3,7 @@
 
   perUserHmModules = builtins.listToAttrs (map (username: {
       name = username;
-      value = import ./users/${username}.nix {
+      value = import ./user/${username}.nix {
         inherit hostname;
         inherit username;
       };

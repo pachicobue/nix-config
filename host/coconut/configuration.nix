@@ -8,18 +8,18 @@
 
   # System modules
   imports = [
-    ../../modules/nixos/common.nix
-    ../../modules/nixos/hyprland.nix
-    ../../modules/nixos/fcitx.nix
-    ../../modules/nixos/bluetooth.nix
-    ../../modules/nixos/udisk.nix
-    ../../modules/nixos/yubikey.nix
-    ../../modules/nixos/virtualization.nix
-    ../../modules/nixos/audio.nix
-    ../../modules/nixos/nvidia.nix
-    ../../modules/nixos/network.nix
-    ../../modules/nixos/gaming.nix
-    ../../modules/nixos/keyboard.nix
+    ../../module/nixos/common.nix
+    ../../module/nixos/hyprland.nix
+    ../../module/nixos/fcitx.nix
+    ../../module/nixos/bluetooth.nix
+    ../../module/nixos/udisk.nix
+    ../../module/nixos/yubikey.nix
+    ../../module/nixos/virtualization.nix
+    ../../module/nixos/audio.nix
+    ../../module/nixos/nvidia.nix
+    ../../module/nixos/network.nix
+    ../../module/nixos/gaming.nix
+    ../../module/nixos/keyboard.nix
   ];
 
   # Boot Loader

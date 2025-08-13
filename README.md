@@ -8,7 +8,7 @@ Nix OSの設定ファイル
 
 - [NixOS-WSL](https://github.com/nix-community/NixOS-WSL) に従う
     - https://nix-community.github.io/NixOS-WSL/how-to/change-username.html
-        - `hosts/plum/users` の名前と同じにしておく
+        - `host/plum/user` の名前と同じにしておく
 
 ### 共通
 

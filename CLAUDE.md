@@ -48,12 +48,12 @@ gh ssh-key add ~/.ssh/id_ed25519.pub
 
 ### Configuration Hierarchy
 ```
-hosts/
+host/
 ├── desktop/    # Full desktop with Hyprland, gaming, graphics
 ├── wsl/        # Minimal WSL2 environment  
 └── vm/         # VM configuration
 
-modules/
+module/
 ├── nixos/      # System-level NixOS modules
 │   ├── common/ # Base system configuration
 │   └── *.nix   # Feature modules (audio, gaming, nvidia, etc.)
@@ -64,8 +64,8 @@ modules/
 ```
 
 ### Module System
-- `modules/nixos/common.nix`: Base system (fonts, console, nix config, locale, direnv)
-- `modules/home/common.nix`: Base user environment (shell, CLI tools, text editors)
+- `module/nixos/common.nix`: Base system (fonts, console, nix config, locale, direnv)
+- `module/home/common.nix`: Base user environment (shell, CLI tools, text editors)
 - Feature modules are imported conditionally per host
 - Catppuccin theming applied consistently across applications
 

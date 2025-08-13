@@ -3,8 +3,8 @@
   username,
 }: {
   imports = [
-    ../../../modules/home/common.nix
-    ../../../modules/home/ai.nix
+    ../../../module/home/common.nix
+    ../../../module/home/ai.nix
   ];
   home.sessionVariables = {
     EDITOR = "hx";

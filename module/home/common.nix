@@ -11,12 +11,12 @@
   };
   xdg.userDirs = {
     enable = true;
-    download = "${config.home.homeDirectory}/Downloads";
+    download = "${config.home.homeDirectory}/Download";
     desktop = "${config.home.homeDirectory}/Desktop";
-    documents = "${config.home.homeDirectory}/Documents";
-    music = "${config.home.homeDirectory}/Musics";
-    pictures = "${config.home.homeDirectory}/Pictures";
-    videos = "${config.home.homeDirectory}/Videos";
+    documents = "${config.home.homeDirectory}/Document";
+    music = "${config.home.homeDirectory}/Music";
+    pictures = "${config.home.homeDirectory}/Picture";
+    videos = "${config.home.homeDirectory}/Video";
   };
 
   imports = [

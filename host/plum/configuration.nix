@@ -10,7 +10,7 @@
   imports = [
     inputs.nixos-wsl.nixosModules.default
 
-    ../../modules/nixos/common.nix
+    ../../module/nixos/common.nix
   ];
 
   nixpkgs.hostPlatform = "x86_64-linux";

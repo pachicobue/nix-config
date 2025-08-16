@@ -9,6 +9,7 @@
 
     ./hyprland/fuzzel.nix
     ./hyprland/hyprpanel.nix
+    ./hyprland/hyprpolkitagent.nix
   ];
   wayland.windowManager.hyprland = {
     enable = true;

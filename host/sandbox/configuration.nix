@@ -18,24 +18,23 @@
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
     loader = {
-      grub = {
+      grub.enable = false;
+      systemd-boot.enable = false;
+      limine = {
         enable = true;
         efiSupport = true;
-        device = "nodev";
+        efiInstallAsRemovable = true;
       };
-      efi.canTouchEfiVariables = true;
       timeout = 3;
     };
     kernelParams = [
       "console=ttyS0,115200n8"
-      "console=tty0"
       "earlyprintk=serial,ttyS0,115200"
-      "loglevel=8" # より詳細なレベル
+      "loglevel=8"
       "debug"
       "initcall_debug"
       "ignore_loglevel"
       "debug"
-      "loglevel=7"
     ];
   };
 
@@ -56,17 +55,16 @@
     };
     groups.sho = {};
   };
-  # environment.enableAllTerminfo = true;
+  environment.enableAllTerminfo = true;
 
-  # pverservation required initrd using systemd.
-  # preservation.enable = true;
-  # boot.initrd.systemd.enable = true;
-  # preservation.preserveAt."/persistent" = {
-  #   directories = [
-  #     "/etc"
-  #     "/var"
-  #   ];
-  #   files = [
-  #   ];
-  # };
+  preservation.enable = true;
+  boot.initrd.systemd.enable = true;
+  preservation.preserveAt."/persistent" = {
+    directories = [
+      "/etc"
+      "/var"
+    ];
+    files = [
+    ];
+  };
 }

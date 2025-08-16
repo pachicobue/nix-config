@@ -8,6 +8,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland-plugins = {
@@ -20,6 +24,9 @@
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    preservation = {
+      url = "github:nix-community/preservation";
     };
 
     my-nix-secret = {
@@ -42,57 +49,69 @@
         hostname = "plum";
         system = "x86_64-linux";
       }
+      {
+        hostname = "sandbox";
+        system = "x86_64-linux";
+      }
+    ];
+
+    vmSystems = [
+      "x86_64-linux"
+      "aarch64-linux"
     ];
     vms = [
       {
         hostname = "minimal";
-        system = "x86_64-linux";
-      }
-      {
-        hostname = "minimal";
-        system = "aarch64-linux";
+        format = "qcow-efi";
       }
     ];
   in {
-    nixosConfigurations =
-      builtins.listToAttrs (
-        map ({
-          hostname,
-          system,
-        }: {
-          name = hostname;
-          value = (
-            nixpkgs.lib.nixosSystem {
-              inherit system;
-              specialArgs = {inherit inputs;};
-              modules = [
-                (import ./host/${hostname} {inherit hostname;})
-                home-manager.nixosModules.home-manager
-              ];
+    nixosConfigurations = builtins.listToAttrs (
+      map ({
+        hostname,
+        system,
+      }: {
+        name = hostname;
+        value = (
+          nixpkgs.lib.nixosSystem {
+            specialArgs = {inherit inputs;};
+            modules = [
+              (import ./host/${hostname} {inherit hostname;})
+              home-manager.nixosModules.home-manager
+            ];
+            inherit system;
+          }
+        );
+      })
+      hosts
+    );
+    packages = builtins.listToAttrs (
+      map (system: {
+        name = system;
+        value = builtins.listToAttrs (
+          map (
+            {
+              hostname,
+              format,
+            }: {
+              name = hostname;
+              value = (
+                inputs.nixos-generators.nixosGenerate {
+                  inherit system;
+                  specialArgs = {inherit inputs;};
+                  modules = [
+                    (import ./vm/${hostname}.nix {inherit hostname;})
+                  ];
+                  inherit format;
+                }
+              );
             }
-          );
-        })
-        hosts
-      )
-      // builtins.listToAttrs (
-        map ({
-          hostname,
-          system,
-        }: {
-          name = "vm/${hostname}";
-          value = (
-            nixpkgs.lib.nixosSystem {
-              inherit system;
-              specialArgs = {inherit inputs;};
-              modules = [
-                (import ./vm/${hostname}.nix {inherit hostname;})
-                home-manager.nixosModules.home-manager
-              ];
-            }
-          );
-        })
-        vms
-      );
+          )
+          vms
+        );
+      })
+      vmSystems
+    );
     devShells = import ./devshell.nix inputs;
   };
 }

@@ -30,16 +30,7 @@ in
             fi
 
             TARGET_HOSTNAME="$1"
-
-            # Reject vm/ prefixed arguments
-            if [[ "$TARGET_HOSTNAME" == vm/* ]]; then
-              echo "❌ Error: Cannot use 'switch' with vm/ prefixed hostnames"
-              echo "   VM configurations (vm/x86, vm/aarch) should be built with 'vmbuild' instead"
-              exit 1
-            fi
-
             CURRENT_HOSTNAME=$(hostname)
-
             if [ "$TARGET_HOSTNAME" != "$CURRENT_HOSTNAME" ]; then
               echo "⚠️  Warning: Target hostname '$TARGET_HOSTNAME' differs from current hostname '$CURRENT_HOSTNAME'"
               echo "   This will apply configuration for '$TARGET_HOSTNAME' to this machine."
@@ -53,8 +44,10 @@ in
 
             nh os switch . --hostname "$TARGET_HOSTNAME"
           '')
-          (writeScriptBin "vmbuild" ''
-            nh os build-vm . --hostname "vm/$@"
+          (writeScriptBin "qemu-kvm-uefi" ''
+            qemu-kvm \
+              -bios ${pkgs.OVMF.fd}/FV/OVMF.fd \
+              "$@"
           '')
         ];
         shellHook = ''

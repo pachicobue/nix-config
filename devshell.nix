@@ -49,6 +49,60 @@ in
               -bios ${pkgs.OVMF.fd}/FV/OVMF.fd \
               "$@"
           '')
+          (writeScriptBin "vm-cleanbuild" ''
+            #!/bin/sh
+            set -euo pipefail
+
+            if [ $# -eq 0 ]; then
+              echo "Usage: vm-cleanbuild <hostname> [size]"
+              echo "Available hosts: minimal"
+              echo "Default size: 128G"
+              exit 1
+            fi
+
+            HOSTNAME="$1"
+            SIZE="''${2:-128G}"
+
+            echo "🚀 Building VM image for $HOSTNAME..."
+            nix build ".#$HOSTNAME"
+
+            echo "📁 Setting up VM result directory..."
+            mkdir -p "vm/result"
+
+            echo "📋 Copying QCOW2 image..."
+            cp -f result/nixos.qcow2 "vm/result/$HOSTNAME.qcow2"
+            chmod 644 "vm/result/$HOSTNAME.qcow2"
+
+            echo "📏 Resizing image to $SIZE..."
+            qemu-img resize "vm/result/$HOSTNAME.qcow2" "$SIZE"
+
+            echo "✅ VM image built successfully: vm/result/$HOSTNAME.qcow2 ($SIZE)"
+          '')
+          (writeScriptBin "vm-run" ''
+            #!/bin/sh
+            if [ $# -eq 0 ]; then
+              echo "Usage: vm-run <hostname> [qemu-options...]"
+              echo "Example: vm-run minimal"
+              echo "Example: vm-run minimal -nographic -m 8G"
+              exit 1
+            fi
+
+            HOSTNAME="$1"
+            shift
+
+            QCOW_PATH="vm/result/$HOSTNAME.qcow2"
+            if [ ! -f "$QCOW_PATH" ]; then
+              echo "❌ VM image not found: $QCOW_PATH"
+              echo "   Run 'vm-cleanbuild $HOSTNAME' first"
+              exit 1
+            fi
+
+            BASE_OPTS="-bios ${pkgs.OVMF.fd}/FV/OVMF.fd -hda $QCOW_PATH"
+
+            echo "🚀 Starting VM: $HOSTNAME"
+            echo "💻 Command: qemu-kvm $BASE_OPTS $*"
+            qemu-kvm $BASE_OPTS "$@"
+          '')
         ];
         shellHook = ''
           #!/bin/sh

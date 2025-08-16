@@ -37,8 +37,6 @@
   ];
   home.packages = with pkgs; [
     procs
-    scooter
     ouch
-    manix
   ];
 }

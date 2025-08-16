@@ -48,7 +48,7 @@
       keys = {
         insert = {
           j.k = [
-            ":sh fcitx5-remote -c"
+            "normal_mode"
           ];
         };
         normal = {

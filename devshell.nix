@@ -1,4 +1,8 @@
-{nixpkgs, ...}: let
+{
+  nixpkgs,
+  disko,
+  ...
+}: let
   supportedSystems = [
     "x86_64-linux"
     "aarch64-linux"
@@ -21,6 +25,8 @@ in
           git
           gh
           nh
+          disko.packages.${system}.disko
+
           (writeScriptBin "switch" ''
             #!/bin/sh
             if [ $# -eq 0 ]; then

@@ -2,9 +2,11 @@
   # 最小限の設定
   system.stateVersion = "25.11";
   networking.hostName = hostname;
-  users.users.root = {
-    isSystemUser = true;
-    password = "root";
+  users = {
+    mutableUsers = false;
+    users.root = {
+      password = "root";
+    };
   };
 
   # SSH + 基本設定

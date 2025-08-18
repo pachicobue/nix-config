@@ -1,8 +1,14 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: {
+  # nix-secret 参照
+  age.identityPaths = [
+    "${config.home.homeDirectory}/.ssh/agenix"
+  ];
+
   home.stateVersion = "25.05";
   home.shellAliases = {
     e = "$EDITOR";
@@ -20,6 +26,7 @@
   };
 
   imports = [
+    inputs.agenix.homeManagerModules.default
     ./common/atuin.nix
     ./common/bat.nix
     ./common/btop.nix

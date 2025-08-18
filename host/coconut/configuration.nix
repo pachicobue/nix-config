@@ -72,6 +72,5 @@
     };
     groups.sho = {};
   };
-
   environment.enableAllTerminfo = true;
 }

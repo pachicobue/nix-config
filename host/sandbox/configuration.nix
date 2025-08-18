@@ -1,4 +1,5 @@
 {hostname}: {
+  config,
   pkgs,
   inputs,
   ...
@@ -27,25 +28,21 @@
       };
       timeout = 3;
     };
-    kernelParams = [
-      "console=ttyS0,115200n8"
-      "earlyprintk=serial,ttyS0,115200"
-      "loglevel=8"
-      "debug"
-      "initcall_debug"
-      "ignore_loglevel"
-      "debug"
-    ];
   };
 
   # Register Users
+  age.secrets.sho_hashed_password = {
+    symlink = true;
+    file = "${inputs.my-nix-secret}/sho_hashed_password.age";
+  };
   programs.zsh.enable = true;
   users = {
+    mutableUsers = false;
     users.root = {
-      isSystemUser = true;
-      password = "root";
+      hashedPassword = "!"; # Disable root account
     };
     users.sho = {
+      hashedPasswordFile = config.age.secrets.sho_hashed_password.path;
       isNormalUser = true;
       group = "sho";
       extraGroups = [
@@ -56,15 +53,4 @@
     groups.sho = {};
   };
   environment.enableAllTerminfo = true;
-
-  preservation.enable = true;
-  boot.initrd.systemd.enable = true;
-  preservation.preserveAt."/persistent" = {
-    directories = [
-      "/etc"
-      "/var"
-    ];
-    files = [
-    ];
-  };
 }

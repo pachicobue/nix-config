@@ -17,6 +17,7 @@ in {
     inputs.disko.nixosModules.disko
     (import ./configuration.nix {inherit hostname;})
   ];
+
   # Per user HM configs
   home-manager = {
     useGlobalPkgs = true;

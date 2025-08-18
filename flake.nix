@@ -8,8 +8,17 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agenix.url = "github:yaxitech/ragenix";
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -18,13 +27,9 @@
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
-
     stylix.url = "github:danth/stylix";
     helix.url = "github:helix-editor/helix";
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+
     preservation = {
       url = "github:nix-community/preservation";
     };
@@ -35,11 +40,11 @@
     };
   };
 
-  outputs = {
+  outputs = inputs @ {
     nixpkgs,
     home-manager,
     ...
-  } @ inputs: let
+  }: let
     hosts = [
       {
         hostname = "coconut";
@@ -54,18 +59,7 @@
         system = "x86_64-linux";
       }
     ];
-
-    vmSystems = [
-      "x86_64-linux"
-      "aarch64-linux"
-    ];
-    vms = [
-      {
-        hostname = "minimal";
-        format = "qcow-efi";
-      }
-    ];
-  in {
+  in rec {
     nixosConfigurations = builtins.listToAttrs (
       map ({
         hostname,
@@ -85,33 +79,40 @@
       })
       hosts
     );
-    packages = builtins.listToAttrs (
-      map (system: {
-        name = system;
-        value = builtins.listToAttrs (
-          map (
-            {
-              hostname,
-              format,
-            }: {
-              name = hostname;
-              value = (
-                inputs.nixos-generators.nixosGenerate {
-                  inherit system;
-                  specialArgs = {inherit inputs;};
-                  modules = [
-                    (import ./vm/${hostname}.nix {inherit hostname;})
-                  ];
-                  inherit format;
-                }
-              );
-            }
-          )
-          vms
-        );
-      })
-      vmSystems
-    );
+
+    # Create base VM of `sandbox`
+    packages = let
+      hostname = "minimal";
+      systems = ["x86_64-linux" "aarch64-linux"];
+      format = "qcow-efi";
+    in
+      nixpkgs.lib.genAttrs systems (
+        system: {
+          ${hostname} = inputs.nixos-generators.nixosGenerate {
+            inherit system;
+            specialArgs = {inherit inputs;};
+            modules = [
+              (import ./vm/${hostname}.nix {inherit hostname;})
+            ];
+            inherit format;
+          };
+        }
+      );
+
     devShells = import ./devshell.nix inputs;
+
+    deploy.nodes = {
+      localhost = {
+        hostname = "localhost";
+        sshUser = "sho";
+        sshOpts = ["-p" "2222"];
+        profiles.system = {
+          user = "root";
+          path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos nixosConfigurations.sandbox;
+        };
+      };
+    };
+
+    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks deploy) inputs.deploy-rs.lib;
   };
 }

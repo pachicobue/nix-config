@@ -58,6 +58,10 @@
         hostname = "sandbox";
         system = "x86_64-linux";
       }
+      {
+        hostname = "berry";
+        system = "x86_64-linux";
+      }
     ];
   in rec {
     nixosConfigurations = builtins.listToAttrs (

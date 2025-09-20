@@ -25,89 +25,24 @@ in
           git
           gh
           nh
+          python3Minimal
           disko.packages.${system}.disko
 
+          # Python script wrappers - Top-level APIs
           (writeScriptBin "switch" ''
-            #!/bin/sh
-            if [ $# -eq 0 ]; then
-              echo "Usage: switch <hostname>"
-              echo "Available hosts: coconut, plum"
-              exit 1
-            fi
-
-            TARGET_HOSTNAME="$1"
-            CURRENT_HOSTNAME=$(hostname)
-            if [ "$TARGET_HOSTNAME" != "$CURRENT_HOSTNAME" ]; then
-              echo "⚠️  Warning: Target hostname '$TARGET_HOSTNAME' differs from current hostname '$CURRENT_HOSTNAME'"
-              echo "   This will apply configuration for '$TARGET_HOSTNAME' to this machine."
-              read -p "   Continue? (y/N): " -n 1 -r
-              echo
-              if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-                echo "Aborted."
-                exit 1
-              fi
-            fi
-
-            nh os switch . --hostname "$TARGET_HOSTNAME"
-          '')
-          (writeScriptBin "qemu-kvm-uefi" ''
-            qemu-kvm \
-              -bios ${pkgs.OVMF.fd}/FV/OVMF.fd \
-              "$@"
+            python3 ./script/switch.py $@
           '')
           (writeScriptBin "vm-cleanbuild" ''
-            #!/bin/sh
-            set -euo pipefail
-
-            if [ $# -eq 0 ]; then
-              echo "Usage: vm-cleanbuild <hostname> [size]"
-              echo "Available hosts: minimal"
-              echo "Default size: 128G"
-              exit 1
-            fi
-
-            HOSTNAME="$1"
-            SIZE="''${2:-128G}"
-
-            echo "🚀 Building VM image for $HOSTNAME..."
-            nix build ".#$HOSTNAME"
-
-            echo "📁 Setting up VM result directory..."
-            mkdir -p "vm/result"
-
-            echo "📋 Copying QCOW2 image..."
-            cp -f result/nixos.qcow2 "vm/result/$HOSTNAME.qcow2"
-            chmod 644 "vm/result/$HOSTNAME.qcow2"
-
-            echo "📏 Resizing image to $SIZE..."
-            qemu-img resize "vm/result/$HOSTNAME.qcow2" "$SIZE"
-
-            echo "✅ VM image built successfully: vm/result/$HOSTNAME.qcow2 ($SIZE)"
+            python3 ./script/vm-cleanbuild.py $@
           '')
-          (writeScriptBin "vm-run" ''
-            #!/bin/sh
-            if [ $# -eq 0 ]; then
-              echo "Usage: vm-run <hostname> [qemu-options...]"
-              echo "Example: vm-run minimal"
-              echo "Example: vm-run minimal -nographic -m 8G"
-              exit 1
-            fi
-
-            HOSTNAME="$1"
-            shift
-
-            QCOW_PATH="vm/result/$HOSTNAME.qcow2"
-            if [ ! -f "$QCOW_PATH" ]; then
-              echo "❌ VM image not found: $QCOW_PATH"
-              echo "   Run 'vm-cleanbuild $HOSTNAME' first"
-              exit 1
-            fi
-
-            BASE_OPTS="-bios ${pkgs.OVMF.fd}/FV/OVMF.fd -hda $QCOW_PATH"
-
-            echo "🚀 Starting VM: $HOSTNAME"
-            echo "💻 Command: qemu-kvm $BASE_OPTS $*"
-            qemu-kvm $BASE_OPTS "$@"
+          (writeScriptBin "vm-runner" ''
+            python3 ./script/vm-runner.py $@
+          '')
+          (writeScriptBin "vm-runner-default" ''
+            python3 ./script/vm-runner.py $@ -bios ${OVMF.fd}/FV/OVMF.fd -m 8G -smp 4 -nic user,hostfwd=tcp::2222-:22 -nographic
+          '')
+          (writeScriptBin "remote-installer" ''
+            exec ${pkgs.python3Minimal}/bin/python3 ./script/remote-installer.py $@
           '')
         ];
         shellHook = ''

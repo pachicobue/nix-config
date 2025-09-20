@@ -20,7 +20,7 @@
       alejandra
       taplo
       ruff
-      pyright
+      python313Packages.jedi-language-server
       rust-analyzer
       rustfmt
       haskell-language-server

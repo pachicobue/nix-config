@@ -8,3 +8,5 @@ result-*
 # VM images
 *.qcow2
 
+# Pycache
+__pycache__

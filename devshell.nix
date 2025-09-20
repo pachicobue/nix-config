@@ -25,6 +25,8 @@ in
           git
           gh
           nh
+          vim
+          helix
           python3Minimal
           disko.packages.${system}.disko
 
@@ -32,17 +34,8 @@ in
           (writeScriptBin "switch" ''
             python3 ./script/switch.py $@
           '')
-          (writeScriptBin "vm-cleanbuild" ''
-            python3 ./script/vm-cleanbuild.py $@
-          '')
-          (writeScriptBin "vm-runner" ''
-            python3 ./script/vm-runner.py $@
-          '')
-          (writeScriptBin "vm-runner-default" ''
-            python3 ./script/vm-runner.py $@ -bios ${OVMF.fd}/FV/OVMF.fd -m 8G -smp 4 -nic user,hostfwd=tcp::2222-:22 -nographic
-          '')
-          (writeScriptBin "remote-installer" ''
-            exec ${pkgs.python3Minimal}/bin/python3 ./script/remote-installer.py $@
+          (writeScriptBin "vm" ''
+            python3 ./script/switch.py $@
           '')
         ];
         shellHook = ''

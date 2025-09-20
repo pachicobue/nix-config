@@ -1,5 +1,6 @@
 {hostname}: {
   pkgs,
+  config,
   inputs,
   ...
 }: {
@@ -9,51 +10,51 @@
   # System modules
   imports = [
     ../../module/nixos/common.nix
+    ../../module/nixos/fcitx.nix
+    ../../module/nixos/bluetooth.nix
+    ../../module/nixos/audio.nix
+    ../../module/nixos/network.nix
   ];
 
-  nixpkgs.hostPlatform = "x86_64-linux";
 
-  # Boot configuration
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda"; # Update this for your actual device
-
-  # File systems configuration
-  fileSystems."/" = {
-    device = "/dev/disk/by-label/nixos";
-    fsType = "ext4";
-  };
-
-  # SSH Server
-  services.openssh = {
-    enable = true;
-    settings.PermitRootLogin = "no";
-    settings.PasswordAuthentication = false;
-  };
-
-  # Firewall
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [ 22 ];
+  # Boot Loader
+  boot = {
+    loader = {
+      grub.enable = false;
+      systemd-boot.enable = false;
+      limine = {
+        enable = true;
+        efiSupport = true;
+        efiInstallAsRemovable = true;
+      };
+      timeout = 1;
+    };
   };
 
   # Register Users
+  age.secrets.sho_berry_hashed_password = {
+    symlink = true;
+    file = "${inputs.my-nix-secret}/sho_berry_hashed_password.age";
+  };
   programs.zsh.enable = true;
   users = {
+    mutableUsers = false;
+    users.root = {
+      hashedPassword = "!"; # Disable root account
+    };
     users.sho = {
+      hashedPasswordFile = config.age.secrets.sho_berry_hashed_password.path;
       isNormalUser = true;
       group = "sho";
       extraGroups = [
         "wheel"
+        "video"
+        "input"
+        "network"
       ];
       shell = pkgs.zsh;
-      openssh.authorizedKeys.keys = [
-        # SSH公開鍵をここに追加
-      ];
     };
     groups.sho = {};
   };
-
-  # Enable sudo without password for wheel group
-  security.sudo.wheelNeedsPassword = false;
-
+  environment.enableAllTerminfo = true;
 }

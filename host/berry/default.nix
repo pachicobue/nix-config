@@ -12,8 +12,12 @@
 in {
   # NixOS configs
   imports = [
+    ./hardware-configuration.nix
+    ./disko-config.nix
+    inputs.disko.nixosModules.disko
     (import ./configuration.nix {inherit hostname;})
   ];
+
   # Per user HM configs
   home-manager = {
     useGlobalPkgs = true;

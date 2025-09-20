@@ -737,11 +737,11 @@
     "my-nix-secret": {
       "flake": false,
       "locked": {
-        "lastModified": 1755523029,
-        "narHash": "sha256-KU0ut9bF9LVTFtitFqDBZ2SJ2aV9TUjL1cJMNJd6EJY=",
+        "lastModified": 1758383221,
+        "narHash": "sha256-odSjQX/4u8RGsozPuSZlDVvwX9mwjk1wTNvX+EDDtMU=",
         "owner": "pachicobue",
         "repo": "nix-secret",
-        "rev": "60f374564921e1c57e071796910e8f865a3fb345",
+        "rev": "6277f1b70d9280ce1ed1be6122fd2d6ca9cb482e",
         "type": "github"
       },
       "original": {

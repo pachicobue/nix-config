@@ -84,39 +84,43 @@
       hosts
     );
 
-    # Create base VM of `sandbox`
     packages = let
-      hostname = "minimal";
       systems = ["x86_64-linux" "aarch64-linux"];
-      format = "qcow-efi";
     in
       nixpkgs.lib.genAttrs systems (
         system: {
-          ${hostname} = inputs.nixos-generators.nixosGenerate {
+          minimal-qcow = inputs.nixos-generators.nixosGenerate {
             inherit system;
             specialArgs = {inherit inputs;};
             modules = [
-              (import ./vm/${hostname}.nix {inherit hostname;})
+              (import ./minimal-qcow.nix)
             ];
-            inherit format;
+            format = "qcow-efi";
+          };
+          minimal-iso = inputs.nixos-generators.nixosGenerate {
+            inherit system;
+            specialArgs = {inherit inputs;};
+            modules = [
+              (import ./minimal-iso.nix)
+            ];
+            format = "install-iso";
           };
         }
       );
 
     devShells = import ./devshell.nix inputs;
 
-    deploy.nodes = {
-      localhost = {
-        hostname = "localhost";
-        sshUser = "sho";
-        sshOpts = ["-p" "2222"];
-        profiles.system = {
-          user = "root";
-          path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos nixosConfigurations.sandbox;
-        };
-      };
-    };
-
-    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks deploy) inputs.deploy-rs.lib;
+    # deploy.nodes = {
+    #   localhost = {
+    #     hostname = "localhost";
+    #     sshUser = "sho";
+    #     sshOpts = ["-p" "2222"];
+    #     profiles.system = {
+    #       user = "root";
+    #       path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos nixosConfigurations.sandbox;
+    #     };
+    #   };
+    # };
+    # checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks deploy) inputs.deploy-rs.lib;
   };
 }

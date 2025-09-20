@@ -31,9 +31,9 @@
   };
 
   # Register Users
-  age.secrets.sho_hashed_password = {
+  age.secrets.sho_sandbox_hashed_password = {
     symlink = true;
-    file = "${inputs.my-nix-secret}/sho_hashed_password.age";
+    file = "${inputs.my-nix-secret}/sho_sandbox_hashed_password.age";
   };
   programs.zsh.enable = true;
   users = {
@@ -42,7 +42,7 @@
       hashedPassword = "!"; # Disable root account
     };
     users.sho = {
-      hashedPasswordFile = config.age.secrets.sho_hashed_password.path;
+      hashedPasswordFile = config.age.secrets.sho_sandbox_hashed_password.path;
       isNormalUser = true;
       group = "sho";
       extraGroups = [

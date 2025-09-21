@@ -1,23 +1,22 @@
-{hostname}: {
+{hostName}: {
   config,
   pkgs,
   inputs,
   ...
 }: {
   # Host name
-  networking.hostName = hostname;
+  networking.hostName = hostName;
 
   # System modules
   imports = [
-    inputs.preservation.nixosModules.default
     ../../module/nixos/common.nix
     ../../module/nixos/fcitx.nix
     ../../module/nixos/network.nix
+    ../../module/nixos/ssh.nix
   ];
 
   # Boot Loader
   boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
     loader = {
       grub.enable = false;
       systemd-boot.enable = false;
@@ -31,10 +30,6 @@
   };
 
   # Register Users
-  age.secrets.sho_sandbox_hashed_password = {
-    symlink = true;
-    file = "${inputs.my-nix-secret}/sho_sandbox_hashed_password.age";
-  };
   programs.zsh.enable = true;
   users = {
     mutableUsers = false;
@@ -42,7 +37,7 @@
       hashedPassword = "!"; # Disable root account
     };
     users.sho = {
-      hashedPasswordFile = config.age.secrets.sho_sandbox_hashed_password.path;
+      hashedPassword = "$y$j9T$f9mAf7huGP5kDCIEeus/a/$7iNCLyOyXdDJYaF.Z2VdvZMtbrBDzZsR56mLAo7LcU1";
       isNormalUser = true;
       group = "sho";
       extraGroups = [

@@ -1,5 +1,5 @@
 {...}: {
-  programs.hyprland = {
+  programs.niri = {
     enable = true;
   };
 }

@@ -1,25 +1,28 @@
-{hostname}: {
+{hostName}: {
   pkgs,
   inputs,
   ...
 }: {
   # Host name
-  networking.hostName = hostname;
+  networking.hostName = hostName;
 
   # System modules
   imports = [
     ../../module/nixos/common.nix
-    ../../module/nixos/hyprland.nix
+    ../../module/nixos/common-wayland.nix
+    # ../../module/nixos/hyprland.nix
+    ../../module/nixos/niri.nix
     ../../module/nixos/fcitx.nix
     ../../module/nixos/bluetooth.nix
     ../../module/nixos/udisk.nix
     ../../module/nixos/yubikey.nix
-    ../../module/nixos/virtualization.nix
+    # ../../module/nixos/virtualization.nix
     ../../module/nixos/audio.nix
     ../../module/nixos/nvidia.nix
     ../../module/nixos/network.nix
+    ../../module/nixos/ssh.nix
     ../../module/nixos/gaming.nix
-    ../../module/nixos/keyboard.nix
+    # ../../module/nixos/keyboard.nix
   ];
 
   # Boot Loader
@@ -33,7 +36,7 @@
         efiSupport = true;
         efiInstallAsRemovable = true;
       };
-      timeout = 1;
+      timeout = 3;
     };
     tmp = {
       cleanOnBoot = true;
@@ -45,11 +48,11 @@
     enable = true;
     settings = {
       initial_session = {
-        command = "Hyprland";
+        command = "zsh";
         user = "sho";
       };
       default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --cmd Hyprland";
+        command = "${pkgs.tuigreet}/bin/tuigreet --cmd zsh";
       };
     };
   };
@@ -59,7 +62,6 @@
   users = {
     users.sho = {
       isNormalUser = true;
-      group = "sho";
       extraGroups = [
         "wheel"
         "video"

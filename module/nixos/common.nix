@@ -6,6 +6,7 @@
 
   imports = [
     inputs.agenix.nixosModules.age
+    common/sudo.nix
     common/font.nix
     common/console.nix
     common/nix.nix

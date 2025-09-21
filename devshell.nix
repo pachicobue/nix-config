@@ -29,6 +29,8 @@ in
           helix
           python3Minimal
           disko.packages.${system}.disko
+          nil
+          alejandra
 
           # Python script wrappers - Top-level APIs
           (writeScriptBin "switch" ''

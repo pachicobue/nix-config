@@ -1,6 +1,6 @@
 {
-  hostname,
-  username,
+  hostName,
+  userName,
 }: {
   inputs,
   pkgs,

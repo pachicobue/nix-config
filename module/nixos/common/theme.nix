@@ -32,8 +32,8 @@ in {
         name = "Noto Sans CJK JP";
       };
       monospace = {
-        package = pkgs.moralerspace-nf;
-        name = "Moralerspace Neon NF";
+        package = pkgs.moralerspace;
+        name = "Moralerspace Neon";
       };
       emoji = {
         package = pkgs.noto-fonts-emoji;

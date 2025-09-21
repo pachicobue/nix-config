@@ -34,7 +34,7 @@
                   };
                   "/root-blank" = {
                     mountOptions = [
-                      "nodatacow"                        
+                      "nodatacow"
                       "noatime"
                     ];
                   };
@@ -55,7 +55,7 @@
                   "/log" = {
                     mountpoint = "/var/log";
                     mountOptions = [
-                      "compress=zstd"                        
+                      "compress=zstd"
                       "noatime"
                     ];
                   };

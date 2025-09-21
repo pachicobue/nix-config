@@ -1,10 +1,10 @@
-{hostname}: {
+{hostName}: {
   pkgs,
   inputs,
   ...
 }: {
   # Host name
-  networking.hostName = hostname;
+  networking.hostName = hostName;
 
   # System modules
   imports = [

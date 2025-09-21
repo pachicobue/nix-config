@@ -1,11 +1,10 @@
-{hostname}: {inputs, ...}: let
+{hostName}: {inputs, ...}: let
   users = ["sho"];
-
-  perUserHmModules = builtins.listToAttrs (map (username: {
-      name = username;
-      value = import ./user/${username}.nix {
-        inherit hostname;
-        inherit username;
+  perUserHmModules = builtins.listToAttrs (map (userName: {
+      name = userName;
+      value = import ./user/${userName}.nix {
+        inherit hostName;
+        inherit userName;
       };
     })
     users);
@@ -15,7 +14,7 @@ in {
     ./hardware-configuration.nix
     ./disko-config.nix
     inputs.disko.nixosModules.disko
-    (import ./configuration.nix {inherit hostname;})
+    (import ./configuration.nix {inherit hostName;})
   ];
 
   # Per user HM configs

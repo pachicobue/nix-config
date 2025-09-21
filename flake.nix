@@ -30,10 +30,6 @@
     stylix.url = "github:danth/stylix";
     helix.url = "github:helix-editor/helix";
 
-    preservation = {
-      url = "github:nix-community/preservation";
-    };
-
     my-nix-secret = {
       url = "github:pachicobue/nix-secret";
       flake = false;
@@ -47,34 +43,34 @@
   }: let
     hosts = [
       {
-        hostname = "coconut";
+        hostName = "coconut";
         system = "x86_64-linux";
       }
       {
-        hostname = "plum";
+        hostName = "plum";
         system = "x86_64-linux";
       }
       {
-        hostname = "sandbox";
+        hostName = "berry";
         system = "x86_64-linux";
       }
       {
-        hostname = "berry";
+        hostName = "sandbox";
         system = "x86_64-linux";
       }
     ];
   in rec {
     nixosConfigurations = builtins.listToAttrs (
       map ({
-        hostname,
+        hostName,
         system,
       }: {
-        name = hostname;
+        name = hostName;
         value = (
           nixpkgs.lib.nixosSystem {
             specialArgs = {inherit inputs;};
             modules = [
-              (import ./host/${hostname} {inherit hostname;})
+              (import ./host/${hostName} {inherit hostName;})
               home-manager.nixosModules.home-manager
             ];
             inherit system;
@@ -89,19 +85,11 @@
     in
       nixpkgs.lib.genAttrs systems (
         system: {
-          minimal-qcow = inputs.nixos-generators.nixosGenerate {
+          minimal-installer-iso = inputs.nixos-generators.nixosGenerate {
             inherit system;
             specialArgs = {inherit inputs;};
             modules = [
-              (import ./minimal-qcow.nix)
-            ];
-            format = "qcow-efi";
-          };
-          minimal-iso = inputs.nixos-generators.nixosGenerate {
-            inherit system;
-            specialArgs = {inherit inputs;};
-            modules = [
-              (import ./minimal-iso.nix)
+              (import ./minimal-installer.nix)
             ];
             format = "install-iso";
           };
@@ -110,6 +98,18 @@
 
     devShells = import ./devshell.nix inputs;
 
+    deploy = {
+      nodes = {
+        berry = {
+          hostname = "192.168.10.115";
+          sshUser = "sho";
+          profiles.sho = {
+            user = "sho";
+            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos nixosConfigurations.berry;
+          };
+        };
+      };
+    };
     # deploy.nodes = {
     #   localhost = {
     #     hostname = "localhost";

@@ -5,7 +5,7 @@
       noto-fonts-cjk-serif
       noto-fonts-cjk-sans
       noto-fonts-emoji
-      moralerspace-nf
+      moralerspace
     ];
     fontconfig = {
       defaultFonts = {
@@ -16,11 +16,11 @@
           "Noto Sans CJK JP"
         ];
         monospace = [
-          "Moralerspace Neon NF"
-          "Moralerspace Radon NF"
-          "Moralerspace Xenon NF"
-          "Moralerspace Argon NF"
-          "Moralerspace Krypton NF"
+          "Moralerspace Neon"
+          "Moralerspace Radon"
+          "Moralerspace Xenon"
+          "Moralerspace Argon"
+          "Moralerspace Krypton"
           "Noto Sans Mono CJK JP"
         ];
       };

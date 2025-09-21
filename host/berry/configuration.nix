@@ -1,11 +1,11 @@
-{hostname}: {
+{hostName}: {
   pkgs,
   config,
   inputs,
   ...
 }: {
   # Host name
-  networking.hostName = hostname;
+  networking.hostName = hostName;
 
   # System modules
   imports = [
@@ -14,8 +14,8 @@
     ../../module/nixos/bluetooth.nix
     ../../module/nixos/audio.nix
     ../../module/nixos/network.nix
+    ../../module/nixos/ssh.nix
   ];
-
 
   # Boot Loader
   boot = {
@@ -32,10 +32,6 @@
   };
 
   # Register Users
-  age.secrets.sho_berry_hashed_password = {
-    symlink = true;
-    file = "${inputs.my-nix-secret}/sho_berry_hashed_password.age";
-  };
   programs.zsh.enable = true;
   users = {
     mutableUsers = false;
@@ -43,7 +39,8 @@
       hashedPassword = "!"; # Disable root account
     };
     users.sho = {
-      hashedPasswordFile = config.age.secrets.sho_berry_hashed_password.path;
+      # 本当はagenixでさらに隠蔽したいがremote-installが面倒なので
+      hashedPassword = "$y$j9T$OHc4xS4cpDtjJcZlK/QdT0$dCD/Gr55hB7yUseg4PplL6LIwo7AqLdfucPtx5fJ4NC";
       isNormalUser = true;
       group = "sho";
       extraGroups = [

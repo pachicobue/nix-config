@@ -9,7 +9,6 @@
   # System modules
   imports = [
     inputs.nixos-wsl.nixosModules.default
-
     ../../module/nixos/common.nix
   ];
 
@@ -25,12 +24,10 @@
   users = {
     users.sho = {
       isNormalUser = true;
-      group = "sho";
       extraGroups = [
         "wheel"
       ];
       shell = pkgs.zsh;
     };
-    groups.sho = {};
   };
 }

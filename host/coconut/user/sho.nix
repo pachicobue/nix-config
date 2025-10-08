@@ -10,7 +10,7 @@
   imports = [
     ../../../module/home/common.nix
     ../../../module/home/common-wayland.nix
-    ../../../module/home/hyprland.nix
+    # ../../../module/home/hyprland.nix
     ../../../module/home/niri.nix
 
     ../../../module/home/alacritty.nix

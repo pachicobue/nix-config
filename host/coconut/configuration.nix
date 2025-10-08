@@ -20,14 +20,15 @@
     ../../module/nixos/audio.nix
     ../../module/nixos/nvidia.nix
     ../../module/nixos/network.nix
-    ../../module/nixos/ssh.nix
+    ../../module/nixos/tailscale.nix
     ../../module/nixos/gaming.nix
     # ../../module/nixos/keyboard.nix
+
+    ../../module/nixos/regreet.nix
   ];
 
   # Boot Loader
   boot = {
-    kernelPackages = pkgs.linuxPackages_zen;
     loader = {
       grub.enable = false;
       systemd-boot.enable = false;
@@ -43,36 +44,25 @@
     };
   };
 
-  # Login Manager
-  services.greetd = {
-    enable = true;
-    settings = {
-      initial_session = {
-        command = "zsh";
-        user = "sho";
-      };
-      default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --cmd zsh";
-      };
-    };
-  };
-
   # Register Users
   programs.zsh.enable = true;
   users = {
+    mutableUsers = false;
+    users.root = {
+      hashedPassword = "!"; # Disable root account
+    };
     users.sho = {
       isNormalUser = true;
+      hashedPassword = "$y$j9T$.Iarvh3Ht.bUFAvigxxPD/$3BITVWgdIMokntQ/QvyfXahKNLeA6MFV8acqhgni746";
       extraGroups = [
         "wheel"
         "video"
         "input"
-        "uinput"
         "libvirt"
         "network"
       ];
       shell = pkgs.zsh;
     };
-    groups.sho = {};
   };
   environment.enableAllTerminfo = true;
 }

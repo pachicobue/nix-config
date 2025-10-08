@@ -12,7 +12,7 @@ in {
   # NixOS configs
   imports = [
     ./hardware-configuration.nix
-    ./disko-config.nix
+    ./disk-config.nix
     inputs.disko.nixosModules.disko
     (import ./configuration.nix {inherit hostName;})
   ];

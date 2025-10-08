@@ -14,7 +14,8 @@
     ../../module/nixos/bluetooth.nix
     ../../module/nixos/audio.nix
     ../../module/nixos/network.nix
-    ../../module/nixos/ssh.nix
+    ../../module/nixos/tailscale.nix
+    ../../module/nixos/tuigreet.nix
   ];
 
   # Boot Loader
@@ -27,7 +28,7 @@
         efiSupport = true;
         efiInstallAsRemovable = true;
       };
-      timeout = 1;
+      timeout = 3;
     };
   };
 
@@ -42,7 +43,6 @@
       # 本当はagenixでさらに隠蔽したいがremote-installが面倒なので
       hashedPassword = "$y$j9T$OHc4xS4cpDtjJcZlK/QdT0$dCD/Gr55hB7yUseg4PplL6LIwo7AqLdfucPtx5fJ4NC";
       isNormalUser = true;
-      group = "sho";
       extraGroups = [
         "wheel"
         "video"
@@ -51,7 +51,6 @@
       ];
       shell = pkgs.zsh;
     };
-    groups.sho = {};
   };
   environment.enableAllTerminfo = true;
 }

@@ -22,10 +22,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland";
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
+    niri-flake = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     stylix.url = "github:danth/stylix";
     helix.url = "github:helix-editor/helix";
@@ -52,10 +51,6 @@
       }
       {
         hostName = "berry";
-        system = "x86_64-linux";
-      }
-      {
-        hostName = "sandbox";
         system = "x86_64-linux";
       }
     ];
@@ -99,28 +94,20 @@
     devShells = import ./devshell.nix inputs;
 
     deploy = {
+      autoRollback = true;
+      magicRollback = true;
+      interactiveSudo = true;
       nodes = {
         berry = {
-          hostname = "192.168.10.115";
-          sshUser = "sho";
+          hostname = "berry"; # over tailscale network
           profiles.sho = {
+            sshUser = "sho";
             user = "sho";
             path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos nixosConfigurations.berry;
           };
         };
       };
     };
-    # deploy.nodes = {
-    #   localhost = {
-    #     hostname = "localhost";
-    #     sshUser = "sho";
-    #     sshOpts = ["-p" "2222"];
-    #     profiles.system = {
-    #       user = "root";
-    #       path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos nixosConfigurations.sandbox;
-    #     };
-    #   };
-    # };
-    # checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks deploy) inputs.deploy-rs.lib;
+    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks deploy) inputs.deploy-rs.lib;
   };
 }

@@ -51,7 +51,7 @@ in {
         Add = [
         ];
       };
-      PassworkManagerEnabled = false;
+      PasswordManagerEnabled = false;
       GoToIntranetSiteForSingleWordEntryInAddressBar = false;
       OfferToSaveLogins = false;
     };
@@ -63,9 +63,6 @@ in {
         // {
           "services.sync.prefs.dangerously_allow_arbitrary" = true;
         };
-      # extensions = {
-      #   force = true;
-      # };
     };
     package = pkgs.firefox-beta;
     languagePacks = ["ja"];

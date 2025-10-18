@@ -9,10 +9,9 @@
   ];
   wayland.windowManager.hyprland = {
     enable = true;
-    systemd.enable = true;
+    systemd.enable = false; # Avoid conflict with UWSM
   };
   home.packages = with pkgs; [
-    pavucontrol
     hyprshot
   ];
 }

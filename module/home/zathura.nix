@@ -1,5 +1,5 @@
 {...}: {
-  programs.anyrun = {
+  programs.zathura = {
     enable = true;
   };
 }

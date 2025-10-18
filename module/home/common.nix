@@ -1,49 +1,24 @@
 {
-  config,
-  pkgs,
   inputs,
+  config,
   ...
 }: {
   # nix-secret 参照
-  age.identityPaths = [
-    "${config.home.homeDirectory}/.ssh/agenix"
-  ];
-
-  home.stateVersion = "25.05";
-  home.shellAliases = {
-    e = "$EDITOR";
-    rm = "rm -i";
-    cp = "cp -i";
-  };
-  xdg.userDirs = {
-    enable = true;
-    download = "${config.home.homeDirectory}/Download";
-    desktop = "${config.home.homeDirectory}/Desktop";
-    documents = "${config.home.homeDirectory}/Document";
-    music = "${config.home.homeDirectory}/Music";
-    pictures = "${config.home.homeDirectory}/Picture";
-    videos = "${config.home.homeDirectory}/Video";
-  };
+  # age.identityPaths = [
+  #   "${config.home.homeDirectory}/.ssh/agenix"
+  # ];
 
   imports = [
-    inputs.agenix.homeManagerModules.default
+    # inputs.agenix.homeManagerModules.default
+
+    ./common/xdg.nix
     ./common/atuin.nix
-    ./common/bat.nix
-    ./common/btop.nix
     ./common/carapace.nix
-    ./common/fd.nix
+    ./common/starship.nix
     ./common/git.nix
-    ./common/helix.nix
     ./common/lsd.nix
     ./common/pueue.nix
-    ./common/ripgrep.nix
-    ./common/starship.nix
-    ./common/zathura.nix
     ./common/zsh.nix
     ./common/zoxide.nix
-  ];
-  home.packages = with pkgs; [
-    procs
-    ouch
   ];
 }

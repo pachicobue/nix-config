@@ -6,10 +6,6 @@
     autocd = true;
     autosuggestion.enable = true;
     enableCompletion = true;
-    completionInit = ''
-      autoload -U compinit && compinit
-      zstyle ':completion:*:default' menu true select
-    '';
     history = {
       ignoreAllDups = true;
     };

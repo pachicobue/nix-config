@@ -1,6 +1,4 @@
 {...}: {
-  system.stateVersion = "25.05";
-  nixpkgs.config.allowUnfree = true;
   nix = {
     gc = {
       automatic = true;
@@ -19,5 +17,6 @@
       ];
       accept-flake-config = true;
     };
+    channel.enable = false;
   };
 }

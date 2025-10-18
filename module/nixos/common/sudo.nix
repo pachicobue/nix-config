@@ -1,8 +1,6 @@
 {...}: {
   security = {
     sudo.enable = false;
-    sudo-rs = {
-      enable = true;
-    };
+    sudo-rs.enable = true;
   };
 }

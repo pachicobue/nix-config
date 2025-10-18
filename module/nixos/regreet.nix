@@ -1,26 +1,22 @@
 {
   pkgs,
   lib,
+  config,
+  hostConfig,
   ...
 }: let
-  niriConfig = pkgs.writeText "niri-config.kdl" ''
-    hotkey-overlay {
-      skip-at-startup
-    }
-    environment {
-      GTK_USE_PORTAL "0"
-      GDK_DEBUG "no-portals"
-    }
-    spawn-at-startup "sh" "-c" "${lib.getExe pkgs.regreet}; niri msg action quit --skip-confirmation"
-  '';
-in {
-  programs.regreet.enable = true;
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "${lib.getExe pkgs.niri} -c ${niriConfig}";
+  sessionDir = "${config.services.displayManager.sessionData.desktops}/share";
+  sessionDirs = "${sessionDir}/xsessions:${sessionDir}/wayland-sessions";
+in
+  lib.mkIf (hostConfig.desktop == "wayland") {
+    programs.regreet.enable = true;
+    services.greetd = {
+      enable = true;
+      settings = {
+        default_session = {
+          user = "greeter";
+          command = "env SESSION_DIRS=${sessionDirs} ${lib.getExe pkgs.cage} -s -m last -- ${lib.getExe pkgs.regreet}";
+        };
       };
     };
-  };
-}
+  }

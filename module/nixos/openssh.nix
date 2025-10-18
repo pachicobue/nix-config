@@ -1,0 +1,15 @@
+{
+  lib,
+  hostConfig,
+  ...
+}: {
+  services.openssh = {
+    enable = true;
+    settings = {
+      X11-Forwarding = lib.mkIf (hostConfig.desktop == "x") true;
+      PermitRootLogin = "prohibit-password";
+      PasswordAuthentication = false;
+    };
+  };
+  environment.enableAllTerminfo = true;
+}

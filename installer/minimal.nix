@@ -13,13 +13,11 @@
       PermitRootLogin = "yes";
       PasswordAuthentication = true;
     };
+    openFirewall = true;
   };
   networking = {
     hostName = "minimal-installer";
-    firewall = {
-      enable = true;
-      allowedTCPPorts = [22];
-    };
+    firewall = {enable = true;};
     networkmanager.enable = true;
   };
   users = {

@@ -1,4 +1,6 @@
 {
+  pkgs,
+  lib,
   inputs,
   commonConfig,
   ...
@@ -12,7 +14,17 @@
   ];
 
   # WSL Configuration
-  wsl.enable = true;
-  wsl.defaultUser = commonConfig.userName;
-  wsl.interop.includePath = false;
+  wsl = {
+    enable = true;
+    defaultUser = commonConfig.userName;
+    usbip = {
+      enable = true;
+    };
+    extraBin = [
+      {src = "${lib.getExe' pkgs.coreutils-full "ls"}";}
+      {src = "${lib.getExe' pkgs.coreutils-full "cat"}";}
+      {src = "${lib.getExe pkgs.bash}";}
+      {src = "${lib.getExe' pkgs.linuxPackages.usbip "usbip"}";}
+    ];
+  };
 }

@@ -33,7 +33,7 @@ in
                     home.stateVersion = host.stateVersion.homeManager;
                     # stylix.overlays.enable = false;
                     imports = [
-                      inputs.stylix.homeModules.stylix
+                      # inputs.stylix.homeModules.stylix
                       ./host/${host.name}/home.nix
                     ];
                   };
@@ -43,6 +43,7 @@ in
             ];
             specialArgs = {
               inherit inputs;
+              allHostConfig = hosts;
               hostConfig = host;
               commonConfig = common;
             };

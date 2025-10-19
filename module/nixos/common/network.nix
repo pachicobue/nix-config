@@ -11,5 +11,6 @@
     bandwhich
     gping
     dog
+    socat
   ];
 }

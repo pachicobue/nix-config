@@ -74,8 +74,11 @@
           nixos = "25.05";
           homeManager = "25.05";
         };
-        iface = "eno1";
         desktop = "wayland";
+        ethernet = {
+          name = "eno1";
+          mac = "08:bf:b8:a5:74:f7";
+        };
       }
       {
         name = "plum";
@@ -84,8 +87,8 @@
           nixos = "25.05";
           homeManager = "25.05";
         };
-        iface = "eth0";
         desktop = "wayland";
+        ethernet = null;
       }
       {
         name = "berry";
@@ -94,8 +97,11 @@
           nixos = "25.05";
           homeManager = "25.05";
         };
-        iface = "enp1s0";
         desktop = "none";
+        ethernet = {
+          name = "enp1s0";
+          mac = "68:1d:ef:37:e8:ab";
+        };
       }
     ];
     args = {

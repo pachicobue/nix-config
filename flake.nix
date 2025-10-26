@@ -103,6 +103,16 @@
           mac = "68:1d:ef:37:e8:ab";
         };
       }
+      {
+        name = "pi4";
+        system = "aarch64-linux";
+        stateVersion = {
+          nixos = "25.05";
+          homeManager = "25.05";
+        };
+        desktop = "none";
+        ethernet = null;
+      }
     ];
     args = {
       inherit inputs;

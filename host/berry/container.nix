@@ -25,11 +25,7 @@
 in {
   services.caddy = {
     enable = true;
-    package = pkgs.caddy.withPlugins {
-      plugins = [
-        "github.com/tailscale/caddy-tailscale@v0.0.0-20251016183541-bd3189d81c73"
-      ];
-      hash = "sha256-CHthv5/kDtpr6WD57tGpbqt45WSsIypotqedBNqrnfI=";
+    virtualHosts = {
     };
   };
 

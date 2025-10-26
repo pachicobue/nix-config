@@ -55,7 +55,8 @@
           H = ":buffer-previous";
           L = ":buffer-next";
           space = {
-            o = "@:o <C-r>%";
+            o = "@:open <C-r>%";
+            m = "@:move <C-r>%";
             w = ":write";
             W = ":write-all";
             F = "file_picker_in_current_buffer_directory";

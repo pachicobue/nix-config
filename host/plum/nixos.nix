@@ -10,6 +10,7 @@
 
     ../../module/nixos/common.nix
 
+    ../../module/nixos/avahi.nix
     ../../module/nixos/yubikey.nix
   ];
 

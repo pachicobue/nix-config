@@ -11,7 +11,9 @@
     ../../module/nixos/nvidia.nix
     ../../module/nixos/gaming.nix
     ../../module/nixos/wakeonlan.nix
-    ../../module/nixos/tailscale.nix
+    # ../../module/nixos/tailscale.nix
+    ../../module/nixos/netbird-client.nix
+    ../../module/nixos/avahi.nix
     ../../module/nixos/bluetooth.nix
     ../../module/nixos/usb.nix
     ../../module/nixos/yubikey.nix
@@ -35,5 +37,8 @@
       timeout = 3;
     };
     tmp.cleanOnBoot = true;
+
+    # aarch64バイナリをQEMUでエミュレーション（Raspberry Pi用ビルドのため）
+    binfmt.emulatedSystems = ["aarch64-linux"];
   };
 }

@@ -14,7 +14,7 @@ in {
       host: {
         name = host.name;
         value = {
-          hostname = host.name; # Tailscale DNS経由前提
+          hostname = "${host.name}.local"; # mDNS前提
           profiles.system = {
             sshUser = "root";
             path = deploy-rs.lib.${host.system}.activate.nixos self.outputs.nixosConfigurations.${host.name};

@@ -63,6 +63,7 @@
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMJGjzlH+kjBX98qiZOQ1raIQ2H6CJefEq3c8LO4uSuP sho@coconut"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFGjrK2nSy0CgBqYxNYK03wPuMXN/YG7Qel0aPS3Ano1 sho@pi4"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPqPwPMH1OBXcDsHR1zqkdasrBWiZr8Hwmw3CP5nCbRK sho@berry"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIurSBgviLvpzHnZOMuu7UEbw9sktSuVahUySjW0dquy sho@plum"
       ];
       u2fMappings = [
         ":Dbvc/UKxa67YXHnT2UHFxz5+2uJ+nSlJIlxFVkuUbm2QMuRaCt5CMryJISviqZE52VzT0KmBawjVqFZBHFxvLA==,IZNkn3O8uUZgFvE4dftrcXkIa/qMWsSkP/9Btw4VSE028Ps2nQ7BIUs382LBopylCW9ctJ9W6LCeX8sV1usgZw==,es256,+presence"

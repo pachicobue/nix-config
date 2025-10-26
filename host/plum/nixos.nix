@@ -11,21 +11,28 @@
     ../../module/nixos/common.nix
 
     ../../module/nixos/avahi.nix
-    ../../module/nixos/yubikey.nix
+    ../../module/nixos/netbird-client.nix
+    # ../../module/nixos/yubikey.nix
   ];
 
   # WSL Configuration
   wsl = {
     enable = true;
     defaultUser = commonConfig.userName;
-    usbip = {
-      enable = true;
+    wslConf = {
+      network = {
+        generateHosts = false;
+        generateResolvConf = false;
+      };
     };
-    extraBin = [
-      {src = "${lib.getExe' pkgs.coreutils-full "ls"}";}
-      {src = "${lib.getExe' pkgs.coreutils-full "cat"}";}
-      {src = "${lib.getExe pkgs.bash}";}
-      {src = "${lib.getExe' pkgs.linuxPackages.usbip "usbip"}";}
-    ];
+    # usbip = {
+    #   enable = true;
+    # };
+    # extraBin = [
+    #   {src = "${lib.getExe' pkgs.coreutils-full "ls"}";}
+    #   {src = "${lib.getExe' pkgs.coreutils-full "cat"}";}
+    #   {src = "${lib.getExe pkgs.bash}";}
+    #   {src = "${lib.getExe' pkgs.linuxPackages.usbip "usbip"}";}
+    # ];
   };
 }

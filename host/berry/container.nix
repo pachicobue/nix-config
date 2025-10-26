@@ -1,73 +1,56 @@
 {
-  pkgs,
   config,
   hostConfig,
   ...
 }: let
+  hostIp = "192.168.100.0";
   # /media がメディアデータ用のSecondary Disk
   dataDisk = "/media";
-
-  hostIp = "192.168.100.10";
-  containers = [
-    {
-      name = "immich";
-      hostPort = 1000;
-      containerIp = "192.168.100.11";
-      containerPort = config.services.immich.port;
-    }
-    {
-      name = "silverbullet";
-      hostPort = 1001;
-      containerIp = "192.168.100.12";
-      containerPort = config.services.silverbullet.listenPort;
-    }
-  ];
 in {
-  services.caddy = {
-    enable = true;
-    virtualHosts = {
+  containers = {
+    immich = {
+      autoStart = true;
+      privateNetwork = true;
+      hostAddress = hostIp;
+      localAddress = "192.168.100.1";
+      forwardPorts = [
+        rec {
+          containerPort = config.services.immich.port;
+          hostPort = containerPort;
+          protocol = "tcp";
+        }
+      ];
+      config = {...}: {
+        system.stateVersion = "${hostConfig.stateVersion.nixos}";
+        imports = [
+          ../../container/immich.nix
+        ];
+      };
+    };
+    silverbullet = {
+      autoStart = true;
+      privateNetwork = true;
+      hostAddress = hostIp;
+      localAddress = "192.168.100.2";
+      forwardPorts = [
+        rec {
+          containerPort = config.services.silverbullet.listenPort;
+          hostPort = containerPort;
+          protocol = "tcp";
+        }
+      ];
+      config = {...}: {
+        system.stateVersion = "${hostConfig.stateVersion.nixos}";
+        imports = [
+          ../../container/silverbullet.nix
+        ];
+      };
     };
   };
-
-  containers = builtins.listToAttrs (
-    map (container: {
-      name = container.name;
-      value = {
-        autoStart = true;
-        privateNetwork = true;
-        hostAddress = hostIp;
-        localAddress = container.containerIp;
-        forwardPorts = [
-          {
-            hostPort = container.hostPort;
-            containerPort = container.containerPort;
-            protocol = "tcp";
-          }
-        ];
-        bindMounts = {
-          "/var/lib/${container.name}" = {
-            hostPath = "${dataDisk}/${container.name}";
-            isReadOnly = false;
-          };
-        };
-        config = {...}: {
-          system.stateVersion = "${hostConfig.stateVersion.nixos}";
-          imports = [
-            ../../container/${container.name}.nix
-          ];
-        };
-        specialArgs = {
-          inherit hostIp;
-          hostPort = container.hostPort;
-          containerIp = container.containerIp;
-          containerPort = container.containerPort;
-        };
-      };
-    })
-    containers
-  );
+  systemd.tmpfiles.rules = [
+    "d ${dataDisk}/immich 0755 root root -"
+    "d ${dataDisk}/silverbullet 0755 root root -"
+  ];
 
   networking.firewall.enable = true;
-
-  systemd.tmpfiles.rules = map (container: "d ${dataDisk}/${container.name} 0755 root root -") containers;
 }

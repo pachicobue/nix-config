@@ -1,5 +1,6 @@
 {...}: {
   services.netbird = {
+    ui.enable = false;
     useRoutingFeatures = "client";
     clients."homelab" = {
       autoStart = true;

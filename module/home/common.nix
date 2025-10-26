@@ -17,6 +17,7 @@
     ./common/starship.nix
     ./common/git.nix
     ./common/lsd.nix
+    ./common/ssh-agent.nix
     # ./common/pueue.nix
     ./common/zsh.nix
     ./common/zoxide.nix

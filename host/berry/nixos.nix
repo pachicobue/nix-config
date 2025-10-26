@@ -26,7 +26,7 @@
         enable = true;
         efiSupport = true;
         efiInstallAsRemovable = true;
-        maxGenerations = 10;
+        maxGenerations = 5;
       };
       timeout = 3;
     };

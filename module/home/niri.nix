@@ -105,14 +105,8 @@ in {
 
         "Mod+Shift+E" = {action = quit;};
         "Ctrl+Alt+Delete" = {action = quit;};
-
-        "Alt+Tab" = {action.spawn = ["niriswitcherctl" "show" "--window"];};
-        "Alt+Shift+Tab" = {action.spawn = ["niriswitcherctl" "show" "--window"];};
       };
       screenshot-path = "~/Picture/Screenshots/%Y%m%d-%H%M%s.png";
-      spawn-at-startup = [
-        {argv = ["niriswitcher"];}
-      ];
     };
   };
   programs.niriswitcher = {

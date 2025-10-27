@@ -1,11 +1,11 @@
-{...}: {
+{pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
     ./container.nix
 
     ../../module/nixos/common.nix
     ../../module/nixos/openssh.nix
-    ../../module/nixos/avahi.nix
+    # ../../module/nixos/avahi.nix
     ../../module/nixos/netbird-client.nix
     ../../module/nixos/yubikey.nix
     ../../module/nixos/wakeonlan.nix
@@ -22,11 +22,21 @@
     };
   };
 
-  # Reboot per day
-  services.cron = {
-    enable = true;
-    systemCronJobs = [
-      "0 8 * * * root reboot now"
-    ];
+  # Reboot per day using systemd timer
+  systemd.timers.daily-reboot = {
+    wantedBy = ["timers.target"];
+    timerConfig = {
+      OnCalendar = "*-*-* 08:00:00";
+      Persistent = true;
+      Unit = "daily-reboot.service";
+    };
+  };
+
+  systemd.services.daily-reboot = {
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.systemd}/bin/systemctl reboot";
+    };
+    description = "Daily system reboot at 8:00 AM";
   };
 }

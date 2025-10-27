@@ -61,8 +61,6 @@
         "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIFNr0LUHwXLsJ2PatYjqGmI0ysEQDeDwlmde1qE+JAEOAAAAB3NzaDpzaG8= yubikey5"
         "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIJMh1WWX6JlHyzTp+oyn7iGO4+lcDFnZvtqXdDARcxyzAAAAB3NzaDpzaG8= yubikey5C"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMJGjzlH+kjBX98qiZOQ1raIQ2H6CJefEq3c8LO4uSuP sho@coconut"
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFGjrK2nSy0CgBqYxNYK03wPuMXN/YG7Qel0aPS3Ano1 sho@pi4"
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPqPwPMH1OBXcDsHR1zqkdasrBWiZr8Hwmw3CP5nCbRK sho@berry"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIurSBgviLvpzHnZOMuu7UEbw9sktSuVahUySjW0dquy sho@plum"
       ];
       u2fMappings = [

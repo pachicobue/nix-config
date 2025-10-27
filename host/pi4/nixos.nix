@@ -8,6 +8,7 @@
     ../../module/nixos/avahi.nix
     ../../module/nixos/netbird-client.nix
     ../../module/nixos/yubikey.nix
+    ../../module/nixos/wakeonlan.nix
   ];
 
   boot = {

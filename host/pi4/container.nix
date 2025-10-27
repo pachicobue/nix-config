@@ -3,7 +3,7 @@
   hostConfig,
   ...
 }: let
-  hostIp = "192.168.100.0";
+  hostIp = "192.168.100.10";
 in {
   containers = {
     adguardhome = {
@@ -12,9 +12,9 @@ in {
       hostAddress = hostIp;
       localAddress = "192.168.100.1";
       forwardPorts = [
-        rec {
-          containerPort = config.services.adguardhome.port;
-          hostPort = containerPort;
+        {
+          containerPort = 3000;
+          hostPort = 3000;
           protocol = "tcp";
         }
       ];
@@ -26,5 +26,9 @@ in {
       };
     };
   };
-  networking.firewall.enable = true;
+
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [3000];
+  };
 }

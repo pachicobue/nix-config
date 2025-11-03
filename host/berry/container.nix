@@ -50,27 +50,6 @@ in {
     };
   };
 
-  # Caddyはホスト本体で動作
-  services.caddy = {
-    enable = true;
-    virtualHosts = {
-      "berry.netbird.cloud".extraConfig = ''
-        handle /immich* {
-          reverse_proxy localhost:2283
-        }
-        handle /silverbullet* {
-          reverse_proxy localhost:3000
-        }
-        handle /komga* {
-          reverse_proxy localhost:8080
-        }
-        handle {
-          respond "Berry Services" 200
-        }
-      '';
-    };
-  };
-
   systemd.tmpfiles.rules = [
     "d ${dataDisk}/immich 0755 root root -"
     "d ${dataDisk}/silverbullet 0755 root root -"
@@ -80,8 +59,9 @@ in {
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [
-      80 # HTTP (Caddy)
-      443 # HTTPS (Caddy)
+      2283 # Immich
+      3000 # Silverbullet
+      8080 # Komga
     ];
   };
 }

@@ -56,14 +56,19 @@ in {
           ../../container/caddy.nix
         ];
         services.caddy.virtualHosts = {
-          "immich.berry.netbird.cloud".extraConfig = ''
-            reverse_proxy localhost:2283
-          '';
-          "silverbullet.berry.netbird.cloud".extraConfig = ''
-            reverse_proxy localhost:3000
-          '';
-          "komga.berry.netbird.cloud".extraConfig = ''
-            reverse_proxy localhost:8080
+          "berry.netbird.cloud".extraConfig = ''
+            handle /immich* {
+              reverse_proxy localhost:2283
+            }
+            handle /silverbullet* {
+              reverse_proxy localhost:3000
+            }
+            handle /komga* {
+              reverse_proxy localhost:8080
+            }
+            handle {
+              respond "Berry Services" 200
+            }
           '';
         };
       };

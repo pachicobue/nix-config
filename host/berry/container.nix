@@ -48,30 +48,26 @@ in {
         ];
       };
     };
-    caddy = {
-      autoStart = true;
-      config = {...}: {
-        system.stateVersion = "${hostConfig.stateVersion.nixos}";
-        imports = [
-          ../../container/caddy.nix
-        ];
-        services.caddy.virtualHosts = {
-          "berry.netbird.cloud".extraConfig = ''
-            handle /immich* {
-              reverse_proxy localhost:2283
-            }
-            handle /silverbullet* {
-              reverse_proxy localhost:3000
-            }
-            handle /komga* {
-              reverse_proxy localhost:8080
-            }
-            handle {
-              respond "Berry Services" 200
-            }
-          '';
-        };
-      };
+  };
+
+  # Caddyはホスト本体で動作
+  services.caddy = {
+    enable = true;
+    virtualHosts = {
+      "berry.netbird.cloud".extraConfig = ''
+        handle /immich* {
+          reverse_proxy localhost:2283
+        }
+        handle /silverbullet* {
+          reverse_proxy localhost:3000
+        }
+        handle /komga* {
+          reverse_proxy localhost:8080
+        }
+        handle {
+          respond "Berry Services" 200
+        }
+      '';
     };
   };
 

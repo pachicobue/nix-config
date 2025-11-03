@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  commonConfig,
   hostConfig,
   ...
 }: let

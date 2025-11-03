@@ -1,25 +1,16 @@
-{
-  config,
-  hostConfig,
-  ...
-}: let
-  hostIp = "192.168.100.0";
+{hostConfig, ...}: let
   # /media がメディアデータ用のSecondary Disk
   dataDisk = "/media";
 in {
   containers = {
     immich = {
       autoStart = true;
-      privateNetwork = true;
-      hostAddress = hostIp;
-      localAddress = "192.168.100.1";
-      forwardPorts = [
-        rec {
-          containerPort = config.services.immich.port;
-          hostPort = containerPort;
-          protocol = "tcp";
-        }
-      ];
+      bindMounts = {
+        "/var/lib/immich" = {
+          hostPath = "${dataDisk}/immich";
+          isReadOnly = false;
+        };
+      };
       config = {...}: {
         system.stateVersion = "${hostConfig.stateVersion.nixos}";
         imports = [
@@ -29,16 +20,12 @@ in {
     };
     silverbullet = {
       autoStart = true;
-      privateNetwork = true;
-      hostAddress = hostIp;
-      localAddress = "192.168.100.2";
-      forwardPorts = [
-        rec {
-          containerPort = config.services.silverbullet.listenPort;
-          hostPort = containerPort;
-          protocol = "tcp";
-        }
-      ];
+      bindMounts = {
+        "/var/lib/silverbullet" = {
+          hostPath = "${dataDisk}/silverbullet";
+          isReadOnly = false;
+        };
+      };
       config = {...}: {
         system.stateVersion = "${hostConfig.stateVersion.nixos}";
         imports = [
@@ -52,5 +39,11 @@ in {
     "d ${dataDisk}/silverbullet 0755 root root -"
   ];
 
-  networking.firewall.enable = true;
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [
+      2283
+      3000
+    ];
+  };
 }

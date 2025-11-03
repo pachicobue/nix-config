@@ -33,18 +33,18 @@ in {
         ];
       };
     };
-    komga = {
+    freshrss = {
       autoStart = true;
       bindMounts = {
-        "/var/lib/komga" = {
-          hostPath = "${dataDisk}/komga";
+        "/var/lib/freshrss" = {
+          hostPath = "${dataDisk}/freshrss";
           isReadOnly = false;
         };
       };
       config = {...}: {
         system.stateVersion = "${hostConfig.stateVersion.nixos}";
         imports = [
-          ../../container/komga.nix
+          ../../container/freshrss.nix
         ];
       };
     };
@@ -53,7 +53,7 @@ in {
   systemd.tmpfiles.rules = [
     "d ${dataDisk}/immich 0755 root root -"
     "d ${dataDisk}/silverbullet 0755 root root -"
-    "d ${dataDisk}/komga 0755 root root -"
+    "d ${dataDisk}/freshrss 0755 root root -"
   ];
 
   networking.firewall = {
@@ -61,7 +61,7 @@ in {
     allowedTCPPorts = [
       2283 # Immich
       3000 # Silverbullet
-      8080 # Komga
+      80   # FreshRSS
     ];
   };
 }

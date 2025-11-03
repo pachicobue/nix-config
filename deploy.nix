@@ -14,7 +14,7 @@ in {
       host: {
         name = host.name;
         value = {
-          hostname = "${host.name}.local"; # mDNS等前提
+          hostname = "${host.name}.netbird.cloud"; # netbird前提
           profiles.system = {
             sshUser = "root";
             path = deploy-rs.lib.${host.system}.activate.nixos self.outputs.nixosConfigurations.${host.name};

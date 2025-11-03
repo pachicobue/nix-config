@@ -40,11 +40,6 @@ in {
           hostPath = "${dataDisk}/komga";
           isReadOnly = false;
         };
-        # 書籍/漫画データの読み取り専用マウント
-        "/data" = {
-          hostPath = "${dataDisk}/books";
-          isReadOnly = true;
-        };
       };
       config = {...}: {
         system.stateVersion = "${hostConfig.stateVersion.nixos}";
@@ -60,6 +55,22 @@ in {
         imports = [
           ../../container/caddy.nix
         ];
+        services.caddy.virtualHosts = {
+          # Immich - 写真管理
+          "immich.berry.netbird.cloud".extraConfig = ''
+            reverse_proxy immich.containers:2283
+          '';
+
+          # Silverbullet - ノート
+          "silverbullet.berry.netbird.cloud".extraConfig = ''
+            reverse_proxy silverbullet.containers:3000
+          '';
+
+          # Komga - 漫画/書籍管理
+          "komga.berry.netbird.cloud".extraConfig = ''
+            reverse_proxy komga.containers:8080
+          '';
+        };
       };
     };
   };
@@ -68,17 +79,16 @@ in {
     "d ${dataDisk}/immich 0755 root root -"
     "d ${dataDisk}/silverbullet 0755 root root -"
     "d ${dataDisk}/komga 0755 root root -"
-    "d ${dataDisk}/books 0755 root root -"
   ];
 
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [
-      80 # HTTP (Caddy)
-      443 # HTTPS (Caddy)
-      2283 # Immich (direct access)
-      3000 # Silverbullet (direct access)
-      8080 # Komga (direct access)
+      80
+      443
+      2283
+      3000
+      8080
     ];
   };
 }

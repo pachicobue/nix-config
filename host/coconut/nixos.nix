@@ -11,16 +11,12 @@
     ../../module/nixos/nvidia.nix
     ../../module/nixos/gaming.nix
     ../../module/nixos/wakeonlan.nix
-    # ../../module/nixos/tailscale.nix
     ../../module/nixos/netbird-client.nix
-    ../../module/nixos/avahi.nix
+    # ../../module/nixos/avahi.nix
     ../../module/nixos/bluetooth.nix
     ../../module/nixos/usb.nix
     ../../module/nixos/yubikey.nix
-    # ../../module/nixos/keyboard.nix
     ../../module/nixos/regreet.nix
-    # ../../module/nixos/hyprland.nix
-    # ../../module/nixos/niri.nix
   ];
 
   # Boot Loader

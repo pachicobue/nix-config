@@ -5,9 +5,7 @@
 
     ../../module/nixos/common.nix
     ../../module/nixos/openssh.nix
-    # ../../module/nixos/avahi.nix
     ../../module/nixos/netbird-client.nix
-    ../../module/nixos/yubikey.nix
     ../../module/nixos/wakeonlan.nix
   ];
 

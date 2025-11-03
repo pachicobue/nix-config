@@ -8,11 +8,9 @@
 
     ../../module/nixos/common.nix
     ../../module/nixos/openssh.nix
-    ../../module/nixos/avahi.nix
+    # ../../module/nixos/avahi.nix
     ../../module/nixos/wakeonlan.nix
-    # ../../module/nixos/tailscale.nix
     ../../module/nixos/netbird-client.nix
-    ../../module/nixos/yubikey.nix
 
     ./container.nix
   ];

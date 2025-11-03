@@ -1,6 +1,4 @@
 {
-  pkgs,
-  lib,
   inputs,
   commonConfig,
   ...
@@ -10,9 +8,8 @@
 
     ../../module/nixos/common.nix
 
-    ../../module/nixos/avahi.nix
+    # ../../module/nixos/avahi.nix
     ../../module/nixos/netbird-client.nix
-    # ../../module/nixos/yubikey.nix
   ];
 
   # WSL Configuration
@@ -25,14 +22,5 @@
         generateResolvConf = false;
       };
     };
-    # usbip = {
-    #   enable = true;
-    # };
-    # extraBin = [
-    #   {src = "${lib.getExe' pkgs.coreutils-full "ls"}";}
-    #   {src = "${lib.getExe' pkgs.coreutils-full "cat"}";}
-    #   {src = "${lib.getExe pkgs.bash}";}
-    #   {src = "${lib.getExe' pkgs.linuxPackages.usbip "usbip"}";}
-    # ];
   };
 }

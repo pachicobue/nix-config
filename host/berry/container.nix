@@ -84,11 +84,8 @@ in {
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [
-      80
-      443
-      2283
-      3000
-      8080
+      80 # HTTP (Caddy)
+      443 # HTTPS (Caddy)
     ];
   };
 }

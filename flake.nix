@@ -67,6 +67,13 @@
         ":Dbvc/UKxa67YXHnT2UHFxz5+2uJ+nSlJIlxFVkuUbm2QMuRaCt5CMryJISviqZE52VzT0KmBawjVqFZBHFxvLA==,IZNkn3O8uUZgFvE4dftrcXkIa/qMWsSkP/9Btw4VSE028Ps2nQ7BIUs382LBopylCW9ctJ9W6LCeX8sV1usgZw==,es256,+presence"
         ":4gggXi9HjEIbpw65Jr3jRhls/GKa+sRGfbegDG5KKrIBf4WoPVzCa+Huc8U5gQDX6N4m+vgH6eH87cwv9RLecg==,fORR3/Imh08tiT7R96Y4qJALqSgErH5mYjnxI02yqHpW+3IZb7y9D66r7AkRbMULlf/LK+ukqjyTsUw3JT2GAQ==,es256,+presence"
       ];
+      network = {
+        gateway = "192.168.10.1";
+        dns = [
+          "192.168.10.181"
+          "1.1.1.1"
+        ];
+      };
     };
     hosts = [
       {
@@ -77,9 +84,13 @@
           homeManager = "25.05";
         };
         desktop = "wayland";
-        ethernet = {
-          name = "eno1";
-          mac = "08:bf:b8:a5:74:f7";
+        network = {
+          useDhcp = true;
+          iface = {
+            name = "eno1";
+            mac = "08:bf:b8:a5:74:f7";
+            enableWol = true;
+          };
         };
       }
       {
@@ -90,7 +101,10 @@
           homeManager = "25.05";
         };
         desktop = "wayland";
-        ethernet = null;
+        network = {
+          useDhcp = true;
+          iface = {};
+        };
       }
       {
         name = "berry";
@@ -100,9 +114,13 @@
           homeManager = "25.05";
         };
         desktop = "none";
-        ethernet = {
-          name = "enp1s0";
-          mac = "68:1d:ef:37:e8:ab";
+        network = {
+          useDhcp = true;
+          iface = {
+            name = "enp1s0";
+            mac = "68:1d:ef:37:e8:ab";
+            enableWol = true;
+          };
         };
       }
       {
@@ -113,7 +131,14 @@
           homeManager = "25.05";
         };
         desktop = "none";
-        ethernet = null;
+        network = {
+          useDhcp = false;
+          iface = {
+            name = "eth0";
+            address = "192.168.10.181";
+            mac = "2c:cf:67:1a:1c:61";
+          };
+        };
       }
     ];
     args = {

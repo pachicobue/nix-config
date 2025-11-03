@@ -19,11 +19,7 @@ in {
         ];
       };
     };
-    defaultGateway = {
-      address = commonConfig.network.gateway;
-    };
     firewall.enable = true;
-    nameservers = commonConfig.network.dns;
   };
   programs.tcpdump.enable = true;
   environment.systemPackages = with pkgs; [

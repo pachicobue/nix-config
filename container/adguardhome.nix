@@ -1,4 +1,8 @@
-{commonConfig, ...}: {
+{
+  commonConfig,
+  hostConfig,
+  ...
+}: {
   services.adguardhome = {
     enable = true;
     openFirewall = true;
@@ -19,7 +23,7 @@
 
       dhcp = {
         enabled = true;
-        interface_name = "eth0";
+        interface_name = hostConfig.network.iface.name;
 
         dhcpv4 = {
           gateway_ip = commonConfig.network.gateway;

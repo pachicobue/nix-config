@@ -12,7 +12,6 @@
     ../../module/nixos/gaming.nix
     ../../module/nixos/wakeonlan.nix
     ../../module/nixos/netbird-client.nix
-    # ../../module/nixos/avahi.nix
     ../../module/nixos/bluetooth.nix
     ../../module/nixos/usb.nix
     ../../module/nixos/yubikey.nix

@@ -1,4 +1,8 @@
-{hostConfig, ...}: let
+{
+  commonConfig,
+  hostConfig,
+  ...
+}: let
   # /media がメディアデータ用のSecondary Disk
   dataDisk = "/media";
 in {
@@ -17,6 +21,10 @@ in {
           ../../container/immich.nix
         ];
       };
+      specialArgs = {
+        inherit commonConfig;
+        inherit hostConfig;
+      };
     };
     silverbullet = {
       autoStart = true;
@@ -32,20 +40,28 @@ in {
           ../../container/silverbullet.nix
         ];
       };
+      specialArgs = {
+        inherit commonConfig;
+        inherit hostConfig;
+      };
     };
-    freshrss = {
+    miniflux = {
       autoStart = true;
       bindMounts = {
-        "/var/lib/freshrss" = {
-          hostPath = "${dataDisk}/freshrss";
+        "/var/lib/miniflux" = {
+          hostPath = "${dataDisk}/miniflux";
           isReadOnly = false;
         };
       };
       config = {...}: {
         system.stateVersion = "${hostConfig.stateVersion.nixos}";
         imports = [
-          ../../container/freshrss.nix
+          ../../container/miniflux.nix
         ];
+      };
+      specialArgs = {
+        inherit commonConfig;
+        inherit hostConfig;
       };
     };
   };
@@ -61,7 +77,7 @@ in {
     allowedTCPPorts = [
       2283 # Immich
       3000 # Silverbullet
-      80   # FreshRSS
+      80 # FreshRSS
     ];
   };
 }

@@ -9,7 +9,8 @@
     ../../module/nixos/common.nix
     ../../module/nixos/openssh.nix
     ../../module/nixos/wakeonlan.nix
-    ../../module/nixos/netbird-client.nix
+    # ../../module/nixos/netbird-client.nix
+    ../../module/nixos/tailscale.nix
 
     ./container.nix
   ];

@@ -11,7 +11,8 @@
     ../../module/nixos/nvidia.nix
     ../../module/nixos/gaming.nix
     ../../module/nixos/wakeonlan.nix
-    ../../module/nixos/netbird-client.nix
+    ../../module/nixos/tailscale.nix
+    # ../../module/nixos/netbird-client.nix
     ../../module/nixos/bluetooth.nix
     ../../module/nixos/usb.nix
     ../../module/nixos/yubikey.nix

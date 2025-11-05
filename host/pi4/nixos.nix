@@ -5,9 +5,12 @@
 
     ../../module/nixos/common.nix
     ../../module/nixos/openssh.nix
-    ../../module/nixos/netbird-client.nix
+    # ../../module/nixos/netbird-client.nix
+    ../../module/nixos/tailscale.nix
     ../../module/nixos/wakeonlan.nix
   ];
+
+  networking.nameservers = ["127.0.0.1"];
 
   boot = {
     loader = {

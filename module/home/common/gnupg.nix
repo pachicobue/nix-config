@@ -13,12 +13,6 @@
       s2k-digest-algo = "SHA512";
       s2k-cipher-algo = "AES256";
       charset = "utf-8";
-      fixed-list-mode = true;
-      no-comments = true;
-      no-emit-version = true;
-      keyid-format = "0xlong";
-      list-options = "show-uid-validity";
-      verify-options = "show-uid-validity";
       with-fingerprint = true;
       with-keygrip = true;
       require-cross-certification = true;
@@ -30,12 +24,10 @@
   services.gpg-agent = {
     enable = true;
     enableZshIntegration = true;
-    enableSshSupport = true;
     defaultCacheTtl = 3600;
     maxCacheTtl = 86400;
     pinentry = {
       package = pkgs.pinentry-all;
-      program = "pinentry-qt";
     };
   };
 }

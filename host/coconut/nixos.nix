@@ -37,4 +37,14 @@
     # aarch64バイナリをQEMUでエミュレーション（Raspberry Pi用ビルドのため）
     binfmt.emulatedSystems = ["aarch64-linux"];
   };
+
+  # SSH経由でもsystemctl suspendを実行可能にする
+  security.polkit.extraConfig = ''
+    polkit.addRule(function(action, subject) {
+      if (action.id == "org.freedesktop.login1.suspend" &&
+          subject.isInGroup("wheel")) {
+        return polkit.Result.YES;
+      }
+    });
+  '';
 }

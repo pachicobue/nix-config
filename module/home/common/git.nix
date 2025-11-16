@@ -2,9 +2,15 @@
   programs = {
     git = {
       enable = true;
-      userName = "pachicobue";
-      userEmail = commonConfig.userEmail;
-      extraConfig = {
+      signing = {
+        key = commonConfig.gpg;
+        signByDefault = true;
+      };
+      settings = {
+        user = {
+          name = "pachicobue";
+          email = commonConfig.userEmail;
+        };
         init.defaultBranch = "main";
         pull.rebase = true;
         credential.helper = "!gh auth git-credential";

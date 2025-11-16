@@ -16,6 +16,7 @@
     ./common/carapace.nix
     ./common/starship.nix
     ./common/git.nix
+    ./common/gnupg.nix
     ./common/lsd.nix
     ./common/ssh.nix
     # ./common/pueue.nix

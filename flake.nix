@@ -54,14 +54,17 @@
     common = {
       userName = "sho";
       userFullName = "Sho Yasui";
-      userEmail = "github.ranch301@passmail.net";
+      userEmail = "mail@pachicobue.org";
       userPassHash = "$y$jFT$8ucjYlvf80e0wuuTIRCST.$w4/ZC0ZCsas0nq3vxghytE9cwLORY5ioE6hc1zz3Ph4";
       rootPassHash = "$y$jFT$RxsQil2C/9qnFX4LcUD9S1$.8fXwaf9oMzCVHV2v/NyaavHgk8h3oBk.HfsFRYWLH5";
+      gpg = "E4E61C685DD58216CE33134FC743571182DA7DB9";
       sshKeys = [
         "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIFNr0LUHwXLsJ2PatYjqGmI0ysEQDeDwlmde1qE+JAEOAAAAB3NzaDpzaG8= yubikey5"
         "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIJMh1WWX6JlHyzTp+oyn7iGO4+lcDFnZvtqXdDARcxyzAAAAB3NzaDpzaG8= yubikey5C"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHfpC+F7nY8vUxPN5zEX/x/PAo7R7IUHFnXR8ADyd1aY openpgp:0x5094153E"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMJGjzlH+kjBX98qiZOQ1raIQ2H6CJefEq3c8LO4uSuP sho@coconut"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIurSBgviLvpzHnZOMuu7UEbw9sktSuVahUySjW0dquy sho@plum"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDhQ3Qu0j1XnGyUbO0maSI85xRyzbh/rTxg77aPDz2HF iPhoneXR"
       ];
       u2fMappings = [
         ":Dbvc/UKxa67YXHnT2UHFxz5+2uJ+nSlJIlxFVkuUbm2QMuRaCt5CMryJISviqZE52VzT0KmBawjVqFZBHFxvLA==,IZNkn3O8uUZgFvE4dftrcXkIa/qMWsSkP/9Btw4VSE028Ps2nQ7BIUs382LBopylCW9ctJ9W6LCeX8sV1usgZw==,es256,+presence"

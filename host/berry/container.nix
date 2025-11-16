@@ -7,56 +7,18 @@
   dataDisk = "/media";
 in {
   containers = {
-    immich = {
+    nextcloud = {
       autoStart = true;
       bindMounts = {
-        "/var/lib/immich" = {
-          hostPath = "${dataDisk}/immich";
+        "/var/lib/nextcloud" = {
+          hostPath = "${dataDisk}/nextcloud";
           isReadOnly = false;
         };
       };
       config = {...}: {
         system.stateVersion = "${hostConfig.stateVersion.nixos}";
         imports = [
-          ../../container/immich.nix
-        ];
-      };
-      specialArgs = {
-        inherit commonConfig;
-        inherit hostConfig;
-      };
-    };
-    silverbullet = {
-      autoStart = true;
-      bindMounts = {
-        "/var/lib/silverbullet" = {
-          hostPath = "${dataDisk}/silverbullet";
-          isReadOnly = false;
-        };
-      };
-      config = {...}: {
-        system.stateVersion = "${hostConfig.stateVersion.nixos}";
-        imports = [
-          ../../container/silverbullet.nix
-        ];
-      };
-      specialArgs = {
-        inherit commonConfig;
-        inherit hostConfig;
-      };
-    };
-    miniflux = {
-      autoStart = true;
-      bindMounts = {
-        "/var/lib/miniflux" = {
-          hostPath = "${dataDisk}/miniflux";
-          isReadOnly = false;
-        };
-      };
-      config = {...}: {
-        system.stateVersion = "${hostConfig.stateVersion.nixos}";
-        imports = [
-          ../../container/miniflux.nix
+          ../../container/nextcloud.nix
         ];
       };
       specialArgs = {
@@ -67,17 +29,13 @@ in {
   };
 
   systemd.tmpfiles.rules = [
-    "d ${dataDisk}/immich 0755 root root -"
-    "d ${dataDisk}/silverbullet 0755 root root -"
-    "d ${dataDisk}/freshrss 0755 root root -"
+    "d ${dataDisk}/nextcloud 0750 root root -"
   ];
 
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [
-      2283 # Immich
-      3000 # Silverbullet
-      80 # FreshRSS
+      80 # Nextcloud
     ];
   };
 }

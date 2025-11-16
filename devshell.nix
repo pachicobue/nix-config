@@ -24,7 +24,7 @@ in
                 nil
                 alejandra
                 deploy-rs
-                gnupg
+                ssh-to-pgp
 
                 # Python script wrappers - Top-level APIs
                 (writeScriptBin "switch" ''

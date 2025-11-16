@@ -23,11 +23,6 @@ in {
   programs.tcpdump.enable = true;
   environment.systemPackages = with pkgs; [
     tcpdump
-    wget2
-    curl
-    bandwhich
-    gping
-    dog
-    socat
+    dnslookup
   ];
 }

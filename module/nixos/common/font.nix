@@ -6,7 +6,7 @@ in {
       noto-fonts
       noto-fonts-cjk-serif
       noto-fonts-cjk-sans
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       moralerspace
     ];
   };
@@ -24,7 +24,7 @@ in {
       name = "Moralerspace Neon";
     };
     emoji = {
-      package = pkgs.noto-fonts-emoji;
+      package = pkgs.noto-fonts-color-emoji;
       name = "Noto Color Emoji";
     };
     sizes = {

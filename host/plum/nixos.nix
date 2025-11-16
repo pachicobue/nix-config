@@ -8,6 +8,7 @@
 
     ../../module/nixos/common.nix
     ../../module/nixos/usb.nix
+    ../../module/nixos/yubikey.nix
     # ../../module/nixos/netbird-client.nix
     # ../../module/nixos/tailscale.nix
   ];

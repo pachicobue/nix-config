@@ -33,6 +33,9 @@
     enableSshSupport = true;
     defaultCacheTtl = 3600;
     maxCacheTtl = 86400;
-    pinentryPackage = pkgs.pinentry-all;
+    pinentry = {
+      package = pkgs.pinentry-all;
+      program = "pinentry-qt";
+    };
   };
 }

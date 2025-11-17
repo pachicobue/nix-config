@@ -24,7 +24,6 @@ in
                 nil
                 alejandra
                 deploy-rs
-                ssh-to-pgp
 
                 # Python script wrappers - Top-level APIs
                 (writeScriptBin "switch" ''

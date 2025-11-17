@@ -1,0 +1,10 @@
+keys:
+  - &coconut     age1srfkwm8rnmqdnnyq0t0x92fxmdk36qzp4lzdur0jfcttkhkjkflqs9wl9x
+  - &sho@coconut age1z7m0kfmkcmg7k5dvxpqkq5qan8ldgmw4kmuna44qtxre56h39uzq55g7lk
+  - &berry       age18lg4yvamkc77mv9ehxf62hjyne5tl05klw5a2mn7r6vnr72j7e3sd64qqd
+  - &pi4         age1jqef99fafm6f9l5wwchj6kru226j6jyq48p9xxu45gzsjrhq0a8qy3ys8z
+creation_rules:
+  - path_regex: secrets/secrets.yaml$
+    key_groups:
+    - age:
+      - *sho@coconut

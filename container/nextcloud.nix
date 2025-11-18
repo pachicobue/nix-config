@@ -1,6 +1,11 @@
-{hostConfig, ...}: {
+{
+  pkgs,
+  hostConfig,
+  ...
+}: {
   services.nextcloud = {
     enable = true;
+    package = pkgs.nextcloud32;
     hostName = hostConfig.name;
 
     database.createLocally = true;

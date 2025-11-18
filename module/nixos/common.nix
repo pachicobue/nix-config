@@ -21,7 +21,7 @@
     ./common/zsh.nix
     ./common/git.nix
     ./common/direnv.nix
-    ./common/age.nix
+    ./common/sops.nix
   ];
 
   time.timeZone = "Asia/Tokyo";

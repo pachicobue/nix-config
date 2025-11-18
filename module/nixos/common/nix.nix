@@ -6,6 +6,7 @@
       options = "--delete-older-than 7d";
     };
     settings = {
+      fallback = true;
       auto-optimise-store = true;
       experimental-features = [
         "nix-command"

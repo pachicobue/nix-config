@@ -10,7 +10,7 @@
     ../../module/nixos/wakeonlan.nix
   ];
 
-  networking.nameservers = ["127.0.0.1"];
+  networking.nameservers = ["1.1.1.1"];
 
   boot = {
     loader = {

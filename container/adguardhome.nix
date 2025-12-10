@@ -10,16 +10,12 @@
     settings = {
       dns = {
         bind_hosts = ["0.0.0.0"];
-        upstream_dns = ["1.1.1.1"];
+        upstream_dns = ["tls://1.1.1.1"];
         enable_dnssec = true;
         edns_client_subnet = {
           enabled = false;
         };
       };
-
-      # tls = {
-      #   enabled = true;
-      # };
 
       dhcp = {
         enabled = true;

@@ -7,6 +7,10 @@
     adguardhome = {
       autoStart = true;
       bindMounts = {
+        "/etc/ssh/ssh_host_ed25519_key" = {
+          hostPath = "/etc/ssh/ssh_host_ed25519_key";
+          isReadOnly = true;
+        };
         "/var/lib/AdGuardHome" = {
           hostPath = "/var/lib/adguardhome-data";
           isReadOnly = false;

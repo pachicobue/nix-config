@@ -22,7 +22,7 @@ in {
     };
     monospace = {
       package = pkgs.nerd-fonts.monaspace;
-      name = "Monaspace Neon";
+      name = "Monaspace Neon NF";
     };
     emoji = {
       package = pkgs.noto-fonts-color-emoji;

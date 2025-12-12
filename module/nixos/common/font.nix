@@ -7,6 +7,7 @@ in {
       noto-fonts-cjk-serif
       noto-fonts-cjk-sans
       noto-fonts-color-emoji
+      nerd-fonts.monaspace
       moralerspace
     ];
   };
@@ -20,8 +21,8 @@ in {
       name = "Noto Sans CJK JP";
     };
     monospace = {
-      package = pkgs.moralerspace;
-      name = "Moralerspace Neon";
+      package = pkgs.nerd-fonts.monaspace;
+      name = "Monaspace Neon";
     };
     emoji = {
       package = pkgs.noto-fonts-color-emoji;

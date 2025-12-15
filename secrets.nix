@@ -1,4 +1,5 @@
 let
+  master = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILFWTtv++4OCahIDA2anyndbo9uheA6VaqRJSVgmB4cA agenix-master";
   root = {
     coconut = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGYJCBLXavqNCenU0yyAkNMD8fihPVb4H/VqD/Ssa3IP root@coconut";
     pi4 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA9WiYz2sJq45+f7CN0dP3Ag77ugQklmkDz4IcENeem7 root@nixos";
@@ -12,4 +13,5 @@ let
     plum = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIurSBgviLvpzHnZOMuu7UEbw9sktSuVahUySjW0dquy sho@plum";
   };
 in {
+  "secrets/writefreely-pass.age".publicKeys = [master root.coconut root.berry];
 }

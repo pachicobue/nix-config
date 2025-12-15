@@ -23,7 +23,7 @@ in {
     root.coconut
     root.berry
   ];
-  "secrets/freshrss/password.age".publicKeys = [
+  "secrets/miniflux/admin-credentials.age".publicKeys = [
     master
     root.coconut
     root.berry

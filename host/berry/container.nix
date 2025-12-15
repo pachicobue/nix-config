@@ -39,15 +39,15 @@ in {
       };
     };
 
-    freshrss = {
+    miniflux = {
       autoStart = true;
       bindMounts = {
         "/etc/ssh/ssh_host_ed25519_key" = {
           hostPath = "/etc/ssh/ssh_host_ed25519_key";
           isReadOnly = true;
         };
-        "/var/lib/freshrss" = {
-          hostPath = "${dataDisk}/freshrss";
+        "/var/lib/miniflux" = {
+          hostPath = "${dataDisk}/miniflux";
           isReadOnly = false;
         };
       };
@@ -56,7 +56,7 @@ in {
         age.identityPaths = ["/etc/ssh/ssh_host_ed25519_key"];
         imports = [
           inputs.agenix.nixosModules.default
-          ../../container/freshrss.nix
+          ../../container/miniflux.nix
         ];
       };
       specialArgs = {
@@ -68,7 +68,7 @@ in {
 
   systemd.tmpfiles.rules = [
     "d ${dataDisk}/writefreely 0750 root root -"
-    "d ${dataDisk}/freshrss 0750 root root -"
+    "d ${dataDisk}/miniflux 0750 root root -"
   ];
 
   networking.firewall = {
@@ -96,16 +96,16 @@ in {
     };
   };
 
-  # Tailscale Serve for FreshRSS
+  # Tailscale Serve for Miniflux
   systemd.services.tailscale-serve = {
-    description = "Tailscale Serve for FreshRSS";
-    after = ["tailscaled.service" "container@freshrss.service"];
-    wants = ["container@freshrs.service"];
+    description = "Tailscale Serve for Miniflux";
+    after = ["tailscaled.service" "container@miniflux.service"];
+    wants = ["container@miniflux.service"];
     wantedBy = ["multi-user.target"];
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
-      ExecStart = "/run/current-system/sw/bin/tailscale serve --bg --https 443 8080";
+      ExecStart = "/run/current-system/sw/bin/tailscale serve --bg --https 443 http://127.0.0.1:8080";
       ExecStop = "/run/current-system/sw/bin/tailscale serve --https 443 off";
     };
   };

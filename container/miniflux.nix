@@ -1,18 +1,16 @@
-{pkgs, ...}: {
-  services.miniflux = {
-    enable = true;
-    createDatabaseLocally = true;
-    adminCredentialsFile = "/var/lib/miniflux/admin-credentials";
-    config = {
-      LISTEN_ADDR = "0.0.0.0:8080";
-      BASE_URL = "http://berry:8080";
-    };
+{config, ...}: {
+  age.secrets."miniflux/admin-credentials" = {
+    file = ../secrets/miniflux/admin-credentials.age;
+    owner = "miniflux";
   };
 
-  # PostgreSQLを有効化（createDatabaseLocallyで必要）
-  services.postgresql = {
+  services.miniflux = {
     enable = true;
-    package = pkgs.postgresql_15;
+    adminCredentialsFile = config.age.secrets."miniflux/admin-credentials".path;
+    config = {
+      LISTEN_ADDR = "0.0.0.0:8080";
+      BASE_URL = "https://berry.tail414be6.ts.net";
+    };
   };
 
   networking.firewall = {

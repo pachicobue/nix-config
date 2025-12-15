@@ -29,6 +29,7 @@
     maxCacheTtl = 86400;
     pinentry = {
       package = pkgs.pinentry-all;
+      program = "pinentry-tty";
     };
   };
 }

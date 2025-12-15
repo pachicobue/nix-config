@@ -7,10 +7,6 @@
     adguardhome = {
       autoStart = true;
       bindMounts = {
-        "/etc/ssh/ssh_host_ed25519_key" = {
-          hostPath = "/etc/ssh/ssh_host_ed25519_key";
-          isReadOnly = true;
-        };
         "/var/lib/AdGuardHome" = {
           hostPath = "/var/lib/adguardhome-data";
           isReadOnly = false;
@@ -39,16 +35,27 @@
       53 # DNS
       67 # DHCP
       68 # DHCP
-      443 # DNS over HTTPS
-      853 # DNS over TLS
+      443 # Tailscale Serve
       3000 # AdGuardHome Web UI
-      80 # HTTP (for ACME challenge)
     ];
     allowedUDPPorts = [
       53 # DNS
       67 # DHCP
       68 # DHCP
-      853 # DNS over QUIC
     ];
+  };
+
+  # Tailscale Serve - Tailscaleネットワーク内のみで公開
+  systemd.services.tailscale-serve = {
+    description = "Tailscale Serve for AdGuard Home HTTPS";
+    after = ["tailscaled.service" "container@adguardhome.service"];
+    wants = ["container@adguardhome.service"];
+    wantedBy = ["multi-user.target"];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = "/run/current-system/sw/bin/tailscale serve --bg --https 443 3000";
+      ExecStop = "/run/current-system/sw/bin/tailscale serve --https 443 off";
+    };
   };
 }

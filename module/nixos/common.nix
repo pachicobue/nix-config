@@ -53,5 +53,10 @@
         then [wl-clipboard waypipe]
         else []
       );
+    # XDG Desktop Portal用（Home Manager経由でインストールする場合に必要）
+    pathsToLink = lib.mkIf (hostConfig.desktop != "none") [
+      "/share/applications"
+      "/share/xdg-desktop-portal"
+    ];
   };
 }

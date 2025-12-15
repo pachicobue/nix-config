@@ -59,10 +59,6 @@
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIurSBgviLvpzHnZOMuu7UEbw9sktSuVahUySjW0dquy sho@plum"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDhQ3Qu0j1XnGyUbO0maSI85xRyzbh/rTxg77aPDz2HF iPhoneXR"
       ];
-      u2fMappings = [
-        ":Dbvc/UKxa67YXHnT2UHFxz5+2uJ+nSlJIlxFVkuUbm2QMuRaCt5CMryJISviqZE52VzT0KmBawjVqFZBHFxvLA==,IZNkn3O8uUZgFvE4dftrcXkIa/qMWsSkP/9Btw4VSE028Ps2nQ7BIUs382LBopylCW9ctJ9W6LCeX8sV1usgZw==,es256,+presence"
-        ":4gggXi9HjEIbpw65Jr3jRhls/GKa+sRGfbegDG5KKrIBf4WoPVzCa+Huc8U5gQDX6N4m+vgH6eH87cwv9RLecg==,fORR3/Imh08tiT7R96Y4qJALqSgErH5mYjnxI02yqHpW+3IZb7y9D66r7AkRbMULlf/LK+ukqjyTsUw3JT2GAQ==,es256,+presence"
-      ];
       network = {
         gateway = "192.168.10.1";
         dns = "192.168.10.181";

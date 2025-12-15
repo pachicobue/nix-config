@@ -13,5 +13,19 @@ let
     plum = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIurSBgviLvpzHnZOMuu7UEbw9sktSuVahUySjW0dquy sho@plum";
   };
 in {
-  "secrets/writefreely-pass.age".publicKeys = [master root.coconut root.berry];
+  "secrets/cloudflare/pachicobue-org-tunnel-json.age".publicKeys = [
+    master
+    root.coconut
+    root.berry
+  ];
+  "secrets/writefreely/admin-pass.age".publicKeys = [
+    master
+    root.coconut
+    root.berry
+  ];
+  "secrets/freshrss/password.age".publicKeys = [
+    master
+    root.coconut
+    root.berry
+  ];
 }

@@ -24,6 +24,7 @@ in
                 nil
                 alejandra
                 deploy-rs
+                inputs.agenix.packages.${system}.default
 
                 # Python script wrappers - Top-level APIs
                 (writeScriptBin "switch" ''

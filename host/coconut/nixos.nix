@@ -16,7 +16,8 @@
     ../../module/nixos/bluetooth.nix
     ../../module/nixos/usb.nix
     ../../module/nixos/yubikey.nix
-    ../../module/nixos/regreet.nix
+    ../../module/nixos/tuigreet.nix
+    # ../../module/nixos/regreet.nix
   ];
 
   # Boot Loader

@@ -8,6 +8,13 @@
     openFirewall = true;
     mutableSettings = true;
     settings = {
+      users = [
+        {
+          name = "sho";
+          password = "$2a$10$YdgXJ5l3MX7ayFPxdp5KVu1IR5FSyT9FqBC1SLGTM0DKpdlDXrS4q";
+        }
+      ];
+
       dns = {
         bind_hosts = ["0.0.0.0"];
         upstream_dns = ["tls://1.1.1.1"];
@@ -29,6 +36,10 @@
           lease_duration = 86400;
         };
       };
+
+      user_rules = [
+        "@@||statsig.anthropic.com^$important"
+      ];
 
       filters = [
         {

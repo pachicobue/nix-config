@@ -45,7 +45,7 @@
     ];
   };
 
-  # Tailscale Serve - Tailscaleネットワーク内のみで公開
+  # Tailscale Serve for AdGuardHome
   systemd.services.tailscale-serve = {
     description = "Tailscale Serve for AdGuard Home HTTPS";
     after = ["tailscaled.service" "container@adguardhome.service"];

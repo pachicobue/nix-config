@@ -10,7 +10,7 @@ lib.mkIf (hostConfig.desktop != "none") {
     settings = {
       default_session = {
         user = "greeter";
-        command = "${lib.getExe pkgs.tuigreet}  --remember-user-session";
+        command = "${lib.getExe pkgs.tuigreet} --time --remember --remember-session";
       };
     };
   };

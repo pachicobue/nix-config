@@ -24,7 +24,7 @@
   services.gpg-agent = {
     enable = true;
     enableZshIntegration = true;
-    enableSshSupport = true;
+    enableSshSupport = false;
     defaultCacheTtl = 3600;
     maxCacheTtl = 86400;
     pinentry = {

@@ -11,6 +11,5 @@
       PasswordAuthentication = false;
     };
   };
-  services.fail2ban.enable = true;
   environment.enableAllTerminfo = true;
 }

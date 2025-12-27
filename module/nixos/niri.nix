@@ -11,4 +11,7 @@ lib.mkIf (hostConfig.desktop == "wayland") {
     enable = true;
     package = pkgs.niri;
   };
+
+  # Register niri-session for display managers
+  services.displayManager.sessionPackages = [pkgs.niri];
 }

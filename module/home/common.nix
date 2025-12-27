@@ -1,8 +1,4 @@
-{
-  inputs,
-  config,
-  ...
-}: {
+{...}: {
   # nix-secret 参照
   # age.identityPaths = [
   #   "${config.home.homeDirectory}/.ssh/agenix"

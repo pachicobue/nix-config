@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  config,
+  hostConfig,
+  ...
+}: {
   age.secrets."miniflux/admin-credentials" = {
     file = ../secrets/miniflux/admin-credentials.age;
     owner = "miniflux";
@@ -9,7 +13,7 @@
     adminCredentialsFile = config.age.secrets."miniflux/admin-credentials".path;
     config = {
       LISTEN_ADDR = "0.0.0.0:8080";
-      BASE_URL = "https://berry.tail414be6.ts.net";
+      BASE_URL = "http://${hostConfig.name}";
     };
   };
 

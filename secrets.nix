@@ -18,11 +18,6 @@ in {
     root.coconut
     root.berry
   ];
-  "secrets/writefreely/admin-pass.age".publicKeys = [
-    master
-    root.coconut
-    root.berry
-  ];
   "secrets/miniflux/admin-credentials.age".publicKeys = [
     master
     root.coconut

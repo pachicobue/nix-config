@@ -7,7 +7,7 @@ in {
       noto-fonts-cjk-serif
       noto-fonts-cjk-sans
       noto-fonts-color-emoji
-      moralerspace
+      moralerspace-jpdoc
     ];
   };
   stylix.fonts = {
@@ -20,8 +20,8 @@ in {
       name = "Noto Sans CJK JP";
     };
     monospace = {
-      package = pkgs.moralerspace;
-      name = "Moralerspace Neon";
+      package = pkgs.moralerspace-jpdoc;
+      name = "Moralerspace Neon JPDOC";
     };
     emoji = {
       package = pkgs.noto-fonts-color-emoji;

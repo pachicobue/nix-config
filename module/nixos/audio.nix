@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -8,4 +8,7 @@
     alsa.support32Bit = true;
     jack.enable = true;
   };
+  environment.systemPackages = [
+    pkgs.pavucontrol
+  ];
 }

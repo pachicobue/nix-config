@@ -23,4 +23,9 @@ in {
     root.coconut
     root.berry
   ];
+  "secrets/silverbullet/token.age".publicKeys = [
+    master
+    root.coconut
+    root.berry
+  ];
 }

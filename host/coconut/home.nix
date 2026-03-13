@@ -8,8 +8,8 @@
     ../../module/home/discord.nix
     ../../module/home/ai.nix
 
-    # ../../../module/home/hyprland.nix
-    ../../module/home/niri.nix
+    # ../../module/home/wm/hyprland.nix
+    ../../module/home/wm/niri.nix
     ../../module/home/mako.nix
     ../../module/home/fuzzel.nix
     ../../module/home/zathura.nix

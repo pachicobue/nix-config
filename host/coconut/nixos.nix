@@ -12,13 +12,15 @@
     ../../module/nixos/gaming.nix
     ../../module/nixos/wakeonlan.nix
     ../../module/nixos/tailscale.nix
-    # ../../module/nixos/netbird-client.nix
     ../../module/nixos/bluetooth.nix
     ../../module/nixos/usb.nix
     ../../module/nixos/yubikey.nix
-    # ../../module/nixos/tuigreet.nix
-    ../../module/nixos/niri.nix
-    ../../module/nixos/regreet.nix
+
+    # ../../module/nixos/wm/hyprland.nix
+    ../../module/nixos/wm/niri.nix
+
+    ../../module/nixos/greetd/regreet.nix
+    # ../../module/nixos/greetd/tuigreet.nix
   ];
 
   # Boot Loader

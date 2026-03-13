@@ -1,5 +1,5 @@
 {...}: {
-  services.headscale = {
+  programs.jq = {
     enable = true;
   };
 }

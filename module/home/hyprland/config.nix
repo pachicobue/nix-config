@@ -4,10 +4,7 @@
     "$menu" = "fuzzel";
     "$browser" = "firefox-beta";
     exec-once = [
-      "hyprpanel"
-      "hyprctl setcursor ${config.stylix.cursor.name} 24"
       "fcitx5 -d -r"
-      "fusuma -d"
       "[workspace special silent] $terminal"
       "[workspace 1 silent] $browser"
     ];

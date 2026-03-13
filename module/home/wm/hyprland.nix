@@ -1,11 +1,11 @@
 {pkgs, ...}: {
   imports = [
-    ./hyprland/config.nix
-    ./hyprland/keybind.nix
-    ./hyprland/hyprpanel.nix
-    ./hyprland/hyprpolkitagent.nix
+    ../hyprland/config.nix
+    ../hyprland/keybind.nix
+    # ../hyprland/hyprpanel.nix
+    # ../hyprland/hyprpolkitagent.nix
 
-    ./fuzzel.nix
+    ../fuzzel.nix
   ];
   wayland.windowManager.hyprland = {
     enable = true;

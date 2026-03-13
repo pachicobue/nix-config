@@ -15,7 +15,6 @@
     ./common/gnupg.nix
     ./common/lsd.nix
     ./common/ssh.nix
-    # ./common/pueue.nix
     ./common/zsh.nix
     ./common/zoxide.nix
   ];

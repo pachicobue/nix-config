@@ -9,6 +9,7 @@
     "browser.search.region" = "JP";
     "browser.suggest.enabled" = false;
     "browser.tabs.closeWindowWithLastTab" = false;
+    "browser.tabs.closeTabByDblclick" = true;
     "browser.toolbars.bookmarks.visibility" = "always";
     "browser.translations.automaticallyPopup" = false;
     "browser.urlbar.placeholderName" = "DuckDuckGo";
@@ -66,9 +67,5 @@ in {
     };
     package = pkgs.firefox-beta;
     languagePacks = ["ja"];
-  };
-  stylix.targets.firefox = {
-    enable = true;
-    profileNames = ["default"];
   };
 }

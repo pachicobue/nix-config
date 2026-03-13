@@ -13,10 +13,10 @@
     # inputs.agenix.nixosModules.age
     ./common/user.nix
     ./common/sudo.nix
+    ./common/dbus.nix
     ./common/nix.nix
     ./common/network.nix
     ./common/kmscon.nix
-    ./common/theme.nix
     ./common/font.nix
     ./common/zsh.nix
     ./common/git.nix

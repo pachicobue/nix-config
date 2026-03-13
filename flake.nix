@@ -32,8 +32,8 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    stylix = {
-      url = "github:danth/stylix";
+    noctalia-shell = {
+      url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     helix = {
@@ -57,7 +57,7 @@
       sshKeys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMJGjzlH+kjBX98qiZOQ1raIQ2H6CJefEq3c8LO4uSuP sho@coconut"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIurSBgviLvpzHnZOMuu7UEbw9sktSuVahUySjW0dquy sho@plum"
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDhQ3Qu0j1XnGyUbO0maSI85xRyzbh/rTxg77aPDz2HF iPhoneXR"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ9zd4/wJ4gleti/ciOfbI0wMi/lG7Rkgc9Q2jyjA7Cg iPhone XR"
       ];
       network = {
         gateway = "192.168.10.1";

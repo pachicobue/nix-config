@@ -1,6 +1,4 @@
-{pkgs, ...}: let
-  size = 12;
-in {
+{pkgs, ...}: {
   fonts = {
     packages = with pkgs; [
       noto-fonts
@@ -9,30 +7,23 @@ in {
       noto-fonts-color-emoji
       moralerspace-jpdoc
     ];
-  };
-  stylix.fonts = {
-    serif = {
-      package = pkgs.noto-fonts-cjk-serif;
-      name = "Noto Serif CJK JP";
-    };
-    sansSerif = {
-      package = pkgs.noto-fonts-cjk-sans;
-      name = "Noto Sans CJK JP";
-    };
-    monospace = {
-      package = pkgs.moralerspace-jpdoc;
-      name = "Moralerspace Neon JPDOC";
-    };
-    emoji = {
-      package = pkgs.noto-fonts-color-emoji;
-      name = "Noto Color Emoji";
-    };
-    sizes = {
-      applications = size;
-      desktop = size;
-      popups = size;
-      terminal = size;
+    enableDefaultPackages = false;
+    fontDir.enable = true;
+    fontconfig = {
+      defaultFonts = {
+        serif = [
+          "Noto Serif CJK JP"
+        ];
+        sansSerif = [
+          "Noto Sans CJK JP"
+        ];
+        monospace = [
+          "Moralerspace Neon JPDOC"
+        ];
+        emoji = [
+          "Noto Color Emoji"
+        ];
+      };
     };
   };
-  stylix.targets.fontconfig.enable = true;
 }

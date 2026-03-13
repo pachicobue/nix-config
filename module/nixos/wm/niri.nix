@@ -12,6 +12,9 @@ lib.mkIf (hostConfig.desktop == "wayland") {
     package = pkgs.niri;
   };
 
+  # Polkit agent
+  security.soteria.enable = true;
+
   # Register niri-session for display managers
   services.displayManager.sessionPackages = [pkgs.niri];
 }

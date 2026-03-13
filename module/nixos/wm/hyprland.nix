@@ -1,4 +1,5 @@
 {
+  pkgs,
   lib,
   hostConfig,
   ...
@@ -8,4 +9,5 @@ lib.mkIf (hostConfig.desktop == "wayland") {
     enable = true;
     withUWSM = true;
   };
+  services.displayManager.sessionPackages = [pkgs.hyprland];
 }

@@ -6,40 +6,14 @@
   ...
 }: let
   terminal = "alacritty";
-
-  niri-focus-app = pkgs.writeScriptBin "niri-focus-app" ''
-    #!${pkgs.bash}/bin/bash
-    set -euo pipefail
-
-    if [ $# -eq 0 ]; then
-      echo "Usage: niri-focus-app <app-id>"
-      exit 1
-    fi
-
-    APP_ID="$1"
-
-    # Get window list and focus the first window with matching app_id
-    WINDOW_ID=$(${pkgs.niri}/bin/niri msg --json windows | \
-      ${pkgs.jq}/bin/jq -r ".[] | select(.app_id == \"$APP_ID\") | .id" | \
-      head -n1)
-
-    if [ -n "$WINDOW_ID" ]; then
-      ${pkgs.niri}/bin/niri msg action focus-window --id "$WINDOW_ID"
-    else
-      echo "No window found with app-id: $APP_ID" >&2
-      exit 1
-    fi
-  '';
 in {
   imports = [
     inputs.niri-flake.homeModules.niri
     ../alacritty.nix
-    ../fuzzel.nix
     ../jq.nix
     ../noctalia-shell.nix
   ];
   home.packages = [
-    niri-focus-app
   ];
 
   programs.niri = {

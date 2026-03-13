@@ -6,6 +6,7 @@
 
     ../../module/nixos/common.nix
     ../../module/nixos/openssh.nix
+    ../../module/nixos/ddc.nix
     ../../module/nixos/fcitx.nix
     ../../module/nixos/audio.nix
     ../../module/nixos/nvidia.nix

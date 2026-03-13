@@ -25,6 +25,7 @@
         "input"
         "libvirt"
         "network"
+        "i2c"
       ];
       openssh.authorizedKeys.keys = commonConfig.sshKeys;
       shell = pkgs.zsh;

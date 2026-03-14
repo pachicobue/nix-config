@@ -46,20 +46,43 @@
               id = "Brightness";
             }
             {
-              id = "ControlCenter";
-              useDistroLogo = true;
-            }
-            {
               id = "Clock";
               formatVertical = "HH mm";
               tooltipFormat = "MM/dd(ddd), HH:mm";
             }
+            {
+              id = "ControlCenter";
+              useDistroLogo = true;
+            }
           ];
         };
-
-        brightness = {
-          enableDdcSupport = true;
-        };
+      };
+      colorSchemes = {
+        useWallpaperColors = false;
+        predefinedScheme = "Noctalia (default)";
+        darkMode = true;
+        schedulingMode = "location";
+        generationMethod = "tonal-spot";
+        monitorForColors = "";
+      };
+      nightLight = {
+        enabled = true;
+        forced = false;
+        autoSchedule = true;
+        nightTemp = "4000";
+        dayTemp = "6500";
+      };
+      idle = {
+        enabled = true;
+        screenOffTimeout = 600;
+        lockTimeout = 900;
+        suspendTimeout = 1800;
+        fadeDuration = 5;
+      };
+      brightness = {
+        brightnessStep = 5;
+        enforceMinimum = true;
+        enableDdcSupport = true;
       };
     };
   };

@@ -9,9 +9,14 @@
     settings = {
       bar = {
         position = "right";
-        density = "default";
+        density = "spacious";
+        showCapsule = true;
         widgets = {
           left = [
+            {
+              id = "ControlCenter";
+              useDistroLogo = true;
+            }
             {
               id = "Launcher";
               icon = "rocket";
@@ -26,6 +31,7 @@
           center = [
             {
               id = "Workspace";
+              hideUnoccupied = true;
             }
           ];
           right = [
@@ -50,10 +56,6 @@
               formatVertical = "HH mm";
               tooltipFormat = "MM/dd(ddd), HH:mm";
             }
-            {
-              id = "ControlCenter";
-              useDistroLogo = true;
-            }
           ];
         };
       };
@@ -77,6 +79,36 @@
       brightness = {
         enforceMinimum = true;
         enableDdcSupport = true;
+      };
+    };
+    plugins = {
+      sources = [
+        {
+          enabled = true;
+          name = "Official Noctalia Plugins";
+          url = "https://github.com/noctalia-dev/noctalia-plugins";
+        }
+      ];
+      states = {
+        catwalk = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+        tailscale = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+      };
+      version = 2;
+    };
+    pluginSettings = {
+      catwalk = {
+        minimumThreshold = 25;
+        hideBackground = true;
+      };
+      tailscale = {
+        terminalCommand = "alacritty";
+        compactMode = true;
       };
     };
   };

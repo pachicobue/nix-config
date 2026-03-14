@@ -1,16 +1,28 @@
 {
-  pkgs,
   commonConfig,
+  pkgs,
   ...
 }: {
-  programs.jujutsu = {
-    enable = true;
-    settings = {
-      user = {
-        name = "pachicobue";
-        email = commonConfig.userEmail;
+  programs = {
+    jujutsu = {
+      enable = true;
+      settings = {
+        signing = {
+          behavior = "drop";
+          backend = "gpg";
+          key = commonConfig.gpg;
+        };
+        git = {
+          "sign-on-push" = true;
+        };
+        user = {
+          name = "pachicobue";
+          email = commonConfig.userEmail;
+        };
       };
     };
   };
-  home.packages = [pkgs.jjui];
+  home.packages = [
+    pkgs.lazyjj
+  ];
 }

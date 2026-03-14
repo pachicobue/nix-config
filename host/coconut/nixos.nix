@@ -21,7 +21,14 @@
     ../../module/nixos/wm/niri.nix
 
     ../../module/nixos/greetd/regreet.nix
-    # ../../module/nixos/greetd/tuigreet.nix
+
+    ../../module/nixos/stylix.nix
+  ];
+
+  # ../../module/nixos/greetd/tuigreet.nix
+
+  home-manager.sharedModules = [
+    inputs.stylix.homeModules.stylix
   ];
 
   # Boot Loader

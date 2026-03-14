@@ -1,6 +1,7 @@
 {...}: {
   imports = [
     ../../module/home/common.nix
+    ../../module/home/stylix.nix
 
     ../../module/home/alacritty.nix
     ../../module/home/helix.nix

@@ -59,15 +59,10 @@
       };
       colorSchemes = {
         useWallpaperColors = false;
-        predefinedScheme = "Noctalia (default)";
-        darkMode = true;
         schedulingMode = "location";
-        generationMethod = "tonal-spot";
-        monitorForColors = "";
       };
       nightLight = {
         enabled = true;
-        forced = false;
         autoSchedule = true;
         nightTemp = "4000";
         dayTemp = "6500";
@@ -80,7 +75,6 @@
         fadeDuration = 5;
       };
       brightness = {
-        brightnessStep = 5;
         enforceMinimum = true;
         enableDdcSupport = true;
       };

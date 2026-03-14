@@ -17,5 +17,6 @@
     ./common/ssh.nix
     ./common/zsh.nix
     ./common/zoxide.nix
+    ./common/jj.nix
   ];
 }

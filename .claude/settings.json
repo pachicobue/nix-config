@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(nix flake check)",
+      "Bash(jj status *)",
+      "Bash(jj diff *)",
+      "Bash(jj describe *)",
+      "Bash(jj new *)",
+      "Bash(jj bookmark *)"
+    ],
+    "ask": [ ],
+    "deny": [
+      "Bash(git push *)",
+      "Bash(jj git push *)"
+    ]
+  }
+}

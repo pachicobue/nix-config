@@ -21,8 +21,6 @@ in
                 nh
                 helix
                 python3Minimal
-                nil
-                alejandra
                 deploy-rs
                 inputs.agenix.packages.${system}.default
 

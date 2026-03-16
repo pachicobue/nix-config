@@ -7,7 +7,7 @@
     ../../module/home/helix.nix
     ../../module/home/firefox.nix
     ../../module/home/discord.nix
-    ../../module/home/ai.nix
+    ../../module/home/claude-code.nix
 
     # ../../module/home/wm/hyprland.nix
     ../../module/home/wm/niri.nix

@@ -7,6 +7,9 @@
   programs.noctalia-shell = {
     enable = true;
     settings = {
+      general = {
+        lockOnSuspend = false;
+      };
       bar = {
         position = "right";
         density = "spacious";
@@ -22,6 +25,12 @@
               icon = "rocket";
             }
             {
+              id = "Tray";
+            }
+            {
+              id = "NotificationHistory";
+            }
+            {
               id = "ActiveWindow";
             }
             {
@@ -35,12 +44,6 @@
             }
           ];
           right = [
-            {
-              id = "Tray";
-            }
-            {
-              id = "NotificationHiistory";
-            }
             {
               id = "Battery";
               hideIfNotDetected = true;
@@ -79,36 +82,6 @@
       brightness = {
         enforceMinimum = true;
         enableDdcSupport = true;
-      };
-    };
-    plugins = {
-      sources = [
-        {
-          enabled = true;
-          name = "Official Noctalia Plugins";
-          url = "https://github.com/noctalia-dev/noctalia-plugins";
-        }
-      ];
-      states = {
-        catwalk = {
-          enabled = true;
-          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
-        };
-        tailscale = {
-          enabled = true;
-          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
-        };
-      };
-      version = 2;
-    };
-    pluginSettings = {
-      catwalk = {
-        minimumThreshold = 25;
-        hideBackground = true;
-      };
-      tailscale = {
-        terminalCommand = "alacritty";
-        compactMode = true;
       };
     };
   };

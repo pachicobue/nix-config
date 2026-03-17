@@ -20,7 +20,7 @@
 
 ## Phase 1: flake.nixの変更
 
-- [ ] denixをinputsに追加
+- [x] denixをinputsに追加
   ```nix
   denix = {
     url = "github:yunfachi/denix";
@@ -38,7 +38,7 @@
   };
   ```
 - [ ] 手動で書いていた4ホスト分のnixosConfigurationsエントリを削除
-- [ ] `nix flake update` でlock更新
+- [x] `nix flake update` でlock更新 (denixのみ)
 - [ ] `nix flake check` で構文エラーがないことを確認
 
 ---
@@ -139,4 +139,11 @@ delib.module {
 
 ## 進捗メモ
 
-<!-- 作業中に気づいたことや問題点をここに記録 -->
+### Phase 1
+
+- outputsのdelib.configurations書き換えはPhase 2 (host/のdelib.host化) と同時に行う
+  - host/[name]/default.nix が存在しないと delib.configurations がビルドできないため
+- flake.nixの `common` attrset (userName, email, gpg, sshKeys, network等) は
+  Phase 3で `module/config/constants.nix` に移行する予定
+- 現在のspecialArgsは `hostConfig`, `commonConfig`, `allHostConfig` を渡しているが、
+  denix移行後は `myconfig.*` オプションに置き換わる → 全モジュールの参照を更新する必要あり

@@ -90,7 +90,7 @@
     nixosConfigurations = inputs.denix.lib.configurations {
       moduleSystem = "nixos";
       homeManagerUser = commonConfig.userName;
-      paths = [ ./host ./module/config ];
+      paths = [ ./host ./module/config ./rice ];
       specialArgs = { inherit inputs commonConfig; };
       extensions = with inputs.denix.lib.extensions; [ base ];
     };

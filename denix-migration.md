@@ -77,12 +77,14 @@
 
 stylixのcatppuccin-mocha設定をriceとして分離。
 
-- [ ] `rice/catppuccin-mocha/default.nix` 作成 (delib.rice)
-  - [ ] `module/nixos/stylix.nix` の内容を移動
-  - [ ] `module/home/stylix.nix` の内容を移動
-  - [ ] base16-schemesのyamlファイルをrice/へコピー
-- [ ] 元のstylix.nixモジュールを削除
-- [ ] ビルド・テスト確認
+- [x] `rice/catppuccin-mocha/default.nix` 作成 (delib.rice)
+  - [x] `module/nixos/stylix.nix` の内容を移動
+  - [x] `module/home/stylix.nix` の内容を移動
+  - nixos block内でhostConfig.desktop != "none"の場合のみstylix有効化
+  - coconut/default.nixにrice = "catppuccin-mocha"を追加
+- [x] 元のstylix.nixモジュールを削除
+- [x] flake.nixのpathsに./riceを追加
+- [x] ビルド・テスト確認
 
 ---
 

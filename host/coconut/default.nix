@@ -19,14 +19,12 @@ in
 delib.host {
   name = "coconut";
   system = "x86_64-linux";
+  rice = "catppuccin-mocha";
 
   nixos = { ... }: {
     _module.args.hostConfig = hostConfig;
 
-    home-manager = {
-      extraSpecialArgs = { inherit inputs commonConfig hostConfig; };
-      sharedModules = [ inputs.stylix.homeModules.stylix ];
-    };
+    home-manager.extraSpecialArgs = { inherit inputs commonConfig hostConfig; };
 
     imports = [
       inputs.disko.nixosModules.disko
@@ -47,7 +45,6 @@ delib.host {
       ../../module/nixos/yubikey.nix
       ../../module/nixos/wm/niri.nix
       ../../module/nixos/greetd/regreet.nix
-      ../../module/nixos/stylix.nix
     ];
 
     system.stateVersion = hostConfig.stateVersion.nixos;
@@ -85,7 +82,6 @@ delib.host {
   home = { ... }: {
     imports = [
       ../../module/home/common.nix
-      ../../module/home/stylix.nix
 
       ../../module/home/alacritty.nix
       ../../module/home/helix.nix

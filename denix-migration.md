@@ -90,13 +90,14 @@ stylixのcatppuccin-mocha設定をriceとして分離。
 
 ## Phase 5: deploy-rsとagenixの対応
 
-- [ ] `deploy.nix` のnixosConfigurations参照を更新
-  - `self.nixosConfigurations.coconut` → `self.nixosConfigurations.coconut-catppuccin-mocha`
-  - berry, pi4も同様
-- [ ] `check.nix` の参照も同様に更新
-- [ ] `script/switch.py` (存在する場合) のホスト名参照を更新
-- [ ] agenixのsecrets.nixはSSHキー参照のみのため変更不要であることを確認
-- [ ] deploy-rsでcoconutへのデプロイテスト
+- [x] `deploy.nix` のnixosConfigurations参照を確認
+  - deploy対象はdesktop == "none"のberry/pi4のみ
+  - `nixosConfigurations.berry`, `nixosConfigurations.pi4` キーは引き続き存在
+  - 変更不要
+- [x] `check.nix` の参照を確認 — deploy.nixを間接参照するのみ、変更不要
+- [x] `script/switch.py` — 存在しないことを確認
+- [x] agenixのsecrets.nixはSSHキー参照のみのため変更不要であることを確認
+- [ ] deploy-rsでのデプロイテスト (実機確認)
 
 ---
 

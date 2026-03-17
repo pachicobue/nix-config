@@ -51,15 +51,13 @@
     denix = {
       url = "github:yunfachi/denix";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
     };
   };
 
-  outputs = inputs @ {
-    nixpkgs,
-    home-manager,
-    ...
-  }: let
-    common = {
+  outputs = inputs @ { ... }: let
+    # commonConfig: deploy.nix等から参照する共通設定。Phase 3でmodule/config/constants.nixへ移行予定
+    commonConfig = {
       userName = "sho";
       userFullName = "Sho Yasui";
       userEmail = "mail@pachicobue.org";
@@ -75,80 +73,27 @@
         gateway = "192.168.10.1";
         dns = "192.168.10.181";
       };
+      wolHosts = [
+        { name = "coconut"; mac = "08:bf:b8:a5:74:f7"; }
+        { name = "berry"; mac = "68:1d:ef:37:e8:ab"; }
+      ];
     };
+    # hosts: deploy.nix がサーバーホストのフィルタリングに使用。Phase 5で整理予定
     hosts = [
-      {
-        name = "coconut";
-        system = "x86_64-linux";
-        stateVersion = {
-          nixos = "25.05";
-          homeManager = "25.05";
-        };
-        desktop = "wayland";
-        network = {
-          useDhcp = true;
-          iface = {
-            name = "eno1";
-            mac = "08:bf:b8:a5:74:f7";
-            enableWol = true;
-          };
-        };
-      }
-      {
-        name = "plum";
-        system = "x86_64-linux";
-        stateVersion = {
-          nixos = "25.05";
-          homeManager = "25.05";
-        };
-        desktop = "wayland";
-        network = {
-          useDhcp = true;
-          iface = {};
-        };
-      }
-      {
-        name = "berry";
-        system = "x86_64-linux";
-        stateVersion = {
-          nixos = "25.05";
-          homeManager = "25.05";
-        };
-        desktop = "none";
-        network = {
-          useDhcp = true;
-          iface = {
-            name = "enp1s0";
-            mac = "68:1d:ef:37:e8:ab";
-            enableWol = true;
-          };
-        };
-      }
-      {
-        name = "pi4";
-        system = "aarch64-linux";
-        stateVersion = {
-          nixos = "25.05";
-          homeManager = "25.05";
-        };
-        desktop = "none";
-        network = {
-          useDhcp = false;
-          iface = {
-            name = "eth0";
-            address = "192.168.10.181";
-            mac = "2c:cf:67:1a:1c:61";
-          };
-        };
-      }
+      { name = "coconut"; system = "x86_64-linux"; desktop = "wayland"; }
+      { name = "plum"; system = "x86_64-linux"; desktop = "wayland"; }
+      { name = "berry"; system = "x86_64-linux"; desktop = "none"; }
+      { name = "pi4"; system = "aarch64-linux"; desktop = "none"; }
     ];
-    args = {
-      inherit inputs;
-      inherit common;
-      inherit hosts;
-    };
+    args = { inherit inputs commonConfig hosts; };
   in {
-    nixosConfigurations = import ./nixos-configuration.nix args;
+    nixosConfigurations = inputs.denix.lib.configurations {
+      moduleSystem = "nixos";
+      homeManagerUser = commonConfig.userName;
+      paths = [ ./host ];
+      specialArgs = { inherit inputs commonConfig; };
+      extensions = with inputs.denix.lib.extensions; [ base ];
+    };
     deploy = import ./deploy.nix args;
     packages = import ./package.nix args;
     checks = import ./check.nix args;

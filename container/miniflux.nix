@@ -4,7 +4,7 @@
   ...
 }: {
   age.secrets."miniflux/admin-credentials" = {
-    file = ../secrets/miniflux/admin-credentials.age;
+    file = ../secret/miniflux/admin-credentials.age;
     owner = "miniflux";
   };
 

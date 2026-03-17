@@ -2,19 +2,15 @@
   lib,
   pkgs,
   hostConfig,
-  allHostConfig,
+  commonConfig,
   ...
 }: let
-  wolHosts =
-    builtins.filter (
-      host: (host.network.iface.enableWol or false)
-    )
-    allHostConfig;
+  wolHosts = commonConfig.wolHosts;
 
   wol-command = pkgs.writeShellScriptBin "wol" ''
     declare -A hosts=(
       ${builtins.concatStringsSep "\n      " (map (
-        host: "[${host.name}]=\"${host.network.iface.mac}\""
+        host: "[${host.name}]=\"${host.mac}\""
       )
       wolHosts)}
     )

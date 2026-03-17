@@ -65,10 +65,11 @@
 
 既存モジュールはstandardなNixOSモジュールのままauto-importで動く。ディレクトリ移動は不要。
 
-- [ ] `module/config/constants.nix` を新規作成 (delib.module + readOnly)
+- [x] `module/config/constants.nix` を新規作成 (delib.module + readOnly)
   - username, email, GPG key, SSH keysなどの定数を集約
-- [ ] flake.nixのpathsが `./module` を参照していることを確認
-- [ ] 全ホストでビルドが通ることを確認
+  - specialArgs.commonConfigを参照してオプションのdefaultに設定
+- [x] flake.nixのpathsに `./module/config` を追加
+- [x] 全ホストでビルドが通ることを確認
 
 ---
 

@@ -15,10 +15,6 @@
     flake-utils = {
       url = "github:numtide/flake-utils";
     };
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -56,46 +52,23 @@
   };
 
   outputs = inputs @ { ... }: let
-    # commonConfig: deploy.nix等から参照する共通設定。Phase 3でmodule/config/constants.nixへ移行予定
-    commonConfig = {
-      userName = "sho";
-      userFullName = "Sho Yasui";
-      userEmail = "mail@pachicobue.org";
-      userPassHash = "$y$jFT$8ucjYlvf80e0wuuTIRCST.$w4/ZC0ZCsas0nq3vxghytE9cwLORY5ioE6hc1zz3Ph4";
-      rootPassHash = "$y$jFT$RxsQil2C/9qnFX4LcUD9S1$.8fXwaf9oMzCVHV2v/NyaavHgk8h3oBk.HfsFRYWLH5";
-      gpg = "E4E61C685DD58216CE33134FC743571182DA7DB9";
-      sshKeys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMJGjzlH+kjBX98qiZOQ1raIQ2H6CJefEq3c8LO4uSuP sho@coconut"
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIurSBgviLvpzHnZOMuu7UEbw9sktSuVahUySjW0dquy sho@plum"
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ9zd4/wJ4gleti/ciOfbI0wMi/lG7Rkgc9Q2jyjA7Cg iPhone XR"
-      ];
-      network = {
-        gateway = "192.168.10.1";
-        dns = "192.168.10.181";
-      };
-      wolHosts = [
-        { name = "coconut"; mac = "08:bf:b8:a5:74:f7"; }
-        { name = "berry"; mac = "68:1d:ef:37:e8:ab"; }
-      ];
+    args = { inherit inputs; };
+    installerModule = { system }: inputs.nixpkgs.lib.nixosSystem {
+      inherit system;
+      modules = [ ./installer/minimal.nix ];
     };
-    # hosts: deploy.nix がサーバーホストのフィルタリングに使用。Phase 5で整理予定
-    hosts = [
-      { name = "coconut"; system = "x86_64-linux"; desktop = "wayland"; }
-      { name = "plum"; system = "x86_64-linux"; desktop = "wayland"; }
-      { name = "berry"; system = "x86_64-linux"; desktop = "none"; }
-      { name = "pi4"; system = "aarch64-linux"; desktop = "none"; }
-    ];
-    args = { inherit inputs commonConfig hosts; };
   in {
-    nixosConfigurations = inputs.denix.lib.configurations {
+    nixosConfigurations = (inputs.denix.lib.configurations {
       moduleSystem = "nixos";
-      homeManagerUser = commonConfig.userName;
+      homeManagerUser = "sho";
       paths = [ ./host ./module/config ./rice ];
-      specialArgs = { inherit inputs commonConfig; };
+      specialArgs = { inherit inputs; };
       extensions = with inputs.denix.lib.extensions; [ base ];
+    }) // {
+      "minimal-installer-x86_64-linux" = installerModule { system = "x86_64-linux"; };
+      "minimal-installer-aarch64-linux" = installerModule { system = "aarch64-linux"; };
     };
     deploy = import ./deploy.nix args;
-    packages = import ./package.nix args;
     checks = import ./check.nix args;
     devShells = import ./devshell.nix args;
   };

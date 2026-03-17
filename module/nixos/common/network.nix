@@ -1,7 +1,7 @@
 {
   lib,
   pkgs,
-  commonConfig,
+  config,
   hostConfig,
   ...
 }: let
@@ -19,7 +19,7 @@ in {
         ];
       };
     };
-    defaultGateway = lib.mkIf (!hostConfig.network.useDhcp) commonConfig.network.gateway;
+    defaultGateway = lib.mkIf (!hostConfig.network.useDhcp) config.myconfig.constants.network.gateway;
     firewall.enable = true;
   };
   programs.tcpdump.enable = true;

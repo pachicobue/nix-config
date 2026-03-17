@@ -1,11 +1,11 @@
 {
   lib,
   pkgs,
+  config,
   hostConfig,
-  commonConfig,
   ...
 }: let
-  wolHosts = commonConfig.wolHosts;
+  wolHosts = config.myconfig.constants.wolHosts;
 
   wol-command = pkgs.writeShellScriptBin "wol" ''
     declare -A hosts=(

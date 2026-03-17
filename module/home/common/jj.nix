@@ -1,5 +1,5 @@
 {
-  commonConfig,
+  osConfig,
   pkgs,
   ...
 }: {
@@ -10,14 +10,14 @@
         signing = {
           behavior = "drop";
           backend = "gpg";
-          key = commonConfig.gpg;
+          key = osConfig.myconfig.constants.gpg;
         };
         git = {
           "sign-on-push" = true;
         };
         user = {
           name = "pachicobue";
-          email = commonConfig.userEmail;
+          email = osConfig.myconfig.constants.userEmail;
         };
       };
     };

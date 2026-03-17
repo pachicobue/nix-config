@@ -1,4 +1,4 @@
-{ delib, inputs, commonConfig, ... }:
+{ delib, inputs, ... }:
 let
   hostConfig = {
     desktop = "wayland";
@@ -24,13 +24,9 @@ delib.host {
   nixos = { ... }: {
     _module.args.hostConfig = hostConfig;
 
-    home-manager.extraSpecialArgs = { inherit inputs commonConfig hostConfig; };
+    home-manager.extraSpecialArgs = { inherit inputs hostConfig; };
 
     imports = [
-      inputs.disko.nixosModules.disko
-      ../../hardware/coconut/hardware-configuration.nix
-      ../../hardware/coconut/disk-config.nix
-
       ../../module/nixos/common.nix
       ../../module/nixos/openssh.nix
       ../../module/nixos/ddc.nix
@@ -46,6 +42,11 @@ delib.host {
       ../../module/nixos/wm/niri.nix
       ../../module/nixos/greetd/regreet.nix
     ];
+
+    myconfig.audio.enable = true;
+    myconfig.bluetooth.enable = true;
+    myconfig.tailscale.enable = true;
+
 
     system.stateVersion = hostConfig.stateVersion.nixos;
     networking.hostName = "coconut";

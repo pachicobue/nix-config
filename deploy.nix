@@ -1,27 +1,19 @@
-{
-  inputs,
-  hosts,
-  ...
-}: let
+{ inputs, ... }:
+let
+  lib = inputs.nixpkgs.lib;
   self = inputs.self;
   deploy-rs = inputs.deploy-rs;
+  deployConfigs = lib.filterAttrs
+    (_: cfg: cfg.config.myconfig.deploy.enable or false)
+    self.outputs.nixosConfigurations;
 in {
   autoRollback = true;
   magicRollback = true;
-  nodes = builtins.listToAttrs (
-    map
-    (
-      host: {
-        name = host.name;
-        value = {
-          hostname = "${host.name}"; # tailscale前提
-          profiles.system = {
-            sshUser = "root";
-            path = deploy-rs.lib.${host.system}.activate.nixos self.outputs.nixosConfigurations.${host.name};
-          };
-        };
-      }
-    )
-    (builtins.filter (host: host.desktop == "none") hosts)
-  );
+  nodes = lib.mapAttrs (name: cfg: {
+    hostname = name;
+    profiles.system = {
+      sshUser = "root";
+      path = deploy-rs.lib.${cfg.pkgs.system}.activate.nixos cfg;
+    };
+  }) deployConfigs;
 }

@@ -1,15 +1,15 @@
-{commonConfig, ...}: {
+{ osConfig, ... }: {
   programs = {
     git = {
       enable = true;
       signing = {
-        key = commonConfig.gpg;
+        key = osConfig.myconfig.constants.gpg;
         signByDefault = true;
       };
       settings = {
         user = {
           name = "pachicobue";
-          email = commonConfig.userEmail;
+          email = osConfig.myconfig.constants.userEmail;
         };
         init.defaultBranch = "main";
         pull.rebase = true;

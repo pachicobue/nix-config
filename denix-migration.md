@@ -20,26 +20,13 @@
 
 ## Phase 1: flake.nixの変更
 
-- [x] denixをinputsに追加
-  ```nix
-  denix = {
-    url = "github:yunfachi/denix";
-    inputs.nixpkgs.follows = "nixpkgs";
-  };
-  ```
-- [ ] outputsのnixosConfigurations / homeConfigurationsをdelib.configurationsに書き換え
-  ```nix
-  nixosConfigurations = denix.lib.configurations {
-    moduleSystem = "nixos";
-    homeManagerUser = "sho";
-    paths = [ ./host ./module ./rice ];
-    specialArgs = { inherit inputs; };
-    extensions = [ denix.lib.extensions.args ];
-  };
-  ```
-- [ ] 手動で書いていた4ホスト分のnixosConfigurationsエントリを削除
+- [x] denixをinputsに追加 (home-manager.followsも追加)
+- [x] outputsのnixosConfigurationsをdelib.configurationsに書き換え
+  - `paths = [ ./host ./module/config ./rice ]`, `extensions = [ base ]`, `specialArgs = { inherit inputs commonConfig; }`
+  - 計画と一部異なる点: `./module` 全体ではなく `./module/config` のみ追加 (auto-import問題回避)
+- [x] 手動で書いていた4ホスト分のnixosConfigurationsエントリを削除 (nixos-configuration.nixごと削除)
 - [x] `nix flake update` でlock更新 (denixのみ)
-- [ ] `nix flake check` で構文エラーがないことを確認
+- [x] `nix flake check` で構文エラーがないことを確認
 
 ---
 
@@ -47,17 +34,18 @@
 
 各ホストをdelib.hostで定義。既存の `host/[name]/` 配下のnixos.nix + home.nixをdefault.nixに統合。
 
-- [ ] `host/coconut/default.nix` 作成 (delib.host, rice = "catppuccin-mocha")
-  - [ ] nixos.nix + home.nix の内容を統合
-  - [ ] hardware-configuration.nix / disk-config.nix は同ディレクトリに残す
-  - [ ] home.stateVersion = "25.05" 設定
-- [ ] `host/plum/default.nix` 作成 (WSL2: nixos-wslをnixosブロックでimport)
-- [ ] `host/berry/default.nix` 作成
-  - [ ] main-disk-config.nix / extra-disk-config.nix は同ディレクトリに残す
-  - [ ] container.nix の扱いを決定
-- [ ] `host/pi4/default.nix` 作成 (aarch64: system指定に注意)
-  - [ ] container.nix の扱いを決定
-- [ ] coconutのみで `nix build .#nixosConfigurations.coconut-catppuccin-mocha.config.system.build.toplevel` が通ることを確認
+- [x] `host/coconut/default.nix` 作成 (delib.host, rice = "catppuccin-mocha")
+  - [x] nixos.nix + home.nix の内容を統合
+  - [x] hardware-configuration.nix / disk-config.nix を hardware/coconut/ に移動
+  - [x] home.stateVersion = "25.05" 設定
+- [x] `host/plum/default.nix` 作成 (WSL2: nixos-wslをnixosブロックでimport)
+- [x] `host/berry/default.nix` 作成
+  - [x] main-disk-config.nix / extra-disk-config.nix を hardware/berry/ に移動
+  - [x] container.nix の内容をdefault.nixにインライン化
+- [x] `host/pi4/default.nix` 作成 (aarch64: system = "aarch64-linux"指定)
+  - [x] container.nix の内容をdefault.nixにインライン化
+- [x] 全ホストで `nix flake check` が通ることを確認
+  - 注: `nixosConfigurations.coconut` キーでもrice適用済み (host.rice = "catppuccin-mocha"のため)
 
 ---
 
@@ -105,11 +93,13 @@ stylixのcatppuccin-mocha設定をriceとして分離。
 
 以下のモジュールを優先的にdelib.moduleパターンへ変換する。必須ではない。
 
-- [ ] `module/nixos/audio.nix`
-- [ ] `module/nixos/bluetooth.nix`
-- [ ] `module/nixos/tailscale.nix`
-- [ ] `module/home/common/git.nix`
-- [ ] `module/home/common/zsh.nix`
+- [x] `module/nixos/audio.nix` — delib.module (options.audio.enable, nixos.ifEnabled)
+- [x] `module/nixos/bluetooth.nix` — delib.module (options.bluetooth.enable, nixos.ifEnabled)
+- [x] `module/nixos/tailscale.nix` — delib.module (options.tailscale.enable, nixos.ifEnabled)
+  - 注: delib.moduleのoptionsはmyconfig.プレフィックス不要 (module.nixが自動付与)
+  - coconut/berry/pi4のhostファイルに `myconfig.<name>.enable = true` を追加
+- [x] `module/home/common/git.nix` — commonConfig.* → osConfig.myconfig.constants.* に置換 (delib.module化は非推奨: home-managerモジュールのため)
+- [x] `module/home/common/zsh.nix` — dotDirを相対パスに修正 (`.config/zsh`)
 - [ ] その他モジュールを順次変換
 
 delib.moduleパターン例:

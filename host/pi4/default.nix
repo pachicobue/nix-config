@@ -1,4 +1,4 @@
-{ delib, inputs, commonConfig, pkgs, ... }:
+{ delib, inputs, config, pkgs, ... }:
 let
   hostConfig = {
     desktop = "none";
@@ -23,16 +23,17 @@ delib.host {
   nixos = { ... }: {
     _module.args.hostConfig = hostConfig;
 
-    home-manager.extraSpecialArgs = { inherit inputs commonConfig hostConfig; };
+    home-manager.extraSpecialArgs = { inherit inputs hostConfig; };
 
     imports = [
-      ../../hardware/pi4/hardware-configuration.nix
-
       ../../module/nixos/common.nix
       ../../module/nixos/openssh.nix
       ../../module/nixos/tailscale.nix
       ../../module/nixos/wakeonlan.nix
     ];
+
+    myconfig.tailscale.enable = true;
+    myconfig.deploy.enable = true;
 
     system.stateVersion = hostConfig.stateVersion.nixos;
     networking = {
@@ -79,7 +80,7 @@ delib.host {
             ../../container/adguardhome.nix
           ];
         };
-        specialArgs = { inherit commonConfig hostConfig; };
+        specialArgs = { constants = config.myconfig.constants; inherit hostConfig; };
       };
     };
 

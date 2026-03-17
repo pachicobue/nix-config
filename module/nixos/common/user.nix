@@ -1,25 +1,27 @@
 {
   pkgs,
-  commonConfig,
+  config,
   ...
-}: {
+}: let
+  constants = config.myconfig.constants;
+in {
   users = {
     mutableUsers = false;
 
     # For deploy only
     users.root = {
       isSystemUser = true;
-      initialHashedPassword = commonConfig.rootPassHash;
-      openssh.authorizedKeys.keys = commonConfig.sshKeys;
+      initialHashedPassword = constants.rootPassHash;
+      openssh.authorizedKeys.keys = constants.sshKeys;
       shell = pkgs.zsh;
     };
 
-    users.${commonConfig.userName} = {
-      description = commonConfig.userFullName;
+    users.${constants.userName} = {
+      description = constants.userFullName;
       isNormalUser = true;
-      initialHashedPassword = commonConfig.userPassHash;
+      initialHashedPassword = constants.userPassHash;
       extraGroups = [
-        "${commonConfig.userName}"
+        "${constants.userName}"
         "wheel"
         "video"
         "input"
@@ -27,7 +29,7 @@
         "network"
         "i2c"
       ];
-      openssh.authorizedKeys.keys = commonConfig.sshKeys;
+      openssh.authorizedKeys.keys = constants.sshKeys;
       shell = pkgs.zsh;
     };
   };

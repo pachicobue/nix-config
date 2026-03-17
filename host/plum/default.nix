@@ -1,4 +1,4 @@
-{ delib, inputs, commonConfig, ... }:
+{ delib, inputs, config, ... }:
 let
   hostConfig = {
     desktop = "wayland";
@@ -19,7 +19,7 @@ delib.host {
   nixos = { ... }: {
     _module.args.hostConfig = hostConfig;
 
-    home-manager.extraSpecialArgs = { inherit inputs commonConfig hostConfig; };
+    home-manager.extraSpecialArgs = { inherit inputs hostConfig; };
 
     imports = [
       inputs.nixos-wsl.nixosModules.default
@@ -35,7 +35,7 @@ delib.host {
 
     wsl = {
       enable = true;
-      defaultUser = commonConfig.userName;
+      defaultUser = config.myconfig.constants.userName;
     };
 
     security.polkit.extraConfig = ''

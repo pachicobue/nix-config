@@ -1,4 +1,4 @@
-{ delib, inputs, commonConfig, pkgs, ... }:
+{ delib, inputs, pkgs, ... }:
 let
   hostConfig = {
     desktop = "none";
@@ -23,19 +23,17 @@ delib.host {
   nixos = { ... }: {
     _module.args.hostConfig = hostConfig;
 
-    home-manager.extraSpecialArgs = { inherit inputs commonConfig hostConfig; };
+    home-manager.extraSpecialArgs = { inherit inputs hostConfig; };
 
     imports = [
-      inputs.disko.nixosModules.disko
-      ../../hardware/berry/hardware-configuration.nix
-      ../../hardware/berry/main-disk-config.nix
-      ../../hardware/berry/extra-disk-config.nix
-
       ../../module/nixos/common.nix
       ../../module/nixos/openssh.nix
       ../../module/nixos/wakeonlan.nix
       ../../module/nixos/tailscale.nix
     ];
+
+    myconfig.tailscale.enable = true;
+    myconfig.deploy.enable = true;
 
     system.stateVersion = hostConfig.stateVersion.nixos;
     networking.hostName = "berry";
@@ -117,7 +115,7 @@ delib.host {
             ../../container/filebrowser.nix
           ];
         };
-        specialArgs = { inherit commonConfig hostConfig; };
+        specialArgs = { inherit hostConfig; };
       };
       mealie = {
         autoStart = true;
@@ -134,7 +132,7 @@ delib.host {
             ../../container/mealie.nix
           ];
         };
-        specialArgs = { inherit commonConfig hostConfig; };
+        specialArgs = { inherit hostConfig; };
       };
       silverbullet = {
         autoStart = true;
@@ -152,7 +150,7 @@ delib.host {
             ../../container/silverbullet.nix
           ];
         };
-        specialArgs = { inherit commonConfig hostConfig; };
+        specialArgs = { inherit hostConfig; };
       };
     };
 

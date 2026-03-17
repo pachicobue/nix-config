@@ -24,6 +24,8 @@
     ./common/agenix.nix
   ];
 
+  home-manager.useGlobalPkgs = true;
+
   time.timeZone = "Asia/Tokyo";
   i18n.defaultLocale = "ja_JP.UTF-8";
   environment = {

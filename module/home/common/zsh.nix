@@ -1,8 +1,10 @@
-{ config,... }: {
-  programs.zsh = {
+{ delib, ... }:
+delib.module {
+  name = "home.zsh";
+  home.always.programs.zsh = {
     enable = true;
     defaultKeymap = "emacs";
-    dotDir = "${config.home.homeDirectory}/.config/zsh";
+    dotDir = ".config/zsh";
     autocd = true;
     autosuggestion.enable = true;
     enableCompletion = true;

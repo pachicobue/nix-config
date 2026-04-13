@@ -1,10 +1,8 @@
-{
-  osConfig,
-  pkgs,
-  ...
-}: {
-  programs = {
-    jujutsu = {
+{ delib, pkgs, ... }:
+delib.module {
+  name = "home.jj";
+  home.always = { osConfig, ... }: {
+    programs.jujutsu = {
       enable = true;
       settings = {
         signing = {
@@ -21,8 +19,6 @@
         };
       };
     };
+    home.packages = [ pkgs.lazyjj ];
   };
-  home.packages = [
-    pkgs.lazyjj
-  ];
 }

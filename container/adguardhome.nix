@@ -1,6 +1,5 @@
 {
   constants,
-  hostConfig,
   ...
 }: {
   services.adguardhome = {
@@ -26,7 +25,7 @@
 
       dhcp = {
         enabled = true;
-        interface_name = hostConfig.network.iface.name;
+        interface_name = constants.network.pi4IfaceName;
 
         dhcpv4 = {
           gateway_ip = constants.network.gateway;

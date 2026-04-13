@@ -1,12 +1,11 @@
 { delib, inputs, pkgs, ... }:
-let
-  hostConfig = {
-    desktop = "none";
-    stateVersion = {
-      nixos = "25.05";
-      homeManager = "25.05";
-    };
-    network = {
+delib.host {
+  name = "berry";
+  system = "x86_64-linux";
+
+  myconfig = { ... }: {
+    host.desktop = "none";
+    host.network = {
       useDhcp = true;
       iface = {
         name = "enp1s0";
@@ -14,28 +13,15 @@ let
         enableWol = true;
       };
     };
+    tailscale.enable = true;
+    deploy.enable = true;
+    openssh.enable = true;
+    wakeonlan.enable = true;
+    helix.enable = true;
   };
-in
-delib.host {
-  name = "berry";
-  system = "x86_64-linux";
 
   nixos = { ... }: {
-    _module.args.hostConfig = hostConfig;
-
-    home-manager.extraSpecialArgs = { inherit inputs hostConfig; };
-
-    imports = [
-      ../../module/nixos/common.nix
-      ../../module/nixos/openssh.nix
-      ../../module/nixos/wakeonlan.nix
-      ../../module/nixos/tailscale.nix
-    ];
-
-    myconfig.tailscale.enable = true;
-    myconfig.deploy.enable = true;
-
-    system.stateVersion = hostConfig.stateVersion.nixos;
+    system.stateVersion = "25.05";
     networking.hostName = "berry";
     nixpkgs.config.allowUnfree = true;
 
@@ -102,76 +88,55 @@ delib.host {
     containers = {
       jellyfin = {
         autoStart = true;
-        bindMounts = {
-          "/etc/ssh/ssh_host_ed25519_key" = {
-            isReadOnly = true;
-          };
-        };
+        bindMounts."/etc/ssh/ssh_host_ed25519_key".isReadOnly = true;
         config = { ... }: {
-          system.stateVersion = hostConfig.stateVersion.nixos;
+          system.stateVersion = "25.05";
           age.identityPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
           imports = [
             inputs.agenix.nixosModules.default
             ../../container/filebrowser.nix
           ];
         };
-        specialArgs = { inherit hostConfig; };
       };
       mealie = {
         autoStart = true;
-        bindMounts = {
-          "/etc/ssh/ssh_host_ed25519_key" = {
-            isReadOnly = true;
-          };
-        };
+        bindMounts."/etc/ssh/ssh_host_ed25519_key".isReadOnly = true;
         config = { ... }: {
-          system.stateVersion = hostConfig.stateVersion.nixos;
+          system.stateVersion = "25.05";
           age.identityPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
           imports = [
             inputs.agenix.nixosModules.default
             ../../container/mealie.nix
           ];
         };
-        specialArgs = { inherit hostConfig; };
       };
       silverbullet = {
         autoStart = true;
-        privateNetwork = false; # Share host network namespace for Tailscale serve
-        bindMounts = {
-          "/etc/ssh/ssh_host_ed25519_key" = {
-            isReadOnly = true;
-          };
-        };
+        privateNetwork = false;
+        bindMounts."/etc/ssh/ssh_host_ed25519_key".isReadOnly = true;
         config = { ... }: {
-          system.stateVersion = hostConfig.stateVersion.nixos;
+          system.stateVersion = "25.05";
           age.identityPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
           imports = [
             inputs.agenix.nixosModules.default
             ../../container/silverbullet.nix
           ];
         };
-        specialArgs = { inherit hostConfig; };
       };
     };
 
     networking.firewall = {
       enable = true;
       allowedTCPPorts = [
-        8081 # filebrowser (HTTP - Tailscale serve経由でHTTPS化)
-        8096 # jellyfin (HTTP - Tailscale serve経由でHTTPS化)
-        9000 # mealie (HTTP - Tailscale serve経由でHTTPS化)
-        # silverbullet (3000) は Tailscale serve 経由でのみアクセス
+        8081 # filebrowser
+        8096 # jellyfin
+        9000 # mealie
       ];
     };
   };
 
   home = { ... }: {
-    imports = [
-      ../../module/home/common.nix
-      ../../module/home/helix.nix
-    ];
-
-    home.stateVersion = hostConfig.stateVersion.homeManager;
+    home.stateVersion = "25.05";
     programs.helix.defaultEditor = true;
   };
 }

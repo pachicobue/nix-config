@@ -13,7 +13,7 @@ in {
     hostname = name;
     profiles.system = {
       sshUser = "root";
-      path = deploy-rs.lib.${cfg.pkgs.system}.activate.nixos cfg;
+      path = deploy-rs.lib.${cfg.pkgs.stdenv.hostPlatform.system}.activate.nixos cfg;
     };
   }) deployConfigs;
 }

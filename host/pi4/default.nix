@@ -1,12 +1,11 @@
-{ delib, inputs, config, pkgs, ... }:
-let
-  hostConfig = {
-    desktop = "none";
-    stateVersion = {
-      nixos = "25.05";
-      homeManager = "25.05";
-    };
-    network = {
+{ delib, config, pkgs, ... }:
+delib.host {
+  name = "pi4";
+  system = "aarch64-linux";
+
+  myconfig = { ... }: {
+    host.desktop = "none";
+    host.network = {
       useDhcp = false;
       iface = {
         name = "eth0";
@@ -14,28 +13,13 @@ let
         mac = "2c:cf:67:1a:1c:61";
       };
     };
+    tailscale.enable = true;
+    deploy.enable = true;
+    openssh.enable = true;
   };
-in
-delib.host {
-  name = "pi4";
-  system = "aarch64-linux";
 
   nixos = { ... }: {
-    _module.args.hostConfig = hostConfig;
-
-    home-manager.extraSpecialArgs = { inherit inputs hostConfig; };
-
-    imports = [
-      ../../module/nixos/common.nix
-      ../../module/nixos/openssh.nix
-      ../../module/nixos/tailscale.nix
-      ../../module/nixos/wakeonlan.nix
-    ];
-
-    myconfig.tailscale.enable = true;
-    myconfig.deploy.enable = true;
-
-    system.stateVersion = hostConfig.stateVersion.nixos;
+    system.stateVersion = "25.05";
     networking = {
       hostName = "pi4";
       nameservers = [ "1.1.1.1" ];
@@ -71,25 +55,23 @@ delib.host {
       description = "Daily system reboot at 8:00 AM";
     };
 
-    containers = {
-      adguardhome = {
-        autoStart = true;
-        config = { ... }: {
-          system.stateVersion = hostConfig.stateVersion.nixos;
-          imports = [
-            ../../container/adguardhome.nix
-          ];
-        };
-        specialArgs = { constants = config.myconfig.constants; inherit hostConfig; };
+    containers.adguardhome = {
+      autoStart = true;
+      config = { ... }: {
+        system.stateVersion = "25.05";
+        imports = [
+          ../../container/adguardhome.nix
+        ];
       };
+      specialArgs = { constants = config.myconfig.constants; };
     };
 
     networking.firewall = {
       enable = true;
       allowedTCPPorts = [
-        53 # DNS
-        67 # DHCP
-        68 # DHCP
+        53   # DNS
+        67   # DHCP
+        68   # DHCP
         3000 # AdGuardHome Web UI
       ];
       allowedUDPPorts = [
@@ -101,10 +83,6 @@ delib.host {
   };
 
   home = { ... }: {
-    imports = [
-      ../../module/home/common.nix
-    ];
-
-    home.stateVersion = hostConfig.stateVersion.homeManager;
+    home.stateVersion = "25.05";
   };
 }

@@ -1,7 +1,7 @@
 { delib, lib, ... }:
 delib.module {
   name = "home.hyprland.config";
-  home.always = { myconfig, config, ... }:
+  home.always = { myconfig, ... }:
     lib.mkIf (myconfig."wm.hyprland".enable or false) {
       wayland.windowManager.hyprland.settings = {
         "$terminal" = "alacritty";

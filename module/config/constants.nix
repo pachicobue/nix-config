@@ -17,6 +17,7 @@ delib.module {
       options = {
         gateway = strOption "192.168.10.1";
         dns = strOption "192.168.10.181";
+        pi4IfaceName = strOption "eth0";
       };
     } { });
     wolHosts = readOnly (listOfOption (submodule {

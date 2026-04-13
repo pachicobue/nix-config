@@ -13,8 +13,8 @@ delib.module {
             address = strOption "";
             enableWol = boolOption false;
           };
-        };
+        } { };
       };
-    };
+    } { };
   };
 }

@@ -1,12 +1,12 @@
-{ delib, inputs, ... }:
-let
-  hostConfig = {
-    desktop = "wayland";
-    stateVersion = {
-      nixos = "25.05";
-      homeManager = "25.05";
-    };
-    network = {
+{ delib, ... }:
+delib.host {
+  name = "coconut";
+  system = "x86_64-linux";
+  rice = "catppuccin-mocha";
+
+  myconfig = { ... }: {
+    host.desktop = "wayland";
+    host.network = {
       useDhcp = true;
       iface = {
         name = "eno1";
@@ -14,41 +14,33 @@ let
         enableWol = true;
       };
     };
+    audio.enable = true;
+    bluetooth.enable = true;
+    tailscale.enable = true;
+    openssh.enable = true;
+    ddc.enable = true;
+    fcitx.enable = true;
+    nvidia.enable = true;
+    gaming.enable = true;
+    wakeonlan.enable = true;
+    usb.enable = true;
+    yubikey.enable = true;
+    regreet.enable = true;
+    "wm.niri".enable = true;
+    alacritty.enable = true;
+    helix.enable = true;
+    firefox.enable = true;
+    discord.enable = true;
+    "claude-code".enable = true;
+    mako.enable = true;
+    fuzzel.enable = true;
+    zathura.enable = true;
+    jq.enable = true;
+    "noctalia-shell".enable = true;
   };
-in
-delib.host {
-  name = "coconut";
-  system = "x86_64-linux";
-  rice = "catppuccin-mocha";
 
   nixos = { ... }: {
-    _module.args.hostConfig = hostConfig;
-
-    home-manager.extraSpecialArgs = { inherit inputs hostConfig; };
-
-    imports = [
-      ../../module/nixos/common.nix
-      ../../module/nixos/openssh.nix
-      ../../module/nixos/ddc.nix
-      ../../module/nixos/fcitx.nix
-      ../../module/nixos/audio.nix
-      ../../module/nixos/nvidia.nix
-      ../../module/nixos/gaming.nix
-      ../../module/nixos/wakeonlan.nix
-      ../../module/nixos/tailscale.nix
-      ../../module/nixos/bluetooth.nix
-      ../../module/nixos/usb.nix
-      ../../module/nixos/yubikey.nix
-      ../../module/nixos/wm/niri.nix
-      ../../module/nixos/greetd/regreet.nix
-    ];
-
-    myconfig.audio.enable = true;
-    myconfig.bluetooth.enable = true;
-    myconfig.tailscale.enable = true;
-
-
-    system.stateVersion = hostConfig.stateVersion.nixos;
+    system.stateVersion = "25.05";
     networking.hostName = "coconut";
     nixpkgs.config.allowUnfree = true;
 
@@ -81,22 +73,7 @@ delib.host {
   };
 
   home = { ... }: {
-    imports = [
-      ../../module/home/common.nix
-
-      ../../module/home/alacritty.nix
-      ../../module/home/helix.nix
-      ../../module/home/firefox.nix
-      ../../module/home/discord.nix
-      ../../module/home/claude-code.nix
-
-      ../../module/home/wm/niri.nix
-      ../../module/home/mako.nix
-      ../../module/home/fuzzel.nix
-      ../../module/home/zathura.nix
-    ];
-
-    home.stateVersion = hostConfig.stateVersion.homeManager;
+    home.stateVersion = "25.05";
     programs.helix.defaultEditor = true;
   };
 }

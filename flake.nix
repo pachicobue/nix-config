@@ -54,14 +54,16 @@
   outputs = inputs @ { ... }: let
     args = { inherit inputs; };
     installerModule = { system }: inputs.nixpkgs.lib.nixosSystem {
-      inherit system;
-      modules = [ ./installer/minimal.nix ];
+      modules = [
+        { nixpkgs.hostPlatform = system; }
+        ./installer/minimal.nix
+      ];
     };
   in {
     nixosConfigurations = (inputs.denix.lib.configurations {
       moduleSystem = "nixos";
       homeManagerUser = "sho";
-      paths = [ ./host ./module/config ./rice ];
+      paths = [ ./host ./module/config ./module/nixos ./module/home ./rice ];
       specialArgs = { inherit inputs; };
       extensions = with inputs.denix.lib.extensions; [ base ];
     }) // {

@@ -1,21 +1,21 @@
 { delib, pkgs, ... }:
 delib.module {
   name = "home.jj";
-  home.always = { osConfig, ... }: {
+  home.always = { myconfig, ... }: {
     programs.jujutsu = {
       enable = true;
       settings = {
         signing = {
           behavior = "drop";
           backend = "gpg";
-          key = osConfig.myconfig.constants.gpg;
+          key = myconfig.constants.gpg;
         };
         git = {
           "sign-on-push" = true;
         };
         user = {
           name = "pachicobue";
-          email = osConfig.myconfig.constants.userEmail;
+          email = myconfig.constants.userEmail;
         };
       };
     };

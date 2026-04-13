@@ -1,18 +1,18 @@
 { delib, ... }:
 delib.module {
   name = "home.git";
-  home.always = { osConfig, ... }: {
+  home.always = { myconfig, ... }: {
     programs = {
       git = {
         enable = true;
         signing = {
-          key = osConfig.myconfig.constants.gpg;
+          key = myconfig.constants.gpg;
           signByDefault = true;
         };
         settings = {
           user = {
             name = "pachicobue";
-            email = osConfig.myconfig.constants.userEmail;
+            email = myconfig.constants.userEmail;
           };
           init.defaultBranch = "main";
           pull.rebase = true;

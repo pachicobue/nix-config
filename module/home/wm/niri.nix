@@ -3,7 +3,72 @@ delib.module {
   name = "home.wm.niri";
   home.always = { myconfig, ... }:
     lib.mkIf (myconfig."wm.niri".enable or false) {
-      imports = [ inputs.niri-flake.homeModules.niri ];
+      imports = [
+        inputs.niri-flake.homeModules.niri
+        ({ config, ... }: {
+          programs.niri.settings.binds = with config.lib.niri.actions; let terminal = "alacritty"; in {
+            "Mod+Shift+Slash" = { action = show-hotkey-overlay; };
+            "Mod+Q" = { repeat = false; action = close-window; };
+            "Mod+T" = { repeat = false; action.spawn = terminal; };
+            "Mod+D" = { repeat = false; action.spawn = [ "noctalia-shell" "ipc" "call" "launcher" "toggle" ]; };
+            "Mod+S" = { repeat = false; action.spawn = [ "noctalia-shell" "ipc" "call" "controlCenter" "toggle" ]; };
+            "Mod+E" = { repeat = false; action.spawn = [ "noctalia-shell" "ipc" "call" "sessionMenu" "toggle" ]; };
+            "Mod+C" = { repeat = false; action.spawn = [ "noctalia-shell" "ipc" "call" "calendar" "toggle" ]; };
+
+            "Mod+H" = { action = focus-column-left; };
+            "Mod+J" = { action = focus-window-down; };
+            "Mod+K" = { action = focus-window-up; };
+            "Mod+L" = { action = focus-column-right; };
+            "Mod+Ctrl+H" = { action = move-column-left; };
+            "Mod+Ctrl+J" = { action = move-window-down; };
+            "Mod+Ctrl+K" = { action = move-window-up; };
+            "Mod+Ctrl+L" = { action = move-column-right; };
+            "Mod+Shift+H" = { action = focus-monitor-left; };
+            "Mod+Shift+J" = { action = focus-monitor-down; };
+            "Mod+Shift+K" = { action = focus-monitor-up; };
+            "Mod+Shift+L" = { action = focus-monitor-right; };
+            "Mod+Shift+Ctrl+H" = { action = move-column-to-monitor-left; };
+            "Mod+Shift+Ctrl+J" = { action = move-column-to-monitor-down; };
+            "Mod+Shift+Ctrl+K" = { action = move-column-to-monitor-up; };
+            "Mod+Shift+Ctrl+L" = { action = move-column-to-monitor-right; };
+
+            "Mod+U" = { action = focus-workspace-down; };
+            "Mod+I" = { action = focus-workspace-up; };
+            "Mod+Ctrl+U" = { action = move-column-to-workspace-down; };
+            "Mod+Ctrl+I" = { action = move-column-to-workspace-up; };
+            "Mod+Shift+U" = { action = move-workspace-down; };
+            "Mod+Shift+I" = { action = move-workspace-up; };
+
+            "Mod+1" = { action.focus-workspace = "1other"; };
+            "Mod+2" = { action.focus-workspace = "2terminal"; };
+            "Mod+3" = { action.focus-workspace = "3browser"; };
+            "Mod+4" = { action.focus-workspace = "4gaming"; };
+
+            "Mod+Comma" = { action = consume-window-into-column; };
+            "Mod+Period" = { action = expel-window-from-column; };
+            "Mod+BracketLeft" = { action = consume-or-expel-window-left; };
+            "Mod+BracketRight" = { action = consume-or-expel-window-right; };
+
+            "Mod+F" = { action = maximize-column; };
+            "Mod+Ctrl+F" = { action = expand-column-to-available-width; };
+            "Mod+Shift+F" = { action = fullscreen-window; };
+            "Mod+Ctrl+C" = { action = center-column; };
+
+            "Mod+R" = { action = switch-preset-column-width; };
+            "Mod+Shift+R" = { action = switch-preset-window-height; };
+            "Mod+Minus" = { action = set-column-width "-10%"; };
+            "Mod+Equal" = { action = set-column-width "+10%"; };
+            "Mod+Shift+Minus" = { action = set-window-height "-10%"; };
+            "Mod+Shift+Equal" = { action = set-window-height "+10%"; };
+
+            "Mod+V" = { action = toggle-window-floating; };
+            "Mod+W" = { action = toggle-column-tabbed-display; };
+
+            "Ctrl+Alt+Delete" = { action = quit; };
+            "Ctrl+Alt+L" = { action.spawn = [ "noctalia-shell" "ipc" "call" "lockScreen" "lock" ]; };
+          };
+        })
+      ];
 
       programs.niri = {
         enable = true;
@@ -88,67 +153,6 @@ delib.module {
 
           debug.honor-xdg-activation-with-invalid-serial = true;
 
-          binds = with config.lib.niri.actions; {
-            "Mod+Shift+Slash" = { action = show-hotkey-overlay; };
-            "Mod+Q" = { repeat = false; action = close-window; };
-            "Mod+T" = { repeat = false; action.spawn = terminal; };
-            "Mod+D" = { repeat = false; action.spawn = [ "noctalia-shell" "ipc" "call" "launcher" "toggle" ]; };
-            "Mod+S" = { repeat = false; action.spawn = [ "noctalia-shell" "ipc" "call" "controlCenter" "toggle" ]; };
-            "Mod+E" = { repeat = false; action.spawn = [ "noctalia-shell" "ipc" "call" "sessionMenu" "toggle" ]; };
-            "Mod+C" = { repeat = false; action.spawn = [ "noctalia-shell" "ipc" "call" "calendar" "toggle" ]; };
-
-            "Mod+H" = { action = focus-column-left; };
-            "Mod+J" = { action = focus-window-down; };
-            "Mod+K" = { action = focus-window-up; };
-            "Mod+L" = { action = focus-column-right; };
-            "Mod+Ctrl+H" = { action = move-column-left; };
-            "Mod+Ctrl+J" = { action = move-window-down; };
-            "Mod+Ctrl+K" = { action = move-window-up; };
-            "Mod+Ctrl+L" = { action = move-column-right; };
-            "Mod+Shift+H" = { action = focus-monitor-left; };
-            "Mod+Shift+J" = { action = focus-monitor-down; };
-            "Mod+Shift+K" = { action = focus-monitor-up; };
-            "Mod+Shift+L" = { action = focus-monitor-right; };
-            "Mod+Shift+Ctrl+H" = { action = move-column-to-monitor-left; };
-            "Mod+Shift+Ctrl+J" = { action = move-column-to-monitor-down; };
-            "Mod+Shift+Ctrl+K" = { action = move-column-to-monitor-up; };
-            "Mod+Shift+Ctrl+L" = { action = move-column-to-monitor-right; };
-
-            "Mod+U" = { action = focus-workspace-down; };
-            "Mod+I" = { action = focus-workspace-up; };
-            "Mod+Ctrl+U" = { action = move-column-to-workspace-down; };
-            "Mod+Ctrl+I" = { action = move-column-to-workspace-up; };
-            "Mod+Shift+U" = { action = move-workspace-down; };
-            "Mod+Shift+I" = { action = move-workspace-up; };
-
-            "Mod+1" = { action.focus-workspace = "1other"; };
-            "Mod+2" = { action.focus-workspace = "2terminal"; };
-            "Mod+3" = { action.focus-workspace = "3browser"; };
-            "Mod+4" = { action.focus-workspace = "4gaming"; };
-
-            "Mod+Comma" = { action = consume-window-into-column; };
-            "Mod+Period" = { action = expel-window-from-column; };
-            "Mod+BracketLeft" = { action = consume-or-expel-window-left; };
-            "Mod+BracketRight" = { action = consume-or-expel-window-right; };
-
-            "Mod+F" = { action = maximize-column; };
-            "Mod+Ctrl+F" = { action = expand-column-to-available-width; };
-            "Mod+Shift+F" = { action = fullscreen-window; };
-            "Mod+Ctrl+C" = { action = center-column; };
-
-            "Mod+R" = { action = switch-preset-column-width; };
-            "Mod+Shift+R" = { action = switch-preset-window-height; };
-            "Mod+Minus" = { action = set-column-width "-10%"; };
-            "Mod+Equal" = { action = set-column-width "+10%"; };
-            "Mod+Shift+Minus" = { action = set-window-height "-10%"; };
-            "Mod+Shift+Equal" = { action = set-window-height "+10%"; };
-
-            "Mod+V" = { action = toggle-window-floating; };
-            "Mod+W" = { action = toggle-column-tabbed-display; };
-
-            "Ctrl+Alt+Delete" = { action = quit; };
-            "Ctrl+Alt+L" = { action.spawn = [ "noctalia-shell" "ipc" "call" "lockScreen" "lock" ]; };
-          };
           screenshot-path = "~/Picture/Screenshots/%Y%m%d_%H%M%s.png";
         };
       };

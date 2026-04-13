@@ -1,15 +1,16 @@
-{
-  lib,
-  hostConfig,
-  ...
-}: {
-  services.openssh = {
-    enable = true;
-    settings = {
-      X11-Forwarding = lib.mkIf (hostConfig.desktop == "x") true;
-      PermitRootLogin = "prohibit-password";
-      PasswordAuthentication = false;
+{ delib, lib, ... }:
+delib.module {
+  name = "openssh";
+  options.openssh.enable = delib.boolOption false;
+  nixos.ifEnabled = { myconfig, ... }: {
+    services.openssh = {
+      enable = true;
+      settings = {
+        X11Forwarding = lib.mkIf (myconfig.host.desktop == "x") true;
+        PermitRootLogin = "prohibit-password";
+        PasswordAuthentication = false;
+      };
     };
+    environment.enableAllTerminfo = true;
   };
-  environment.enableAllTerminfo = true;
 }

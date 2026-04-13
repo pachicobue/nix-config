@@ -1,38 +1,39 @@
-{
-  pkgs,
-  hostConfig,
-  ...
-}: {
-  i18n.inputMethod = {
-    enable = true;
-    type = "fcitx5";
-    fcitx5 = {
-      waylandFrontend = hostConfig.desktop == "wayland";
-      addons = with pkgs; [
-        fcitx5-mozc
-        fcitx5-gtk
-      ];
-      ignoreUserConfig = true;
-      settings.globalOptions = {
-        GroupOrder = {
-          "0" = "Default";
-        };
-        "Groups/0" = {
-          Name = "Default";
-          "Default Layout" = "us";
-          DefaultIM = "mozc";
-        };
-        "Groups/0/Items/0" = {
-          Name = "keyboard-us";
-          Layout = "";
-        };
-        "Groups/0/Items/1" = {
-          Name = "mozc";
-          Layout = "";
-        };
-        Hotkey = {
-          ActivateKeys = "0=Henkan";
-          DeactivateKeys = "0=Muhenkan";
+{ delib, pkgs, ... }:
+delib.module {
+  name = "fcitx";
+  options.fcitx.enable = delib.boolOption false;
+  nixos.ifEnabled = { myconfig, ... }: {
+    i18n.inputMethod = {
+      enable = true;
+      type = "fcitx5";
+      fcitx5 = {
+        waylandFrontend = myconfig.host.desktop == "wayland";
+        addons = with pkgs; [
+          fcitx5-mozc
+          fcitx5-gtk
+        ];
+        ignoreUserConfig = true;
+        settings.globalOptions = {
+          GroupOrder = {
+            "0" = "Default";
+          };
+          "Groups/0" = {
+            Name = "Default";
+            "Default Layout" = "us";
+            DefaultIM = "mozc";
+          };
+          "Groups/0/Items/0" = {
+            Name = "keyboard-us";
+            Layout = "";
+          };
+          "Groups/0/Items/1" = {
+            Name = "mozc";
+            Layout = "";
+          };
+          Hotkey = {
+            ActivateKeys = "0=Henkan";
+            DeactivateKeys = "0=Muhenkan";
+          };
         };
       };
     };

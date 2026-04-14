@@ -1,6 +1,5 @@
-{...}: {
-  # TTY program supports nerdfont
-  services.kmscon = {
-    enable = true;
-  };
+{ delib, ... }:
+delib.module {
+  name = "nixos.kmscon";
+  nixos.always.services.kmscon.enable = true;
 }

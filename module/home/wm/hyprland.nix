@@ -1,17 +1,12 @@
-{pkgs, ...}: {
-  imports = [
-    ../hyprland/config.nix
-    ../hyprland/keybind.nix
-    # ../hyprland/hyprpanel.nix
-    # ../hyprland/hyprpolkitagent.nix
-
-    ../fuzzel.nix
-  ];
-  wayland.windowManager.hyprland = {
-    enable = true;
-    systemd.enable = false; # Avoid conflict with UWSM
-  };
-  home.packages = with pkgs; [
-    hyprshot
-  ];
+{ delib, pkgs, lib, ... }:
+delib.module {
+  name = "home.wm.hyprland";
+  home.always = { myconfig, ... }:
+    lib.mkIf (myconfig."wm.hyprland".enable or false) {
+      wayland.windowManager.hyprland = {
+        enable = true;
+        systemd.enable = false;
+      };
+      home.packages = with pkgs; [ hyprshot ];
+    };
 }

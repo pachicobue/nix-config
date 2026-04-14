@@ -1,5 +1,7 @@
-{...}: {
-  nix = {
+{ delib, ... }:
+delib.module {
+  name = "nixos.nix";
+  nixos.always.nix = {
     gc = {
       automatic = true;
       dates = "weekly";
@@ -8,14 +10,8 @@
     settings = {
       fallback = true;
       auto-optimise-store = true;
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
-      trusted-users = [
-        "root"
-        "@wheel"
-      ];
+      experimental-features = [ "nix-command" "flakes" ];
+      trusted-users = [ "root" "@wheel" ];
       substituters = [
         "https://nix-community.cachix.org"
         "https://helix.cachix.org"

@@ -1,11 +1,15 @@
-{config, ...}: {
-  xdg.userDirs = {
-    enable = true;
-    download = "${config.home.homeDirectory}/Download";
-    desktop = "${config.home.homeDirectory}/Desktop";
-    documents = "${config.home.homeDirectory}/Document";
-    music = "${config.home.homeDirectory}/Music";
-    pictures = "${config.home.homeDirectory}/Picture";
-    videos = "${config.home.homeDirectory}/Video";
+{ delib, ... }:
+delib.module {
+  name = "home.xdg";
+  home.always = { myconfig, ... }: {
+    xdg.userDirs = {
+      enable = true;
+      download = "/home/${myconfig.constants.userName}/Download";
+      desktop = "/home/${myconfig.constants.userName}/Desktop";
+      documents = "/home/${myconfig.constants.userName}/Document";
+      music = "/home/${myconfig.constants.userName}/Music";
+      pictures = "/home/${myconfig.constants.userName}/Picture";
+      videos = "/home/${myconfig.constants.userName}/Video";
+    };
   };
 }

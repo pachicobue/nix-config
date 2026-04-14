@@ -1,6 +1,5 @@
 {
-  commonConfig,
-  hostConfig,
+  constants,
   ...
 }: {
   services.adguardhome = {
@@ -26,10 +25,10 @@
 
       dhcp = {
         enabled = true;
-        interface_name = hostConfig.network.iface.name;
+        interface_name = constants.network.pi4IfaceName;
 
         dhcpv4 = {
-          gateway_ip = commonConfig.network.gateway;
+          gateway_ip = constants.network.gateway;
           subnet_mask = "255.255.255.0";
           range_start = "192.168.10.200";
           range_end = "192.168.10.255";

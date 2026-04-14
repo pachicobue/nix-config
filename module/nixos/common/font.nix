@@ -1,5 +1,7 @@
-{pkgs, ...}: {
-  fonts = {
+{ delib, pkgs, ... }:
+delib.module {
+  name = "nixos.font";
+  nixos.always.fonts = {
     packages = with pkgs; [
       noto-fonts
       noto-fonts-cjk-serif
@@ -11,18 +13,10 @@
     fontDir.enable = true;
     fontconfig = {
       defaultFonts = {
-        serif = [
-          "Noto Serif CJK JP"
-        ];
-        sansSerif = [
-          "Noto Sans CJK JP"
-        ];
-        monospace = [
-          "Moralerspace Neon JPDOC"
-        ];
-        emoji = [
-          "Noto Color Emoji"
-        ];
+        serif = [ "Noto Serif CJK JP" ];
+        sansSerif = [ "Noto Sans CJK JP" ];
+        monospace = [ "Moralerspace Neon JPDOC" ];
+        emoji = [ "Noto Color Emoji" ];
       };
     };
   };

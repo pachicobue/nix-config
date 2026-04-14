@@ -1,5 +1,8 @@
-{pkgs, ...}: {
-  programs.zed-editor = {
+{ delib, pkgs, ... }:
+delib.module {
+  name = "zed";
+  options.zed.enable = delib.boolOption false;
+  home.ifEnabled.programs.zed-editor = {
     enable = true;
     extraPackages = with pkgs; [
       clang-tools
@@ -10,9 +13,7 @@
       nixd
       nil
     ];
-    extensions = [
-      "nix"
-    ];
+    extensions = [ "nix" ];
     userSettings = {
       current_line_highlight = "gutter";
       scroll_beyond_last_line = "off";
@@ -23,12 +24,8 @@
         use_multiline_find = true;
       };
       languages = {
-        "C++" = {
-          format_on_save = "on";
-        };
-        "HTML" = {
-          formatter = "language_server";
-        };
+        "C++" = { format_on_save = "on"; };
+        "HTML" = { formatter = "language_server"; };
       };
     };
   };

@@ -1,6 +1,8 @@
-{ pkgs, ... }:
-{
-  home.packages = [
+{ delib, pkgs, ... }:
+delib.module {
+  name = "mathematica";
+  options.mathematica.enable = delib.boolOption false;
+  home.ifEnabled.home.packages = [
     (pkgs.mathematica.override {
       source = pkgs.requireFile {
         name = "Wolfram_14.2.1_LIN_Japanese_Bndl.sh";

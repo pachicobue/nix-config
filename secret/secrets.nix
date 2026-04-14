@@ -13,17 +13,7 @@ let
     plum = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIurSBgviLvpzHnZOMuu7UEbw9sktSuVahUySjW0dquy sho@plum";
   };
 in {
-  "secrets/cloudflare/pachicobue-org-tunnel-json.age".publicKeys = [
-    master
-    root.coconut
-    root.berry
-  ];
-  "secrets/miniflux/admin-credentials.age".publicKeys = [
-    master
-    root.coconut
-    root.berry
-  ];
-  "secrets/silverbullet/token.age".publicKeys = [
+  "silverbullet/token.age".publicKeys = [
     master
     root.coconut
     root.berry

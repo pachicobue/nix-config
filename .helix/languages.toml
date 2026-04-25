@@ -1,0 +1,7 @@
+[[language]]
+name = "nix"
+auto-format = true
+formatter = {command = "alejandra"}
+[[language]]
+name = "toml"
+auto-format = true

@@ -1,6 +1,6 @@
 {config, ...}: {
   age.secrets."silverbullet/token" = {
-    file = ../secret/silverbullet/token.age;
+    file = ../secrets/silverbullet/token.age;
     owner = "silverbullet";
   };
   services.silverbullet = {

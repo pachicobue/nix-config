@@ -7,30 +7,21 @@ Nix OSの設定ファイル
 ### WSL2だけ
 
 - [NixOS-WSL](https://github.com/nix-community/NixOS-WSL) に従う
-    - https://nix-community.github.io/NixOS-WSL/how-to/change-username.html
-        - `host/plum/user` の名前と同じにしておく
+    - [ユーザー名変更しておく](https://nix-community.github.io/NixOS-WSL/how-to/change-username.html)
 
 ### 共通
 
-- nix-secret レポジトリ(private)でSSH鍵登録を済ませておく
-    - https://github.com/pachicobue/nix-secret/blob/main/README.md
 - `nix develop --experimental-features "nix-commands flakes"`
 
 ## インストール・更新
 
-### coconut
-
-- (nix-secret更新後のみ) `nix flake update my-nix-secret`
-- `switch coconut`
-
-### plum
-
-- (nix-secret更新後のみ) `nix flake update my-nix-secret`
-- `switch plum`
+|    |coconut|plum   |berry |pi4   |
+|Type|Desktop|Desktop|Server|Server|
 
 ## Credits
 
-- [numtide/blueprint](https://github.com/numtide/blueprint)
+- [yunfachi/denix](https://github.com/yunfachi/denix)
+- [yunfachi/nix-config](https://github.com/yunfachi/nix-config)
 
 ## License
 

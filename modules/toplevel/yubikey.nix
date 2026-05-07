@@ -1,16 +1,20 @@
 {
   delib,
+  host,
   pkgs,
   ...
 }:
 delib.module {
   name = "yubikey";
-  options = delib.singleEnableOption true;
+  options = with delib;
+    moduleOptions {
+      enable = boolOption host.usbFeatured;
+      enableManager = boolOption host.guiFeatured;
+    };
   nixos.ifEnabled = {
     services.pcscd.enable = true;
-    environment.systemPackages = with pkgs; [
-      yubikey-manager
-      yubioath-flutter
-    ];
+  };
+  home.ifEnabled = {cfg, ...}: {
+    home.packages = with pkgs; lib.optionals cfg.enableManager [yubikey-manager];
   };
 }

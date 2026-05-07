@@ -21,7 +21,7 @@
 
       # Python script wrappers - Top-level APIs
       (writeScriptBin "switch" ''
-        python3 ./script/switch.py $@
+        python3 ./scripts/switch.py $@
       '')
     ];
     shellHook = ''

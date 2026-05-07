@@ -8,52 +8,21 @@ delib.host {
   name = "berry";
   system = "x86_64-linux";
   type = "server";
-  network = {
-    nic = [
-      {
-        name = "enp1s0";
-        mac = "68:1d:ef:37:e8:ab";
-        wakeOnLan = true;
-      }
-    ];
-  };
+  features = [];
 
   myconfig = {...}: {
-    services = {
-      tailscale.enable = true;
-      sshd.enable = true;
-    };
-    deploy.enable = true;
-    programs.helix.setAsDefaultEditor = true;
+    state-version.nixos = "25.05";
+    state-version.home = "25.05";
+    boot.loader = "limine";
   };
 
   nixos = {...}: {
-    system.stateVersion = "25.05";
-    networking.hostName = "berry";
-    nixpkgs.config.allowUnfree = true;
-
-    boot = {
-      loader = {
-        grub.enable = false;
-        systemd-boot.enable = false;
-        limine = {
-          enable = true;
-          efiSupport = true;
-          efiInstallAsRemovable = true;
-          maxGenerations = 5;
-        };
-        timeout = 3;
-      };
-    };
-
     # Tailscale serve configuration for HTTPS access (port-based routing)
     systemd.services.tailscale-serve = {
       description = "Tailscale Serve for all services";
       after = [
         "network-online.target"
         "tailscaled.service"
-        "container@silverbullet.service"
-        "container@mealie.service"
         "container@jellyfin.service"
       ];
       wants = ["network-online.target"];
@@ -105,31 +74,6 @@ delib.host {
           ];
         };
       };
-      mealie = {
-        autoStart = true;
-        bindMounts."/etc/ssh/ssh_host_ed25519_key".isReadOnly = true;
-        config = {...}: {
-          system.stateVersion = "25.05";
-          age.identityPaths = ["/etc/ssh/ssh_host_ed25519_key"];
-          imports = [
-            inputs.agenix.nixosModules.default
-            ../../container/mealie.nix
-          ];
-        };
-      };
-      silverbullet = {
-        autoStart = true;
-        privateNetwork = false;
-        bindMounts."/etc/ssh/ssh_host_ed25519_key".isReadOnly = true;
-        config = {...}: {
-          system.stateVersion = "25.05";
-          age.identityPaths = ["/etc/ssh/ssh_host_ed25519_key"];
-          imports = [
-            inputs.agenix.nixosModules.default
-            ../../container/silverbullet.nix
-          ];
-        };
-      };
     };
 
     networking.firewall = {
@@ -137,12 +81,7 @@ delib.host {
       allowedTCPPorts = [
         8081 # filebrowser
         8096 # jellyfin
-        9000 # mealie
       ];
     };
-  };
-
-  home = {...}: {
-    home.stateVersion = "25.05";
   };
 }

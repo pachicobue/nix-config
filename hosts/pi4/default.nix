@@ -1,6 +1,5 @@
 {
   delib,
-  config,
   pkgs,
   ...
 }:
@@ -8,48 +7,22 @@ delib.host {
   name = "pi4";
   system = "aarch64-linux";
   type = "server";
+  features = [];
 
-  network = {
-    staticIp = [
+  myconfig = {...}: {
+    state-version.nixos = "25.05";
+    state-version.home = "25.05";
+    boot.loader = "extlinux";
+    networking.useDHCP = false;
+  };
+
+  nixos = {...}: {
+    networking.interfaces.eth0.ipv4.addresses = [
       {
         address = "192.168.10.181";
         prefixLength = 24;
       }
     ];
-    nic = [
-      {
-        name = "eth0";
-        mac = "2c:cf:67:1a:1c:61";
-      }
-    ];
-  };
-
-  myconfig = {...}: {
-    services = {
-      tailscale.enable = true;
-      sshd.enable = true;
-    };
-    deploy.enable = true;
-  };
-
-  nixos = {...}: {
-    system.stateVersion = "25.05";
-    networking = {
-      hostName = "pi4";
-      nameservers = ["1.1.1.1"];
-    };
-    nixpkgs.config.allowUnfree = true;
-
-    boot = {
-      loader = {
-        grub.enable = false;
-        generic-extlinux-compatible = {
-          enable = true;
-          configurationLimit = 3;
-        };
-        timeout = 3;
-      };
-    };
 
     # Reboot per day using systemd timer
     systemd.timers.daily-reboot = {
@@ -60,7 +33,6 @@ delib.host {
         Unit = "daily-reboot.service";
       };
     };
-
     systemd.services.daily-reboot = {
       serviceConfig = {
         Type = "oneshot";
@@ -69,6 +41,7 @@ delib.host {
       description = "Daily system reboot at 8:00 AM";
     };
 
+    # Containerサービス
     containers.adguardhome = {
       autoStart = true;
       config = {...}: {
@@ -77,7 +50,6 @@ delib.host {
           ../../container/adguardhome.nix
         ];
       };
-      specialArgs = {constants = config.myconfig.constants;};
     };
 
     networking.firewall = {
@@ -94,9 +66,5 @@ delib.host {
         68 # DHCP
       ];
     };
-  };
-
-  home = {...}: {
-    home.stateVersion = "25.05";
   };
 }

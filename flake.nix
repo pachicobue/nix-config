@@ -4,11 +4,11 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-wsl = {
-      url = "github:nix-community/NixOS-WSL/release-25.11";
+      url = "github:nix-community/NixOS-WSL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -65,118 +65,54 @@
     flake-parts,
     nix-systems,
     ...
-  } @ inputs:
-    flake-parts.lib.mkFlake {inherit inputs;} {
+  } @ inputs: let
+    delib = denix.lib;
+  in
+    flake-parts.lib.mkFlake {inherit inputs;} ({...}: {
       # Denix による Nix設定
       # - HomeManagerはStandAlone型にする（非NixOSの運用を見据える）
       # - Nix Darwinは現状無視
       flake = let
         mkConfigurations = moduleSystem:
-          denix.lib.configurations {
+          delib.configurations {
             inherit moduleSystem;
-            useHomeManagerModule = false;
+            useHomeManagerModule = true;
             homeManagerUser = "sho";
             paths = [./hosts ./modules ./rices];
-            specialArgs = {inherit inputs;};
-            extensions = with denix.lib.extensions; [
+            specialArgs = {inherit inputs moduleSystem;};
+            extensions = with delib.extensions; [
               args
+              overlays
               (base.withConfig {
                 args.enable = true;
                 hosts = {
-                  type.types = ["desktop" "laptop" "server" "virtual"];
+                  type.types = [
+                    "desktop"
+                    "laptop"
+                    "server"
+                    "virtual"
+                  ];
                   features = {
                     features = [
-                      # LSPや各種エディタ
-                      "language"
-                      # GUI protocol
                       "wayland"
                       "x11"
-                      # Hardware
                       "nvidia"
-                      # Wireless
-                      "wireless"
-                      # Server
-                      "sshServer"
-                      "dnsServer"
-                      "dhcpServer"
-                      "wolServer"
-                      # Client
-                      "dhcpClient"
+
+                      "wsl2"
+
+                      "cli"
+                      "gui"
+                      "usb"
+                      "bluetooth"
                     ];
                     defaultByHostType = {
-                      desktop = ["sshServer"];
-                      laptop = ["wireless"];
-                      server = ["sshServer"];
+                      desktop = ["cli" "gui" "usb"];
+                      laptop = ["cli" "gui" "usb"];
+                      server = ["usb"];
+                      virtual = [];
                     };
                   };
-                  extraSubmodules = [
-                    ({
-                      lib,
-                      config,
-                      ...
-                    }: {
-                      options.network = {
-                        staticIp = lib.mkOption {
-                          type = lib.types.listOf (lib.types.submodule {
-                            options = {
-                              address = lib.mkOption {
-                                type = lib.types.str;
-                                default = "";
-                              };
-                              prefixLength = lib.mkOption {
-                                type = lib.types.int;
-                                default = 24;
-                              };
-                            };
-                          });
-                          default = [];
-                        };
-                        defaultGateway = lib.mkOption {
-                          type = lib.types.nullOr lib.types.str;
-                          default = null;
-                        };
-                        # NIC一覧
-                        nic = lib.mkOption {
-                          type = lib.types.listOf (lib.types.submodule {
-                            options = {
-                              name = lib.mkOption {
-                                type = lib.types.str;
-                                default = "";
-                              };
-                              mac = lib.mkOption {
-                                type = lib.types.str;
-                                default = "";
-                              };
-                              wakeOnLan = lib.mkOption {
-                                type = lib.types.bool;
-                                default = false;
-                              };
-                            };
-                          });
-                          default = [];
-                        };
-                        # 代表NIC名（adguardhomeのinterfaceのように一つしか指定できない場合に使用）
-                        # デフォルトではnic先頭を使用する
-                        primaryNic = lib.mkOption {
-                          type = lib.types.nullOr lib.types.str;
-                          default = null;
-                          apply = _:
-                            if config.network.nic == []
-                            then null
-                            else (builtins.head config.network.nic).name;
-                        };
-                        # マシンの代表SSH鍵(AuthorizedKey管理用)
-                        sshPublicKey = lib.mkOption {
-                          type = lib.types.listOf lib.types.str;
-                          default = [];
-                        };
-                      };
-                    })
-                  ];
                 };
-              })
-              (overlays.withConfig {
-                defaultTargets = ["nixos" "home"];
               })
             ];
           };
@@ -211,9 +147,6 @@
               jujutsu
               nh
               helix
-              nil
-              nixd
-              alejandra
               python3Minimal
 
               inputs.agenix.packages.${system}.default
@@ -221,7 +154,7 @@
 
               # Python script wrappers - Top-level APIs
               (writeScriptBin "switch" ''
-                python3 ./script/switch.py $@
+                python3 ./scripts/switch.py $@
               '')
             ];
             shellHook = ''
@@ -250,5 +183,5 @@
 
       # deploy = import ./deploy.nix args;
       # checks = import ./check.nix args;
-    };
+    });
 }

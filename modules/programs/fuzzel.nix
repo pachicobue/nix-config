@@ -4,7 +4,7 @@
   ...
 }:
 delib.module {
-  name = "fuzzel";
+  name = "services.fuzzel";
   options = with delib;
     moduleOptions {
       enable = boolOption false;
@@ -12,8 +12,9 @@ delib.module {
     };
 
   myconfig.ifEnabled = {cfg, ...}: {
-    commands.default.launcher = lib.optional cfg.setAsDefaultLauncher ["fuzzel"];
+    commands.default.launcher = with lib; optionals cfg.setAsDefaultLauncher ["${getExe pkgs.fuzzel}"];
   };
+
   home.ifEnabled = {
     programs.fuzzel.enable = true;
   };

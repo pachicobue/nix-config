@@ -1,29 +1,23 @@
 {
   delib,
+  pkgs,
   lib,
-  host,
   ...
 }:
 delib.module {
   name = "programs.alacritty";
   options = with delib;
     moduleOptions {
-      enable = boolOption host.isPC;
-      setAsDefaultTerminal = boolOption false;
+      enable = boolOption false;
+      defaultTerminal = boolOption false;
     };
 
   myconfig.ifEnabled = {cfg, ...}: {
-    commands.default.terminal = lib.optional cfg.setAsDefaultTerminal ["alacritty"];
+    commands.default.terminal = with lib;
+      optionals cfg.defaultTerminal ["${getExe pkgs.alacritty}"];
   };
-  home.ifEnabled.programs.alacritty = {
-    enable = true;
-    settings = {
-      window = {
-        padding = {
-          x = 10;
-          y = 5;
-        };
-      };
-    };
+
+  home.ifEnabled = {
+    programs.alacritty.enable = true;
   };
 }

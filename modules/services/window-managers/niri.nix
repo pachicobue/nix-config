@@ -1,27 +1,45 @@
 {
   delib,
+  homeconfig,
   host,
   pkgs,
   lib,
+  inputs,
   ...
 }: let
   niriAction = cmd: ["niri" "msg" "action"] ++ (lib.splitString " " cmd);
 in
   delib.module {
-    name = "services.wayland.windowManager.niri";
+    name = "services.windowManager.niri";
     options = delib.singleEnableOption false;
 
     nixos.ifEnabled = {
       services.displayManager.sessionPackages = [pkgs.niri-stable];
     };
+
+    home.always = {
+      imports = [inputs.niri-flake.homeModules.niri];
+    };
     home.ifEnabled = {myconfig, ...}: let
       inherit (myconfig.commands.default) browser terminal launcher;
-      inherit (myconfig.commands) shouldAutostart;
+      pictureDir = homeconfig.xdg.userDirs.pictures;
     in {
       assertions = [
         {
           assertion = host.waylandFeatured;
           message = "[niri] Need 'wayland' feature.";
+        }
+        {
+          assertion = browser != [];
+          message = "[niri] Need default browser command to be set.";
+        }
+        {
+          assertion = terminal != [];
+          message = "[niri] Need terminal browser command to be set.";
+        }
+        {
+          assertion = launcher != [];
+          message = "[niri] Need launcher browser command to be set.";
         }
       ];
 
@@ -30,7 +48,6 @@ in
 
       programs.niri = {
         enable = true;
-        package = pkgs.niri-stable;
         settings = {
           xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
           hotkey-overlay.skip-at-startup = true;
@@ -40,25 +57,22 @@ in
             focus-follows-mouse.enable = true;
             touchpad.dwt = true;
           };
-          spawn-at-startup =
-            [
-              {command = browser;}
-              {command = terminal;}
-              {command = niriAction "toggle-column-tabbed-display";}
-              {command = terminal;}
-              {command = niriAction "consume-window-into-column";}
-            ]
-            ++ (map (c: {command = c;}) shouldAutostart);
-          workspaces = {
-            "1default" = {};
-            "2work" = {};
-            "3gaming" = {};
-          };
+          spawn-at-startup = [
+            {command = browser;}
+            {command = terminal;}
+            {command = terminal;}
+            {command = terminal;}
+            {command = niriAction "consume-window-into-column";}
+          ];
           layout = {
             gaps = 8;
             always-center-single-column = true;
             center-focused-column = "never";
             background-color = "transparent";
+            default-column-width = {proportion = 1. / 2.;};
+            preset-column-widths = [
+              {proportion = 1. / 2.;}
+            ];
           };
           window-rules = [
             {
@@ -70,32 +84,6 @@ in
               };
               clip-to-geometry = true;
             }
-            {
-              matches = [
-                {
-                  app-id = terminal;
-                  at-startup = true;
-                }
-              ];
-              open-on-workspace = "2work";
-            }
-            {
-              matches = [
-                {
-                  app-id = browser;
-                  at-startup = true;
-                }
-              ];
-              open-on-workspace = "2work";
-            }
-            {
-              matches = [{app-id = "steam";}];
-              open-on-workspace = "3gaming";
-            }
-            {
-              matches = [{app-id = "steam_app_default";}];
-              open-on-workspace = "3gaming";
-            }
           ];
 
           layer-rules = [
@@ -105,8 +93,8 @@ in
             }
           ];
           overview.workspace-shadow.enable = true;
-          debug.honor-xdg-activation-with-invalid-serial = true;
-          screenshot-path = "~/Picture/Screenshots/%Y%m%d_%H%M%s.png";
+          # debug.honor-xdg-activation-with-invalid-serial = true;
+          screenshot-path = "${pictureDir}/Screenshots/%Y%m%d_%H%M%s.png";
 
           binds = {
             "Mod+Shift+Slash" = {action.show-hotkey-overlay = [];};
@@ -125,7 +113,7 @@ in
             };
             "Mod+D" = {
               repeat = false;
-              action.span = launcher;
+              action.spawn = launcher;
             };
 
             "Mod+H" = {action.focus-column-left = [];};
@@ -152,10 +140,6 @@ in
             "Mod+Shift+U" = {action.move-workspace-down = [];};
             "Mod+Shift+I" = {action.move-workspace-up = [];};
 
-            "Mod+1" = {action.focus-workspace = "1default";};
-            "Mod+2" = {action.focus-workspace = "2work";};
-            "Mod+3" = {action.focus-workspace = "3gaming";};
-
             "Mod+Comma" = {action.consume-window-into-column = [];};
             "Mod+Period" = {action.expel-window-from-column = [];};
             "Mod+BracketLeft" = {action.consume-or-expel-window-left = [];};
@@ -165,6 +149,7 @@ in
             "Mod+Ctrl+F" = {action.expand-column-to-available-width = [];};
             "Mod+Shift+F" = {action.fullscreen-window = [];};
 
+            "Mod+r" = {action.switch-preset-column-width = [];};
             "Mod+Minus" = {action.set-column-width = "-10%";};
             "Mod+Equal" = {action.set-column-width = "+10%";};
             "Mod+Shift+Minus" = {action.set-window-height = "-10%";};

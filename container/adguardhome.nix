@@ -1,4 +1,4 @@
-{constants, ...}: {
+{...}: {
   services.adguardhome = {
     enable = true;
     openFirewall = true;
@@ -22,10 +22,12 @@
 
       dhcp = {
         enabled = true;
-        interface_name = constants.network.pi4IfaceName;
+        # TODO: container モジュール設計が整ったら host.network.primaryNic に差し替える
+        interface_name = "eth0";
 
         dhcpv4 = {
-          gateway_ip = constants.network.gateway;
+          # TODO: container モジュール設計が整ったら host.network.defaultGateway に差し替える
+          gateway_ip = "192.168.10.1";
           subnet_mask = "255.255.255.0";
           range_start = "192.168.10.200";
           range_end = "192.168.10.255";

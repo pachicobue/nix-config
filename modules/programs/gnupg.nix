@@ -5,7 +5,8 @@
 }:
 delib.module {
   name = "programs.gnupg";
-  options = delib.singleEnableOption true;
+  options = delib.singleEnableOption false;
+
   home.ifEnabled = {
     programs.gpg = {
       enable = true;
@@ -31,7 +32,6 @@ delib.module {
     };
     services.gpg-agent = {
       enable = true;
-      enableZshIntegration = true;
       enableSshSupport = false;
       defaultCacheTtl = 3600;
       maxCacheTtl = 86400;

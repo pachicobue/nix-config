@@ -1,24 +1,21 @@
 {
   delib,
-  host,
   lib,
+  pkgs,
   ...
 }:
 delib.module {
   name = "programs.helix";
   options = with delib;
     moduleOptions {
-      enable = boolOption true;
-      setAsDefaultEditor = boolOption false;
+      enable = boolOption false;
+      defaultEditor = boolOption false;
     };
 
-  myconfig.ifEnabled = {cfg, ...}: {
-    commands.default.editor = lib.optional cfg.setAsDefaultEditor ["hx"];
-  };
   home.ifEnabled = {cfg, ...}: {
     programs.helix = {
       enable = true;
-      defaultEditor = cfg.setAsDefaultEditor;
+      defaultEditor = cfg.defaultEditor;
       settings = {
         editor = {
           middle-click-paste = false;
@@ -36,7 +33,6 @@ delib.module {
           };
           smart-tab = {
             enable = true;
-            supersede-menu = true;
           };
         };
         keys = {
@@ -52,11 +48,12 @@ delib.module {
             space = {
               o = "@:open <C-r>%";
               m = "@:move <C-r>%";
-              c = "@:sh cp <C-r>% <C-r>%";
               w = ":write";
               W = ":write-all";
               x = ":buffer-close";
               X = ":buffer-close!";
+              c = ":buffer-close-others";
+              C = ":buffer-close-others!";
               q = ":quit";
               Q = ":quit!";
             };
@@ -67,14 +64,33 @@ delib.module {
           };
         };
       };
-      languages.language = lib.optionals host.languageFeatured [
+
+      extraPackages = with pkgs; [
+        bash-language-server
+        clang-tools
+        neocmakelsp
+        vscode-json-languageserver
+        just-lsp
+        lean
+        marksman
+        nil
+        ty
+        ruff
+        python314Packages.python-lsp-server
+        rust-analyzer
+        taplo
+        tinymist
+        yaml-language-server
+
+        alejandra
+
+        lldb
+      ];
+      languages.language = with pkgs; [
         {
-          name = "cpp";
+          name = "nix";
           auto-format = true;
-        }
-        {
-          name = "rust";
-          auto-format = true;
+          formatter = {command = "${lib.getExe alejandra}";};
         }
       ];
     };

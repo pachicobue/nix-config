@@ -1,6 +1,7 @@
 {
   delib,
   lib,
+  pkgs,
   ...
 }:
 delib.module {
@@ -8,19 +9,19 @@ delib.module {
   options = with delib;
     moduleOptions {
       enable = boolOption false;
-      setAsDefaultTerminal = boolOption false;
+      defaultTerminal = boolOption false;
     };
+
   myconfig.ifEnabled = {cfg, ...}: {
-    commands.default.terminal = lib.optional cfg.setAsDefaultTerminal ["ghostty"];
+    commands.default.terminal = with lib; optionals cfg.defaultTerminal ["${getExe pkgs.ghostty}" "+new-window"];
   };
+
   home.ifEnabled = {
     programs.ghostty = {
       enable = true;
-      enableZshIntegration = true;
+      systemd.enable = true;
       settings = {
-        window-padding-x = 10;
-        window-padding-y = 5;
-        window-padding-balance = true;
+        confirm-close-surface = false;
       };
     };
   };

@@ -1,12 +1,15 @@
 {delib, ...}:
 delib.module {
   name = "programs.atuin";
-  options = delib.singleEnableOption true;
+  options = delib.singleEnableOption false;
+
   home.ifEnabled = {
     programs.atuin = {
       enable = true;
-      enableZshIntegration = true;
-      flags = ["--disable-up-arrow"];
+      daemon.enable = true;
+      flags = [
+        "--disable-up-arrow"
+      ];
     };
   };
 }

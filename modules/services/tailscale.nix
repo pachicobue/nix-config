@@ -7,6 +7,7 @@ delib.module {
       enable = true;
       openFirewall = true;
       useRoutingFeatures = "client";
+      extraUpFlags = ["--ssh"];
     };
   };
 }

@@ -1,11 +1,7 @@
-{
-  delib,
-  host,
-  ...
-}:
+{delib, ...}:
 delib.module {
   name = "services.pipewire";
-  options = delib.singleEnableOption host.isPC;
+  options = delib.singleEnableOption false;
   nixos.ifEnabled = {
     security.rtkit.enable = true;
     services.pipewire = {

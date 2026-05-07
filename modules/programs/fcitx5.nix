@@ -6,16 +6,18 @@
 }:
 delib.module {
   name = "programs.fcitx5";
-  options = delib.singleEnableOption host.guiFeatured;
+  options = delib.singleEnableOption false;
+
   home.ifEnabled = {
     i18n.inputMethod = {
       enable = true;
       type = "fcitx5";
       fcitx5 = {
         waylandFrontend = host.waylandFeatured;
-        addons = with pkgs; [fcitx5-mozc];
-        ignoreUserConfig = true;
-        settings.globalOptions = {
+        addons = with pkgs; [
+          fcitx5-mozc
+        ];
+        settings.inputMethod = {
           GroupOrder = {
             "0" = "Default";
           };
@@ -31,10 +33,6 @@ delib.module {
           "Groups/0/Items/1" = {
             Name = "mozc";
             Layout = "";
-          };
-          Hotkey = {
-            ActivateKeys = "0=Henkan";
-            DeactivateKeys = "0=Muhenkan";
           };
         };
       };

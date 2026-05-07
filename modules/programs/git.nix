@@ -5,7 +5,7 @@
 }:
 delib.module {
   name = "programs.git";
-  options = delib.singleEnableOption true;
+  options = delib.singleEnableOption false;
 
   nixos.ifEnabled = {
     environment.systemPackages = [pkgs.git pkgs.gh];
@@ -28,12 +28,13 @@ delib.module {
           };
           init.defaultBranch = "main";
           pull.rebase = true;
-          credential.helper = "!gh auth git-credential";
+          credential = {
+            "https://github.com".helper = "!gh auth git-credential";
+          };
         };
       };
       lazygit = {
         enable = true;
-        enableZshIntegration = true;
       };
     };
   };

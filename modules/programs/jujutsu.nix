@@ -1,7 +1,8 @@
 {delib, ...}:
 delib.module {
   name = "programs.jujutsu";
-  options = delib.singleEnableOption true;
+  options = delib.singleEnableOption false;
+
   home.ifEnabled = {myconfig, ...}: let
     inherit (myconfig.constants) gpg userEmail userHandleName;
   in {
@@ -14,7 +15,7 @@ delib.module {
           key = gpg;
         };
         git = {
-          "sign-on-push" = true;
+          sign-on-push = true;
         };
         user = {
           name = userHandleName;
@@ -22,5 +23,6 @@ delib.module {
         };
       };
     };
+    programs.jjui.enable = true;
   };
 }

@@ -1,20 +1,21 @@
-{delib, ...}:
+{
+  delib,
+  homeconfig,
+  ...
+}:
 delib.module {
   name = "programs.zsh";
-  options = delib.singleEnableOption true;
+  options = delib.singleEnableOption false;
 
-  nixos.ifEnabled = {
-    programs.zsh = {
-      enable = true;
-      enableCompletion = true;
-    };
-  };
-
-  home.ifEnabled = {myconfig, ...}: {
+  home.ifEnabled = {
+    home.shell.enableZshIntegration = true;
     programs.zsh = {
       enable = true;
       defaultKeymap = "emacs";
-      dotDir = "/home/${myconfig.constants.userName}/.config/zsh";
+      dotDir = "${homeconfig.xdg.configHome}/zsh";
+      shellAliases = {
+        e = "$EDITOR";
+      };
       autocd = true;
       autosuggestion.enable = true;
       enableCompletion = true;

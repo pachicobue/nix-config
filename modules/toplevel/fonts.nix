@@ -1,11 +1,12 @@
 {
   delib,
+  host,
   pkgs,
   ...
 }:
 delib.module {
-  name = "nixos.font";
-  options = delib.singleEnableOption true;
+  name = "fonts";
+  options = delib.singleEnableOption host.guiFeatured;
   nixos.ifEnabled = {
     fonts = {
       packages = with pkgs; [

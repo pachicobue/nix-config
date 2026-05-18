@@ -29,6 +29,10 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agenix-rekey = {
+      url = "github:oddlama/agenix-rekey";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     treefmt-nix.url = "github:numtide/treefmt-nix";
 
     niri-flake = {
@@ -68,7 +72,7 @@
   } @ inputs: let
     delib = denix.lib;
   in
-    flake-parts.lib.mkFlake {inherit inputs;} ({...}: {
+    flake-parts.lib.mkFlake {inherit inputs;} ({self, ...}: {
       # Denix による Nix設定
       # - HomeManagerはStandAlone型にする（非NixOSの運用を見据える）
       # - Nix Darwinは現状無視
@@ -106,9 +110,9 @@
                       "bluetooth"
                     ];
                     defaultByHostType = {
-                      desktop = ["cli" "gui" "usb"];
-                      laptop = ["cli" "gui" "usb"];
-                      server = ["usb"];
+                      desktop = ["cli" "gui" "usb" "bluetooth"];
+                      laptop = ["cli" "gui" "usb" "bluetooth"];
+                      server = [];
                       virtual = [];
                     };
                   };
@@ -121,15 +125,17 @@
         homeConfigurations = mkConfigurations "home";
       };
 
-      imports = with inputs; [
-        treefmt-nix.flakeModule
-      ];
-      systems = import nix-systems;
       #-------------------------------
       # Per-system outputs
       #-------------------------------
+      imports = with inputs; [
+        treefmt-nix.flakeModule
+        agenix-rekey.flakeModule
+      ];
+      systems = import nix-systems;
       perSystem = {
         system,
+        config,
         pkgs,
         ...
       }: {
@@ -148,9 +154,10 @@
               nh
               helix
               python3Minimal
+              rage
 
-              inputs.agenix.packages.${system}.default
               inputs.disko.packages.${system}.disko
+              config.agenix-rekey.package
 
               # Python script wrappers - Top-level APIs
               (writeScriptBin "switch" ''

@@ -9,5 +9,6 @@ delib.host {
     state-version.nixos = "25.05";
     state-version.home = "25.05";
     boot.loader = "grub";
+    agenix-rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGlZpCH7fP7wFGalhEG1/zJg/DRLtvzQ1Ibluwnvgabi root@plum";
   };
 }

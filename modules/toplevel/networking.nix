@@ -10,8 +10,10 @@ delib.module {
   options = with delib;
     moduleOptions {
       useDHCP = boolOption true;
-      defaultGateway = allowNull (strOption null);
+
+      # DHCP無効なサーバーでの設定
       nameservers = listOfOption str [];
+      defaultGateway = allowNull (strOption null);
       staticIp = attrsOfOption str {};
     };
 

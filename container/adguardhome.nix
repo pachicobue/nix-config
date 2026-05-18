@@ -22,11 +22,11 @@
 
       dhcp = {
         enabled = true;
-        # TODO: container モジュール設計が整ったら host.network.primaryNic に差し替える
+        # TODO: うまく渡したい
         interface_name = "eth0";
 
         dhcpv4 = {
-          # TODO: container モジュール設計が整ったら host.network.defaultGateway に差し替える
+          # TODO: うまく渡したい
           gateway_ip = "192.168.10.1";
           subnet_mask = "255.255.255.0";
           range_start = "192.168.10.200";

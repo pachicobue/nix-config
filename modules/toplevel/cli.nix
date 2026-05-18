@@ -17,7 +17,6 @@ delib.module {
       lsd.enable = true;
       procs.enable = true;
       ripgrep.enable = true;
-      starship.enable = true;
       tealdeer.enable = true;
       zoxide.enable = true;
       yazi.enable = true;

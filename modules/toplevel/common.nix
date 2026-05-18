@@ -12,6 +12,7 @@ delib.module {
         defaultEditor = true;
       };
       jujutsu.enable = true;
+      starship.enable = true;
       zsh.enable = true;
     };
     services = {

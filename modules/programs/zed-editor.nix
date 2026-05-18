@@ -14,9 +14,8 @@ delib.module {
     programs.zed-editor = {
       enable = true;
       installRemoteServer = true;
-      mutableUserSettings = false;
+      mutableUserSettings = true;
       userSettings = {
-        base_keymap = "None";
         code_lens = "on";
         current_line_highlight = "gutter";
         scroll_beyond_last_line = "off";
@@ -27,6 +26,7 @@ delib.module {
         neocmakelsp
         just-lsp
         lean
+        nixd
         nil
         python314Packages.python-lsp-server
         taplo

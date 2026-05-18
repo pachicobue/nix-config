@@ -14,7 +14,12 @@ delib.module {
       carapace.enable = true;
       claude-code.enable = true;
       fd.enable = true;
+      helix = {
+        enable = true;
+        defaultEditor = true;
+      };
       lsd.enable = true;
+      ouch.enable = true;
       procs.enable = true;
       ripgrep.enable = true;
       tealdeer.enable = true;

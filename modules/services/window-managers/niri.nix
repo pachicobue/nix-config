@@ -13,10 +13,6 @@ in
     name = "services.windowManager.niri";
     options = delib.singleEnableOption false;
 
-    nixos.ifEnabled = {
-      services.displayManager.sessionPackages = [pkgs.niri-stable];
-    };
-
     home.always = {
       imports = [inputs.niri-flake.homeModules.niri];
     };
@@ -43,6 +39,14 @@ in
         }
       ];
 
+      xdg.portal = {
+        enable = true;
+        extraPortals = with pkgs; [
+          xdg-desktop-portal-gtk
+          gnome-keyring
+        ];
+        config.niri.default = ["gtk"];
+      };
       # Authentication agentは固定(こだわりなし)
       services.hyprpolkitagent.enable = true;
 

@@ -7,10 +7,6 @@ delib.module {
       direnv.enable = true;
       git.enable = true;
       gnupg.enable = true;
-      helix = {
-        enable = true;
-        defaultEditor = true;
-      };
       jujutsu.enable = true;
       starship.enable = true;
       zsh.enable = true;

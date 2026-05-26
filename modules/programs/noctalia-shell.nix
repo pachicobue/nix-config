@@ -29,11 +29,22 @@ in
       commands.default.launcher = lib.optionals cfg.defaultLauncher (noctaliaCmd "launcher toggle");
     };
 
-    home.ifEnabled = {
+    home.ifEnabled = {myconfig, ...}: let
+      inherit (myconfig.commands.default) terminal;
+      pictureDir = myconfig.xdg.userDirs.pictures;
+    in {
       programs.noctalia-shell = {
         enable = true;
         settings = {
-          general = {lockOnSuspend = false;};
+          general = {
+            avatarImage = "${pictureDir}/pachico.png";
+            lockOnSuspend = false;
+          };
+          wallpaper = {
+            directory = "${pictureDir}/wallpapers";
+            automationEnabled = true;
+            randomIntervalSec = 60;
+          };
           bar = {
             position = "right";
             density = "spacious";
@@ -71,15 +82,8 @@ in
               ];
             };
           };
-          colorSchemes = {
-            useWallpaperColors = false;
-            schedulingMode = "location";
-          };
-          nightLight = {
-            enabled = true;
-            autoSchedule = true;
-            nightTemp = "4000";
-            dayTemp = "6500";
+          appLauncher = {
+            terminalCommand = "${toString terminal} -e";
           };
           idle = {
             enabled = true;

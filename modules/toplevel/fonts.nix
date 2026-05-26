@@ -9,23 +9,9 @@ delib.module {
   options = delib.singleEnableOption host.guiFeatured;
   nixos.ifEnabled = {
     fonts = {
-      packages = with pkgs; [
-        noto-fonts
-        noto-fonts-cjk-serif
-        noto-fonts-cjk-sans
-        noto-fonts-color-emoji
-        moralerspace-jpdoc
-      ];
+      packages = with pkgs; [noto-fonts];
       enableDefaultPackages = false;
       fontDir.enable = true;
-      fontconfig = {
-        defaultFonts = {
-          serif = ["Noto Serif CJK JP"];
-          sansSerif = ["Noto Sans CJK JP"];
-          monospace = ["Moralerspace Neon JPDOC"];
-          emoji = ["Noto Color Emoji"];
-        };
-      };
     };
   };
 }

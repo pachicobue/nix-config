@@ -47,7 +47,6 @@ delib.module {
       plymouth = {
         enable = cfg.enablePlymouth;
         logo = "${pkgs.nixos-icons}/share/icons/hicolor/256x256/apps/nix-snowflake-white.png";
-        theme = "breeze";
       };
 
       tmp.cleanOnBoot = true;

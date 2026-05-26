@@ -1,6 +1,5 @@
 {
   delib,
-  homeconfig,
   host,
   pkgs,
   lib,
@@ -11,14 +10,25 @@
 in
   delib.module {
     name = "services.windowManager.niri";
-    options = delib.singleEnableOption false;
+    options = with delib;
+      moduleOptions {
+        enable = boolOption false;
+        transparent = boolOption false;
+      };
 
     home.always = {
-      imports = [inputs.niri-flake.homeModules.niri];
+      imports = [
+        inputs.niri-flake.homeModules.niri
+        inputs.niri-flake.homeModules.stylix
+      ];
     };
-    home.ifEnabled = {myconfig, ...}: let
+    home.ifEnabled = {
+      myconfig,
+      cfg,
+      ...
+    }: let
       inherit (myconfig.commands.default) browser terminal launcher;
-      pictureDir = homeconfig.xdg.userDirs.pictures;
+      pictureDir = myconfig.xdg.userDirs.pictures;
     in {
       assertions = [
         {
@@ -45,14 +55,23 @@ in
           xdg-desktop-portal-gtk
           gnome-keyring
         ];
-        config.niri.default = ["gtk"];
+        config.niri = {
+          "org.freedesktop.impl.portal.FileChooser" = ["gtk"];
+          "org.freedesktop.impl.portal.Secret" = ["gnome-keyring"];
+        };
       };
       # Authentication agentは固定(こだわりなし)
       services.hyprpolkitagent.enable = true;
+      services.gnome-keyring = {
+        enable = true;
+        components = ["pkcs11" "secrets"];
+      };
+      home.packages = with pkgs; [gcr];
 
       programs.niri = {
         enable = true;
         settings = {
+          prefer-no-csd = false;
           xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
           hotkey-overlay.skip-at-startup = true;
           cursor = {hide-when-typing = true;};
@@ -66,13 +85,11 @@ in
             {command = terminal;}
             {command = terminal;}
             {command = terminal;}
-            {command = niriAction "consume-window-into-column";}
           ];
           layout = {
             gaps = 8;
             always-center-single-column = true;
             center-focused-column = "never";
-            background-color = "transparent";
             default-column-width = {proportion = 1. / 2.;};
             preset-column-widths = [
               {proportion = 1. / 2.;}
@@ -87,9 +104,23 @@ in
                 bottom-right = 20.0;
               };
               clip-to-geometry = true;
+              draw-border-with-background = false;
+            }
+            {
+              matches = [{is-active = false;}];
+              opacity =
+                if cfg.transparent
+                then 0.8
+                else 1.0;
+            }
+            {
+              matches = [{is-active = true;}];
+              opacity =
+                if cfg.transparent
+                then 0.9
+                else 1.0;
             }
           ];
-
           layer-rules = [
             {
               matches = [{namespace = "^noctalia-overview*";}];
@@ -97,12 +128,15 @@ in
             }
           ];
           overview.workspace-shadow.enable = true;
-          # debug.honor-xdg-activation-with-invalid-serial = true;
+          debug = {
+            honor-xdg-activation-with-invalid-serial = {};
+          };
           screenshot-path = "${pictureDir}/Screenshots/%Y%m%d_%H%M%s.png";
 
           binds = {
             "Mod+Shift+Slash" = {action.show-hotkey-overlay = [];};
             "Ctrl+Alt+Delete" = {action.quit = [];};
+            "Ctrl+Alt+Q" = {action.quit = [];};
             "Mod+Q" = {
               repeat = false;
               action.close-window = [];
@@ -161,6 +195,9 @@ in
 
             "Mod+V" = {action.toggle-window-floating = [];};
             "Mod+W" = {action.toggle-column-tabbed-display = [];};
+
+            "Mod+S" = {action.screenshot = {show-pointer = false;};};
+            "Mod+Shift+S" = {action.screenshot-screen = {show-pointer = false;};};
           };
         };
       };

@@ -1,8 +1,4 @@
-{
-  delib,
-  config,
-  ...
-}:
+{delib, ...}:
 delib.host {
   name = "berry";
   system = "x86_64-linux";
@@ -12,9 +8,7 @@ delib.host {
   nixos = {
     age.secrets.obsidian-livesync.rekeyFile = ../../secrets/obsidian-livesync.age;
   };
-  myconfig = {myconfig, ...}: let
-    secrets = config.age.secrets;
-  in {
+  myconfig = {myconfig, ...}: {
     state-version.nixos = "25.05";
     state-version.home = "25.05";
     agenix-rekey = {
@@ -30,7 +24,7 @@ delib.host {
       };
       obsidianLivesync = {
         enable = true;
-        bindAddress = "0.0.0.0";
+        tailscaleServe = true;
         adminPassFile = myconfig.agenix-rekey.secretPaths.obsidian-livesync;
       };
     };

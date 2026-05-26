@@ -13,6 +13,8 @@ delib.module {
       bindAddress = strOption "127.0.0.1";
       adminUser = strOption "admin";
       adminPassFile = pathOption "";
+      tailscaleServe = boolOption false;
+      tailscaleHttpsPort = portOption 443;
     };
 
   nixos.ifEnabled = {cfg, ...}: let
@@ -67,6 +69,30 @@ delib.module {
       };
     };
 
-    networking.firewall.allowedTCPPorts = [cfg.port];
+    networking.firewall.allowedTCPPorts = lib.mkIf (!cfg.tailscaleServe) [cfg.port];
+
+    systemd.services.obsidian-livesync-tailscale-serve = lib.mkIf cfg.tailscaleServe {
+      description = "Tailscale HTTPS serve for obsidian-livesync";
+      after = ["tailscaled.service" "couchdb.service" "network-online.target"];
+      wants = ["network-online.target"];
+      wantedBy = ["multi-user.target"];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+        ExecStartPre = pkgs.writeShellScript "wait-for-tailscale" ''
+          for i in $(seq 30); do
+            state=$(${pkgs.tailscale}/bin/tailscale status --json 2>/dev/null | ${pkgs.jq}/bin/jq -r '.BackendState // empty')
+            if [ "$state" = "Running" ]; then
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Tailscale did not reach Running state within 60 seconds"
+          exit 1
+        '';
+        ExecStart = "${pkgs.tailscale}/bin/tailscale serve --bg --https ${toString cfg.tailscaleHttpsPort} http://127.0.0.1:${toString cfg.port}";
+        ExecStop = "${pkgs.tailscale}/bin/tailscale serve reset";
+      };
+    };
   };
 }

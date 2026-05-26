@@ -40,7 +40,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     noctalia-shell = {
-      url = "github:noctalia-dev/noctalia-shell";
+      url = "github:noctalia-dev/noctalia-shell/legacy-v4";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     stylix = {
@@ -72,7 +72,7 @@
   } @ inputs: let
     delib = denix.lib;
   in
-    flake-parts.lib.mkFlake {inherit inputs;} ({self, ...}: {
+    flake-parts.lib.mkFlake {inherit inputs;} ({...}: {
       # Denix による Nix設定
       # - HomeManagerはStandAlone型にする（非NixOSの運用を見据える）
       # - Nix Darwinは現状無視
@@ -148,9 +148,6 @@
         devShells = {
           default = pkgs.mkShell {
             packages = with pkgs; [
-              git
-              gh
-              jujutsu
               nh
               helix
               python3Minimal

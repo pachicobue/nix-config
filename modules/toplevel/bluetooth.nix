@@ -8,9 +8,13 @@ delib.module {
   options = with delib;
     moduleOptions {
       enable = boolOption host.bluetoothFeatured;
+      withApplet = boolOption host.guiFeatured;
     };
 
-  myconfig.ifEnabled = {
-    services.blueman.enable = true;
+  myconfig.ifEnabled = {cfg, ...}: {
+    services.blueman = {
+      enable = true;
+      inherit (cfg) withApplet;
+    };
   };
 }

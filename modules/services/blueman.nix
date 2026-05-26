@@ -1,7 +1,11 @@
 {delib, ...}:
 delib.module {
   name = "services.blueman";
-  options = delib.singleEnableOption false;
+  options = with delib;
+    moduleOptions {
+      enable = boolOption false;
+      withApplet = boolOption false;
+    };
   nixos.ifEnabled = {
     hardware.bluetooth = {
       enable = true;
@@ -9,7 +13,9 @@ delib.module {
     };
     services.blueman = {
       enable = true;
-      withApplet = true;
     };
+  };
+  home.ifEnabled = {cfg, ...}: {
+    services.blueman-applet.enable = cfg.withApplet;
   };
 }

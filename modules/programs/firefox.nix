@@ -2,7 +2,6 @@
   delib,
   lib,
   pkgs,
-  homeconfig,
   ...
 }:
 delib.module {
@@ -17,10 +16,10 @@ delib.module {
     commands.default.browser = with lib; optionals cfg.defaultBrowser ["${getExe pkgs.firefox-beta}"];
   };
 
-  home.ifEnabled = {
+  home.ifEnabled = {myconfig, ...}: {
     programs.firefox = {
       enable = true;
-      configPath = "${homeconfig.xdg.configHome}/mozilla/firefox";
+      configPath = "${myconfig.xdg.configHome}/mozilla/firefox";
       profiles.default = {
         isDefault = true;
         search = {

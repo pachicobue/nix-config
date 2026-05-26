@@ -1,18 +1,14 @@
-{
-  delib,
-  homeconfig,
-  ...
-}:
+{delib, ...}:
 delib.module {
   name = "programs.zsh";
   options = delib.singleEnableOption false;
 
-  home.ifEnabled = {
+  home.ifEnabled = {myconfig, ...}: {
     home.shell.enableZshIntegration = true;
     programs.zsh = {
       enable = true;
       defaultKeymap = "emacs";
-      dotDir = "${homeconfig.xdg.configHome}/zsh";
+      dotDir = "${myconfig.xdg.configHome}/zsh";
       shellAliases = {
         e = "$EDITOR";
       };

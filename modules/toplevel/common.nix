@@ -4,10 +4,10 @@ delib.module {
 
   myconfig.always = {
     programs = {
-      direnv.enable = true;
       git.enable = true;
       gnupg.enable = true;
       jujutsu.enable = true;
+      jq.enable = true;
       starship.enable = true;
       zsh.enable = true;
     };

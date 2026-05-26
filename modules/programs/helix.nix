@@ -65,27 +65,6 @@ delib.module {
         };
       };
 
-      extraPackages = with pkgs; [
-        bash-language-server
-        clang-tools
-        neocmakelsp
-        vscode-json-languageserver
-        just-lsp
-        lean
-        marksman
-        nil
-        ty
-        ruff
-        python314Packages.python-lsp-server
-        rust-analyzer
-        taplo
-        tinymist
-        yaml-language-server
-
-        alejandra
-
-        lldb
-      ];
       languages.language = with pkgs; [
         {
           name = "nix";
@@ -94,5 +73,25 @@ delib.module {
         }
       ];
     };
+
+    home.packages = with pkgs; [
+      bash-language-server
+      clang-tools
+      neocmakelsp
+      vscode-json-languageserver
+      just-lsp
+      lean
+      marksman
+      nil
+      ty
+      ruff
+      python314Packages.python-lsp-server
+      rust-analyzer
+      taplo
+      tinymist
+      yaml-language-server
+      alejandra
+      lldb
+    ];
   };
 }

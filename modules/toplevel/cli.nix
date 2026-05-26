@@ -9,6 +9,7 @@ delib.module {
 
   myconfig.ifEnabled = {
     programs = {
+      direnv.enable = true;
       atuin.enable = true;
       bottom.enable = true;
       carapace.enable = true;

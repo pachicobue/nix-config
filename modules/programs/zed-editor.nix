@@ -20,18 +20,15 @@ delib.module {
         current_line_highlight = "gutter";
         scroll_beyond_last_line = "off";
         helix_mode = true;
+        assistant = {
+          enabled = true;
+          version = "2";
+          default_model = {
+            provider = "anthropic";
+            model = "claude-sonnet-4-20250514";
+          };
+        };
       };
-      extraPackages = with pkgs; [
-        bash-language-server
-        neocmakelsp
-        just-lsp
-        lean
-        nixd
-        nil
-        python314Packages.python-lsp-server
-        taplo
-        tinymist
-      ];
       extensions = [
         "basher"
         "nix"
@@ -45,5 +42,17 @@ delib.module {
         "lean"
       ];
     };
+
+    home.packages = with pkgs; [
+      bash-language-server
+      neocmakelsp
+      just-lsp
+      lean
+      nixd
+      nil
+      python314Packages.python-lsp-server
+      taplo
+      tinymist
+    ];
   };
 }

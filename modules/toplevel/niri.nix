@@ -4,13 +4,11 @@ delib.module {
   options = with delib;
     moduleOptions {
       enable = boolOption false;
-      transparent = boolOption false;
     };
 
-  myconfig.ifEnabled = {cfg, ...}: {
+  myconfig.ifEnabled = {...}: {
     services.windowManager.niri = {
       enable = true;
-      inherit (cfg) transparent;
     };
     services.pipewire.enable = true;
   };

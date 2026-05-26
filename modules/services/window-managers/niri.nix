@@ -13,14 +13,10 @@ in
     options = with delib;
       moduleOptions {
         enable = boolOption false;
-        transparent = boolOption false;
       };
 
     home.always = {
-      imports = [
-        inputs.niri-flake.homeModules.niri
-        inputs.niri-flake.homeModules.stylix
-      ];
+      imports = [inputs.niri-flake.homeModules.niri];
     };
     home.ifEnabled = {
       myconfig,
@@ -30,6 +26,7 @@ in
       inherit (myconfig.commands.default) browser terminal launcher;
       pictureDir = myconfig.xdg.userDirs.pictures;
     in {
+      imports = [inputs.niri-flake.homeModules.stylix];
       assertions = [
         {
           assertion = host.waylandFeatured;
@@ -105,20 +102,6 @@ in
               };
               clip-to-geometry = true;
               draw-border-with-background = false;
-            }
-            {
-              matches = [{is-active = false;}];
-              opacity =
-                if cfg.transparent
-                then 0.8
-                else 1.0;
-            }
-            {
-              matches = [{is-active = true;}];
-              opacity =
-                if cfg.transparent
-                then 0.9
-                else 1.0;
             }
           ];
           layer-rules = [

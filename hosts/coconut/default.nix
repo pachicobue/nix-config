@@ -2,7 +2,7 @@
 delib.host {
   name = "coconut";
   system = "x86_64-linux";
-  # rice = "catppuccin-mocha";
+  rice = "catppuccin-mocha-transparent";
   type = "desktop";
   features = [
     "wayland"

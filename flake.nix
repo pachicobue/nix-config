@@ -51,16 +51,22 @@
       url = "github:helix-editor/helix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    llm-agent = {
-      url = "github:numtide/llm-agents.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         home-manager.follows = "home-manager";
       };
+    };
+
+    llm-agent = {
+      url = "github:numtide/llm-agents.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.treefmt-nix.follows = "treefmt-nix";
+    };
+    claude-plugins-official = {
+      url = "github:anthropics/claude-plugins-official";
+      flake = false;
     };
   };
 
@@ -74,7 +80,7 @@
   in
     flake-parts.lib.mkFlake {inherit inputs;} ({...}: {
       # Denix による Nix設定
-      # - HomeManagerはStandAlone型にする（非NixOSの運用を見据える）
+      # - HomeManagerはNixos Module
       # - Nix Darwinは現状無視
       flake = let
         mkConfigurations = moduleSystem:
@@ -143,6 +149,8 @@
           projectRootFile = "flake.nix";
           programs = {
             alejandra.enable = true;
+            taplo.enable = true;
+            shfmt.enable = true;
           };
         };
         devShells = {
@@ -184,8 +192,5 @@
           };
         };
       };
-
-      # deploy = import ./deploy.nix args;
-      # checks = import ./check.nix args;
     });
 }

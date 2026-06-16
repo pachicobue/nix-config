@@ -43,7 +43,7 @@ in
           wallpaper = {
             directory = "${pictureDir}/wallpapers";
             automationEnabled = true;
-            randomIntervalSec = 60;
+            randomIntervalSec = 600;
           };
           bar = {
             position = "right";

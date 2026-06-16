@@ -9,7 +9,7 @@ delib.module {
 
   home.ifEnabled = {
     home.packages = with pkgs; [
-      rm-rm-improved
+      rm-improved
     ];
   };
 }

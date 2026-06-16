@@ -22,6 +22,7 @@ delib.module {
       lsd.enable = true;
       ouch.enable = true;
       procs.enable = true;
+      rip.enable = true;
       ripgrep.enable = true;
       tealdeer.enable = true;
       zoxide.enable = true;

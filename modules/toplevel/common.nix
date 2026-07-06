@@ -7,6 +7,7 @@ delib.module {
       git.enable = true;
       gnupg.enable = true;
       jujutsu.enable = true;
+      devenv.enable = true;
       jq.enable = true;
       starship.enable = true;
       zsh.enable = true;

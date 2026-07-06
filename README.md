@@ -18,6 +18,13 @@ Nix OSの設定ファイル
 |    |coconut|plum   |berry |pi4   |
 |Type|Desktop|Desktop|Server|Server|
 
+
+```
+switch <hostname>                      # ローカルへ適用
+switch <hostname> --remote             # SSH経由でリモートへ適用 (root@<hostname>)
+switch <hostname> --remote user@host  # 任意のSSHターゲットへ適用
+```
+
 ## Credits
 
 - [yunfachi/denix](https://github.com/yunfachi/denix)

@@ -27,6 +27,8 @@ delib.module {
       tealdeer.enable = true;
       zoxide.enable = true;
       yazi.enable = true;
+      television.enable = true;
+      nix-search-tv.enable = true;
     };
   };
 }

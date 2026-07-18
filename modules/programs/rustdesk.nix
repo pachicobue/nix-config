@@ -8,6 +8,6 @@ delib.module {
   options = delib.singleEnableOption false;
 
   home.ifEnabled = {
-    home.packages = [pkgs.rustdesk-flutter];
+    home.packages = [pkgs.rustdesk];
   };
 }

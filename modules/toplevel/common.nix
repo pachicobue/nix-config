@@ -10,6 +10,7 @@ delib.module {
       devenv.enable = true;
       jq.enable = true;
       starship.enable = true;
+      zellij.enable = true;
       zsh.enable = true;
     };
     services = {

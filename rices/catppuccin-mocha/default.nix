@@ -18,4 +18,8 @@ delib.rice {
       };
     };
   };
+
+  home = {...}: {
+    home.pointerCursor.enable = true;
+  };
 }

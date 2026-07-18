@@ -1,8 +1,4 @@
-{
-  delib,
-  lib,
-  ...
-}:
+{delib, ...}:
 delib.module {
   name = "services.immich";
   options = with delib;

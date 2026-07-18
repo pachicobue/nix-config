@@ -20,6 +20,8 @@ delib.host {
       emulatedSystems = ["aarch64-linux"];
     };
 
+    rustdesk.enable = true;
+
     niri.enable = true;
     noctalia-shell.enable = true;
 

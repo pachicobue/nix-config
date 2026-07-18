@@ -50,11 +50,14 @@ in
         enable = true;
         extraPortals = with pkgs; [
           xdg-desktop-portal-gtk
+          xdg-desktop-portal-gnome
           gnome-keyring
         ];
         config.niri = {
+          default = ["gnome" "gtk"];
           "org.freedesktop.impl.portal.FileChooser" = ["gtk"];
           "org.freedesktop.impl.portal.Secret" = ["gnome-keyring"];
+          "org.freedesktop.impl.portal.ScreenCast" = ["gnome"];
         };
       };
       # Authentication agentは固定(こだわりなし)

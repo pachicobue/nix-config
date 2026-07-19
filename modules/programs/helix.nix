@@ -34,6 +34,9 @@ delib.module {
           smart-tab = {
             enable = true;
           };
+          soft-wrap = {
+            enable = true;
+          };
         };
         keys = {
           insert = {

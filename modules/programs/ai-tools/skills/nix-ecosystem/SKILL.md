@@ -2,12 +2,16 @@
 name: nix-ecosystem
 description: >
   Expert knowledge of the Nix ecosystem — Nix language, NixOS module system,
-  Flakes, derivations/packaging, and home-manager. Use this skill whenever:
-  the user asks about Nix syntax or errors, writes or debugs NixOS/home-manager
-  configuration, works with flake.nix or flake.lock, packages software with
-  stdenv/mkDerivation, asks about nixpkgs lib functions, or uses any .nix file.
-  Trigger even if the user doesn't say "Nix" explicitly — .nix file extensions,
-  flake.nix, home-manager options, or nixpkgs references are enough.
+  Flakes, derivations/packaging, home-manager, and this repo's denix/delib
+  framework (delib.module, myconfig.*, hosts/, rices/, modules/programs,
+  modules/services). Use this skill for ANY task that touches a .nix file,
+  even ones that look small or mechanical — changing a single option value,
+  swapping a package reference, looking up a package's correct pname on
+  nixpkgs, adding a host, or debugging `nix flake check`/`switch` failures
+  all count. Trigger even if the user never says "Nix" explicitly: a .nix
+  path, flake.nix/flake.lock, a nixpkgs package name, or repo-specific terms
+  like myconfig, stylix, agenix, or hosts/rices/modules paths are enough on
+  their own.
 ---
 
 # Nix Ecosystem Knowledge

@@ -16,7 +16,6 @@ in
     home.ifEnabled = {
       home.packages = with pkgs; [
         llm-agents.ccusage
-        bubblewrap
       ];
       programs.mcp.enable = true;
       programs.claude-code = {

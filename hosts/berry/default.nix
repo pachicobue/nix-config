@@ -13,15 +13,13 @@ delib.host {
       secrets = [];
     };
     boot.loader = "limine";
+    networking.wakeOnLan = true;
+
     services = {
       immich = {
         enable = true;
         bindHost = "0.0.0.0";
         mediaLocation = "/media/immich";
-      };
-      rustdesk = {
-        enable = true;
-        relayHosts = ["berry"];
       };
     };
   };

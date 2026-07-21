@@ -17,6 +17,8 @@ delib.module {
       staticIpv4 = attrsOfOption str {};
       # ULA (Unique Local Address) 等、既存のDHCP/SLAACに追加するIPv6静的アドレス
       staticIpv6 = attrsOfOption str {};
+      # Wake-on-LANでの起動を受け付けるか (要BIOS/UEFI側の対応する設定)
+      wakeOnLan = boolOption false;
     };
 
   nixos.always = {cfg, ...}: let
@@ -45,5 +47,13 @@ delib.module {
     environment.systemPackages = with pkgs; [
       ethtool
     ];
+
+    # インターフェース名を問わず、有線NIC全体にWoLのmagic packet受信を許可する
+    systemd.network.links = lib.mkIf cfg.wakeOnLan {
+      "50-wake-on-lan" = {
+        matchConfig.Type = "ether";
+        linkConfig.WakeOnLan = "magic";
+      };
+    };
   };
 }

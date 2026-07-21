@@ -13,7 +13,10 @@ delib.host {
     agenix-rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGYJCBLXavqNCenU0yyAkNMD8fihPVb4H/VqD/Ssa3IP root@coconut";
     state-version.nixos = "25.05";
     state-version.home = "25.05";
-    networking = {useDHCP = true;};
+    networking = {
+      useDHCP = true;
+      wakeOnLan = true;
+    };
     boot = {
       loader = "limine";
       # aarch64バイナリをエミュレーション（Raspberry Pi用ビルドのため）

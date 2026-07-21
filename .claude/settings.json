@@ -1,4 +1,18 @@
 {
+  "sandbox": {
+    "failIfUnavailable": true,
+    "excludedCommands": ["nix flake check*", "nix build*"],
+    "filesystem": {
+      "allowWrite": [
+        "~/.cache/nix",
+        "~/.local/state/nix",
+        "~/.local/share/nix"
+      ]
+    },
+    "network": {
+      "allowAllUnixSockets": true
+    }
+  },
   "permissions": {
     "allow": [
       "Bash(nix flake check)",

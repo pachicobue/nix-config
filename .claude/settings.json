@@ -1,7 +1,7 @@
 {
   "sandbox": {
     "failIfUnavailable": true,
-    "excludedCommands": ["nix flake check*", "nix build*"],
+    "excludedCommands": ["nix flake check*", "nix build*", "agenix view*"],
     "filesystem": {
       "allowWrite": [
         "~/.cache/nix",

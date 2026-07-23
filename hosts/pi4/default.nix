@@ -28,6 +28,10 @@ delib.host {
           coconut = "08:bf:b8:a5:74:f7";
         };
       };
+      uptime-kuma = {
+        enable = true;
+        bindHost = "0.0.0.0";
+      };
     };
   };
 }

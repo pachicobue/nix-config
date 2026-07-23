@@ -15,14 +15,11 @@ Nix OSの設定ファイル
 
 ## インストール・更新
 
-|    |coconut|plum   |berry |pi4   |
-|Type|Desktop|Desktop|Server|Server|
-
 
 ```
 switch <hostname>                      # ローカルへ適用
 switch <hostname> --remote             # SSH経由でリモートへ適用 (root@<hostname>)
-switch <hostname> --remote user@host  # 任意のSSHターゲットへ適用
+switch <hostname> --remote user@host   # 任意のSSHターゲットへ適用
 ```
 
 ## Credits

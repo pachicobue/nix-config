@@ -145,6 +145,13 @@
         pkgs,
         ...
       }: {
+        # このリポジトリのagenix-rekeyシークレットはNixOSレベル(age.secrets)のみで
+        # home-manager側では使わないため、homeConfigurationsの収集自体を止める
+        # (自動収集はstylix等の追加inputを含まない簡易評価で壊れるため)
+        agenix-rekey = {
+          # collectHomeManagerConfigurations = false;
+          homeConfigurations = {};
+        };
         treefmt = {
           projectRootFile = "flake.nix";
           programs = {

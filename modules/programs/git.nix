@@ -8,7 +8,7 @@ delib.module {
   options = delib.singleEnableOption false;
 
   nixos.ifEnabled = {
-    environment.systemPackages = [pkgs.git pkgs.gh];
+    environment.systemPackages = with pkgs; [git gh forgejo-cli];
   };
 
   home.ifEnabled = {myconfig, ...}: let

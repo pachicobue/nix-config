@@ -10,10 +10,9 @@ delib.host {
     state-version.home = "25.05";
     agenix-rekey = {
       hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDYQA2MdJUMuWPQSQwv/ABoovP9cyxpq/t0vLUIJgGgs root@berry";
-      secrets = ["forgejo-runner" "atticd"];
+      secrets = ["forgejo-runner"];
     };
     boot.loader = "limine";
-    boot.emulatedSystems = ["aarch64-linux"];
     networking.wakeOnLan = true;
 
     services = {
@@ -29,10 +28,6 @@ delib.host {
       forgejo-runner = {
         enable = true;
         uuid = "675e14c5-1b28-4ad9-8559-a1728afe7b14";
-      };
-      atticd = {
-        enable = true;
-        bindHost = "0.0.0.0";
       };
     };
   };

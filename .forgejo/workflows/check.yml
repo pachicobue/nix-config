@@ -1,0 +1,13 @@
+name: check
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: native
+    steps:
+      - uses: actions/checkout@v4
+      - name: nix flake check
+        run: nix flake check

@@ -44,7 +44,7 @@ delib.module {
         };
         # hostPackagesを設定すると上流のデフォルト(bash/coreutils/curl/gawk/
         # gitMinimal/gnused/nodejs/wget)は丸ごと上書きされる(マージされない)ため
-        # ここで全部再列挙した上でnix/attic-clientを追加する
+        # ここで全部再列挙した上でnix flake checkに必要なnixを追加する
         hostPackages = with pkgs; [
           bash
           coreutils
@@ -55,7 +55,6 @@ delib.module {
           nodejs
           wget
           nix
-          attic-client
         ];
       };
     };

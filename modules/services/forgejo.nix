@@ -1,5 +1,6 @@
 {
   delib,
+  host,
   pkgs,
   ...
 }:
@@ -27,6 +28,10 @@ delib.module {
         server = {
           HTTP_ADDR = cfg.bindHost;
           HTTP_PORT = cfg.port;
+          # 未設定だとGiteaのデフォルト値"localhost"にフォールバックし、
+          # Actionsのログ等のリンクがlocalhost:portで生成されLAN内の他端末から開けなくなる
+          DOMAIN = host.name;
+          ROOT_URL = "http://${host.name}:${toString cfg.port}/";
         };
         "service.explore" = {
           REQUIRE_SIGNIN_VIEW = true;

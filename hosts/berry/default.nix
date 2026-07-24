@@ -13,6 +13,7 @@ delib.host {
       secrets = ["forgejo-runner" "atticd"];
     };
     boot.loader = "limine";
+    boot.emulatedSystems = ["aarch64-linux"];
     networking.wakeOnLan = true;
 
     services = {

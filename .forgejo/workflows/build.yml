@@ -1,0 +1,33 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: native
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: attic login
+        env:
+          ATTIC_TOKEN: ${{ secrets.ATTIC_TOKEN }}
+        run: attic login ci http://localhost:8080 "$ATTIC_TOKEN"
+
+      - name: ensure cache exists and is public
+        run: |
+          attic cache create nix-config || true
+          attic cache configure nix-config --public
+          attic cache info nix-config
+
+      - name: nix flake check
+        run: nix flake check
+
+      - name: build & push to attic
+        run: |
+          for host in berry coconut pi4 plum; do
+            nix build ".#nixosConfigurations.$host.config.system.build.toplevel" \
+              --print-out-paths --no-link \
+              | attic push nix-config --stdin
+          done

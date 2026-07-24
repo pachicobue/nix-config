@@ -33,7 +33,7 @@ delib.module {
 
     services.gitea-actions-runner = {
       package = pkgs.forgejo-runner;
-      instances.default = {
+      instances.berry-native = {
         enable = true;
         name = host.name;
         inherit (cfg) url labels;
@@ -42,6 +42,21 @@ delib.module {
           inherit (cfg) url labels uuid;
           token_url = "file://${myconfig.agenix-rekey.secretPaths.forgejo-runner}";
         };
+        # hostPackagesを設定すると上流のデフォルト(bash/coreutils/curl/gawk/
+        # gitMinimal/gnused/nodejs/wget)は丸ごと上書きされる(マージされない)ため
+        # ここで全部再列挙した上でnix/attic-clientを追加する
+        hostPackages = with pkgs; [
+          bash
+          coreutils
+          curl
+          gawk
+          gitMinimal
+          gnused
+          nodejs
+          wget
+          nix
+          attic-client
+        ];
       };
     };
   };

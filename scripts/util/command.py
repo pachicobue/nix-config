@@ -101,7 +101,6 @@ def try_run_command(
     cmd: List[str],
     *,
     cwd: Optional[Union[str, Path]] = None,
-    log_command: bool = True,
     log_errors: bool = True,
 ) -> Optional[subprocess.CompletedProcess]:
     """
@@ -110,21 +109,13 @@ def try_run_command(
     Args:
         cmd: Command and arguments as list
         cwd: Working directory for the command
-        log_command: Whether to log the command being executed
         log_errors: Whether to log errors
 
     Returns:
         CompletedProcess if successful, None if failed
     """
     try:
-        return run_command(
-            cmd,
-            cwd=cwd,
-            capture_output=True,
-            check=True,
-            log_command=log_command,
-            log_success=False,
-        )
+        return run_command(cmd, cwd=cwd, capture_output=True, check=True)
     except subprocess.CalledProcessError as e:
         if log_errors:
             error(f"Command failed: {' '.join(cmd)}")

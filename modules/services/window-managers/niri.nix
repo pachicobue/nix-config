@@ -75,11 +75,35 @@ delib.module {
           focus-follows-mouse.enable = true;
           touchpad.dwt = true;
         };
+        # [browser][terminal][terminal x2 (縦積み)] の列構成を作る。
+        # プロセスの起動順とウィンドウが実際にマップされる順は一致しない
+        # (例: browserの方がterminalより起動が遅くcolumnが後ろにずれる) ため、
+        # 固定sleepではなくwindows数の増加を待ってから次をspawnする。
         spawn-at-startup = [
-          {command = browser;}
-          {command = terminal;}
-          {command = terminal;}
-          {command = terminal;}
+          {
+            sh = ''
+              wait_for_new_window() {
+                before=$1
+                for _ in $(seq 1 100); do
+                  [ "$(niri msg -j windows | jq 'length')" -gt "$before" ] && return
+                  sleep 0.1
+                done
+              }
+              spawn_and_wait() {
+                n=$(niri msg -j windows | jq 'length')
+                niri msg action spawn -- "$@"
+                wait_for_new_window "$n"
+              }
+
+              spawn_and_wait ${lib.escapeShellArgs browser}
+              spawn_and_wait ${lib.escapeShellArgs terminal}
+              spawn_and_wait ${lib.escapeShellArgs terminal}
+              spawn_and_wait ${lib.escapeShellArgs terminal}
+
+              niri msg action focus-column-left
+              niri msg action consume-window-into-column
+            '';
+          }
         ];
         layout = {
           gaps = 8;

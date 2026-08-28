@@ -50,12 +50,12 @@ in
           };
           theme = "dark";
         };
-        plugins = [
-          "${inputs.claude-plugins-official}/plugins/skill-creator"
-          "${inputs.claude-plugins-official}/plugins/hookify"
-          "${inputs.claude-plugins-official}/plugins/code-simplifier"
-          "${inputs.claude-plugins-official}/plugins/claude-md-management"
-        ];
+        plugins = {
+          skill-creator = "${inputs.claude-plugins-official}/plugins/skill-creator";
+          hookify = "${inputs.claude-plugins-official}/plugins/hookify";
+          code-simplifier = "${inputs.claude-plugins-official}/plugins/code-simplifier";
+          claude-md-management = "${inputs.claude-plugins-official}/plugins/claude-md-management";
+        };
         skills = {
           nix-ecosystem = ./skills/nix-ecosystem;
           jj-commit = ./skills/jj-commit;

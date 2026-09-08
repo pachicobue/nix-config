@@ -25,6 +25,8 @@ delib.host {
 
     rustdesk.enable = true;
 
+    usb.enableXenoPlusGamepadFix = true;
+
     niri.enable = true;
     noctalia-shell.enable = true;
 

@@ -41,6 +41,7 @@ delib.module {
       }
     ];
 
+    home.packages = with pkgs; [gcr_4];
     xdg.portal = {
       enable = true;
       extraPortals = with pkgs; [
@@ -61,7 +62,6 @@ delib.module {
       enable = true;
       components = ["pkcs11" "secrets"];
     };
-    home.packages = with pkgs; [gcr];
 
     programs.niri = {
       enable = true;

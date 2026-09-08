@@ -83,7 +83,6 @@ delib.module {
       neocmakelsp
       vscode-json-languageserver
       just-lsp
-      lean
       marksman
       nil
       ty

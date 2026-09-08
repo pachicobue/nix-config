@@ -47,7 +47,6 @@ delib.module {
       bash-language-server
       neocmakelsp
       just-lsp
-      lean
       nixd
       nil
       python314Packages.python-lsp-server

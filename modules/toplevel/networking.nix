@@ -44,9 +44,30 @@ delib.module {
       inherit interfaces;
     };
     programs.tcpdump.enable = true;
-    environment.systemPackages = with pkgs; [
-      ethtool
-    ];
+    environment.systemPackages = with pkgs;
+      [
+        # リンク層・NICドライバの状態確認
+        ethtool
+        # 経路ごとの遅延・パケットロスを継続表示 (断続的な切断の切り分けに最適)
+        mtr
+        # DNS障害の切り分け (dig / nslookup / doggo)
+        dnsutils
+        doggo
+        # スループット実測 (一方を `iperf3 -s` にして計測)
+        iperf3
+        # ポート・宛先別の帯域使用量
+        iftop
+        # プロセス別の帯域使用量
+        nethogs
+        bandwhich
+        # LAN上のホスト探索・ポート確認 (IP衝突や不明機器の調査)
+        nmap
+      ]
+      # 無線を使うホストのみ: 電波強度・リンク状態の監視
+      ++ lib.optionals host.isLaptop [
+        iw
+        wavemon
+      ];
 
     # インターフェース名を問わず、有線NIC全体にWoLのmagic packet受信を許可する
     systemd.network.links = lib.mkIf cfg.wakeOnLan {

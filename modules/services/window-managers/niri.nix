@@ -75,7 +75,8 @@ delib.module {
           focus-follows-mouse.enable = true;
           touchpad.dwt = true;
         };
-        # [browser][terminal][terminal x2 (縦積み)] の列構成を作る。
+        # [browser][terminal(zellij: 3ペイン)] の列構成を作る。
+        # ペイン分割はzellijのworkレイアウト側で行う。
         # プロセスの起動順とウィンドウが実際にマップされる順は一致しない
         # (例: browserの方がterminalより起動が遅くcolumnが後ろにずれる) ため、
         # 固定sleepではなくwindows数の増加を待ってから次をspawnする。
@@ -96,12 +97,7 @@ delib.module {
               }
 
               spawn_and_wait ${lib.escapeShellArgs browser}
-              spawn_and_wait ${lib.escapeShellArgs terminal}
-              spawn_and_wait ${lib.escapeShellArgs terminal}
-              spawn_and_wait ${lib.escapeShellArgs terminal}
-
-              niri msg action focus-column-left
-              niri msg action consume-window-into-column
+              spawn_and_wait ${lib.escapeShellArgs (terminal ++ ["-e" (lib.getExe pkgs.zellij) "attach" "-c" "pachico-work"])}
             '';
           }
         ];
@@ -109,9 +105,11 @@ delib.module {
           gaps = 8;
           always-center-single-column = true;
           center-focused-column = "never";
-          default-column-width = {proportion = 1. / 2.;};
+          # 各ウィンドウは画面幅いっぱいで開き、Mod+H/Lでカラム間を移動する。
+          default-column-width = {proportion = 1.;};
           preset-column-widths = [
             {proportion = 1. / 2.;}
+            {proportion = 1.;}
           ];
         };
         window-rules = [

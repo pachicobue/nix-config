@@ -21,6 +21,7 @@ delib.module {
         enable = true;
         defaultEditor = true;
       };
+      lean-ctx.enable = true;
       lsd.enable = true;
       ouch.enable = true;
       procs.enable = true;

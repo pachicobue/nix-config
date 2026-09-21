@@ -15,7 +15,7 @@ delib.module {
       fcitx5 = {
         waylandFrontend = host.waylandFeatured;
         addons = with pkgs; [
-          fcitx5-mozc
+          fcitx5-skk
         ];
         settings.inputMethod = {
           GroupOrder = {

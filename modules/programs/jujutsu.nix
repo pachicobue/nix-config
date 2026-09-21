@@ -23,6 +23,5 @@ delib.module {
         };
       };
     };
-    programs.jjui.enable = true;
   };
 }

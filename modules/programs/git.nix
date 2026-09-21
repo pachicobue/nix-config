@@ -39,9 +39,6 @@ delib.module {
           };
         };
       };
-      lazygit = {
-        enable = true;
-      };
     };
   };
 }

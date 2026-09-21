@@ -35,13 +35,6 @@
     };
     treefmt-nix.url = "github:numtide/treefmt-nix";
 
-    niri-flake = {
-      # 一時的にfork: libdisplay-info_0_2削除でbuild break (upstream未マージ)
-      # https://github.com/sodiboo/niri-flake/issues/1851
-      # https://github.com/sodiboo/niri-flake/pull/1853 がmergeされたら sodiboo/niri-flake に戻す
-      url = "github:bugeats/niri-flake/7e196a5ce0bf209d3aca844bb31edce5284d6484";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     noctalia-shell = {
       url = "github:noctalia-dev/noctalia-shell/legacy-v4";
       inputs.nixpkgs.follows = "nixpkgs";

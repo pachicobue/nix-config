@@ -14,6 +14,7 @@ delib.module {
       bottom.enable = true;
       carapace.enable = true;
       claude-code.enable = true;
+      codex.enable = true;
       fd.enable = true;
       helix = {
         enable = true;

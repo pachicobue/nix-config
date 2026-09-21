@@ -16,6 +16,7 @@ in
     home.ifEnabled = {
       home.packages = with pkgs; [
         llm-agents.ccusage
+        rtk
       ];
       programs.mcp.enable = true;
       programs.claude-code = {
@@ -49,6 +50,17 @@ in
             padding = 0;
           };
           theme = "dark";
+          hooks.PreToolUse = [
+            {
+              matcher = "Bash";
+              hooks = [
+                {
+                  type = "command";
+                  command = "${lib.getExe pkgs.python3} ${bashRtkHook}";
+                }
+              ];
+            }
+          ];
         };
         plugins = {
           skill-creator = "${inputs.claude-plugins-official}/plugins/skill-creator";

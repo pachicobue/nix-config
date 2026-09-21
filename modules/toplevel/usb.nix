@@ -31,10 +31,18 @@ delib.module {
     # autobind to the xpad driver.
     boot.kernelModules = lib.optionals cfg.enableXenoPlusGamepadFix ["xpad"];
 
-    services.udev.extraRules = lib.optionalString cfg.enableXenoPlusGamepadFix ''
-      # LeadJoy Xeno Plus — auto-bind xpad on connect
-      ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="4131", ATTRS{idProduct}=="3519", RUN+="/bin/sh -c 'echo 4131 3519 > /sys/bus/usb/drivers/xpad/new_id'"
-    '';
+    services.udev.extraRules =
+      (lib.optionalString cfg.enableXenoPlusGamepadFix ''
+        # LeadJoy Xeno Plus — auto-bind xpad on connect
+        ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="4131", ATTRS{idProduct}=="3519", RUN+="/bin/sh -c 'echo 4131 3519 > /sys/bus/usb/drivers/xpad/new_id'"
+      '')
+      + ''
+        # 自作キーボード "7skb" — VIA (WebHID) からのアクセス許可
+        # 99-local.rules は systemd の 73-seat-late.rules (uaccess タグを見て
+        # ACL 更新をトリガーするルール) より後に評価されるため、TAG 付与だけでは
+        # 間に合わない。RUN{builtin}+="uaccess" で自前でビルトインを呼び出す。
+        KERNEL=="hidraw*", ATTRS{idVendor}=="04d8", ATTRS{idProduct}=="eb5f", TAG+="uaccess", RUN{builtin}+="uaccess"
+      '';
   };
 
   home.ifEnabled = {cfg, ...}: {

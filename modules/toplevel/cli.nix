@@ -15,6 +15,7 @@ delib.module {
       carapace.enable = true;
       claude-code.enable = true;
       codex.enable = true;
+      espanso.enable = true;
       fd.enable = true;
       helix = {
         enable = true;
@@ -25,6 +26,8 @@ delib.module {
       procs.enable = true;
       rip.enable = true;
       ripgrep.enable = true;
+      scooter.enable = true;
+      tailspin.enable = true;
       tealdeer.enable = true;
       zoxide.enable = true;
       yazi.enable = true;

@@ -18,10 +18,13 @@ delib.module {
           fcitx5-mozc-ut
         ];
         settings = {
-          globalOptions.Hotkey = {
-            # 無変換キーでIMEオフ、変換キーでIMEオンにする
-            "ActivateKeys/0" = "Henkan";
-            "DeactivateKeys/0" = "Muhenkan";
+          globalOptions = {
+            Hotkey = {
+              # 無変換キーでIMEオフ、変換キーでIMEオンにする
+              "ActivateKeys/0" = "Henkan";
+              "DeactivateKeys/0" = "Muhenkan";
+            };
+            "Hotkey/TriggerKeys" = {};
           };
           inputMethod = {
             GroupOrder = {

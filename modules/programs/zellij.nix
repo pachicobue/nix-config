@@ -7,8 +7,13 @@ delib.module {
     programs.zellij = {
       enable = true;
       settings = {
+        copy_on_select = false;
+        show_startup_tips = false;
+        move_hover_effects = true;
         focus_follows_mouse = true;
-        default_layout = "work";
+        ui = {
+          rounded_corners = true;
+        };
       };
       layouts = {
         # [ 左 | 右上 / 右下 ] の3ペイン。

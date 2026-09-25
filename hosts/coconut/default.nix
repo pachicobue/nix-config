@@ -31,10 +31,6 @@ delib.host {
     noctalia-shell.enable = true;
 
     zen-browser.defaultBrowser = true;
-    ghostty.defaultTerminal = false;
-    programs.rio = {
-      enable = true;
-      defaultTerminal = true;
-    };
+    terminal.alacritty.defaultTerminal = true;
   };
 }

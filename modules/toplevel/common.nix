@@ -9,6 +9,7 @@ delib.module {
       jujutsu.enable = true;
       devenv.enable = true;
       jq.enable = true;
+      nushell.enable = true;
       starship.enable = true;
       zellij.enable = true;
       zsh.enable = true;

@@ -10,7 +10,7 @@ delib.module {
       defaultKeymap = "emacs";
       dotDir = "${myconfig.xdg.configHome}/zsh";
       shellAliases = {
-        e = "$EDITOR";
+        "e" = "$EDITOR";
       };
       autocd = true;
       autosuggestion.enable = true;

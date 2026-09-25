@@ -26,7 +26,8 @@ delib.module {
       groups.${userName} = {};
     };
     programs = {
-      zsh.enable = true; # 明示的にshellをインストールすること！
+      nushell.enable = true;
+      zsh.enable = true;
     };
   };
 

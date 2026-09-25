@@ -19,12 +19,9 @@ delib.module {
         ];
         settings = {
           globalOptions = {
-            Hotkey = {
-              # 無変換キーでIMEオフ、変換キーでIMEオンにする
-              "ActivateKeys/0" = "Henkan";
-              "DeactivateKeys/0" = "Muhenkan";
+            "Hotkey/TriggerKeys" = {
+              "0" = "Control+space";
             };
-            "Hotkey/TriggerKeys" = {};
           };
           inputMethod = {
             GroupOrder = {

@@ -42,8 +42,9 @@ in
           sandbox_mode = "workspace-write";
           approval_policy = "on-request";
         };
-        rules.default = ''
-          prefix_rule(pattern = ["sudo"], decision = "deny")
+        # Keep default.rules free for Codex to save approved commands.
+        rules.sudo = ''
+          prefix_rule(pattern = ["sudo"], decision = "forbidden")
         '';
         hooks.PreToolUse = [
           {

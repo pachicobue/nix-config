@@ -135,12 +135,8 @@
         agenix-rekey.flakeModule
       ];
       systems = import nix-systems;
-      perSystem = {
-        system,
-        config,
-        pkgs,
-        ...
-      }: {
+      # devShellはdevenv.nix (スタンドアローンのdevenv) で定義
+      perSystem = {...}: {
         # このリポジトリのagenix-rekeyシークレットはNixOSレベル(age.secrets)のみで
         # home-manager側では使わないため、homeConfigurationsの収集自体を止める
         # (自動収集はstylix等の追加inputを含まない簡易評価で壊れるため)
@@ -154,28 +150,6 @@
             alejandra.enable = true;
             taplo.enable = true;
             shfmt.enable = true;
-          };
-        };
-        devShells = {
-          default = pkgs.mkShell {
-            packages = with pkgs; [
-              nh
-              helix
-              python3Minimal
-              rage
-
-              inputs.disko.packages.${system}.disko
-              config.agenix-rekey.package
-
-              # Python script wrappers - Top-level APIs
-              (writeScriptBin "switch" ''
-                python3 ./scripts/switch.py $@
-              '')
-            ];
-            shellHook = ''
-              #!/bin/sh
-              export NIX_CONFIG="extra-experimental-features = nix-command flakes"
-            '';
           };
         };
       };

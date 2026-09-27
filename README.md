@@ -11,7 +11,15 @@ Nix OSの設定ファイル
 
 ### 共通
 
-- `nix develop --experimental-features "nix-commands flakes"`
+flakes が未有効の素の NixOS から、`nixos-rebuild` で直接適用する。
+
+```
+nix-shell -p git --run "git clone https://github.com/pachicobue/nix-config ~/nix-config"
+cd ~/nix-config
+sudo nixos-rebuild switch --flake .#<hostname> --option experimental-features "nix-command flakes"
+```
+
+初回適用後は flakes / direnv / devenv が有効になり、リポジトリに入ると `.envrc` 経由で devShell (`switch` 等) が自動で読み込まれる (初回のみ `direnv allow` が必要)。
 
 ## インストール・更新
 

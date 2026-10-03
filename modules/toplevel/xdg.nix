@@ -2,7 +2,6 @@
   delib,
   host,
   lib,
-  pkgs,
   ...
 }:
 delib.module {
@@ -66,9 +65,5 @@ delib.module {
         xdgOpenUsePortal = true;
       };
     };
-
-    home.packages = with pkgs; [
-      handlr
-    ];
   };
 }

@@ -50,7 +50,6 @@ delib.rice {
   home = {...}: {
     stylix = {
       targets.firefox.profileNames = ["default"];
-      targets.zen-browser.profileNames = ["default"];
       targets.fcitx5.colors.enable = false;
     };
   };

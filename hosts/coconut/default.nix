@@ -30,7 +30,7 @@ delib.host {
     niri.enable = true;
     noctalia-shell.enable = true;
 
-    zen-browser.defaultBrowser = true;
+    firefox.defaultBrowser = true;
     terminal.alacritty.defaultTerminal = true;
   };
 }

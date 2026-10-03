@@ -23,7 +23,7 @@ delib.module {
       settings = {
         "$terminal" = "alacritty";
         "$menu" = "fuzzel";
-        "$browser" = "firefox-beta";
+        "$browser" = "firefox";
         "$mainMod" = "SUPER";
         "$subMod" = "ALT";
         exec-once = [

@@ -13,7 +13,7 @@ delib.module {
     };
 
   myconfig.ifEnabled = {cfg, ...}: {
-    commands.default.browser = with lib; optionals cfg.defaultBrowser ["${getExe pkgs.firefox-beta}"];
+    commands.default.browser = with lib; optionals cfg.defaultBrowser ["${getExe pkgs.firefox}"];
   };
 
   home.ifEnabled = {myconfig, ...}: {
@@ -50,7 +50,7 @@ delib.module {
           "sidebar.verticalTabs" = true;
         };
       };
-      package = pkgs.firefox-beta;
+      package = pkgs.firefox;
       languagePacks = ["ja"];
     };
   };

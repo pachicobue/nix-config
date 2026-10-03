@@ -34,6 +34,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     treefmt-nix.url = "github:numtide/treefmt-nix";
+    devenv = {
+      url = "github:cachix/devenv";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    # devenv.root をdirenvから注入するためのダミー入力
+    # (.envrc で `--override-input devenv-root file+file://<PWD>` に差し替える)
+    devenv-root = {
+      url = "file+file:///dev/null";
+      flake = false;
+    };
 
     noctalia-shell = {
       url = "github:noctalia-dev/noctalia-shell/legacy-v4";
@@ -122,10 +132,22 @@
       imports = with inputs; [
         treefmt-nix.flakeModule
         agenix-rekey.flakeModule
+        devenv.flakeModule
       ];
       systems = import nix-systems;
-      # devShellはdevenv.nix (スタンドアローンのdevenv) で定義
-      perSystem = {...}: {
+      perSystem = {lib, ...}: {
+        # devShell (devenv) — devenv.nix をdevenvモジュールとして読み込む
+        # devenv.root は .envrc から devenv-root 入力経由で注入される
+        devenv.shells.default = {
+          imports = [./devenv.nix];
+          # nix flake check 等の純粋評価では PWD も devenv-root も得られず
+          # アサーションで落ちるため、評価用にflakeのソースパスをフォールバックとする
+          # (devenv-root による注入(優先度100)があればそちらが勝つ)
+          devenv.root = lib.mkIf (builtins.getEnv "PWD" == "") (lib.mkOverride 900 (toString ./.));
+        };
+        # devenv.flakeModuleが勝手に生やすpackages (非推奨のdevenv-up/devenv-test、
+        # nix2container入力が無いと評価エラーになるcontainer-*) を出力しない
+        packages = lib.mkForce {};
         # このリポジトリのagenix-rekeyシークレットはNixOSレベル(age.secrets)のみで
         # home-manager側では使わないため、homeConfigurationsの収集自体を止める
         # (自動収集はstylix等の追加inputを含まない簡易評価で壊れるため)

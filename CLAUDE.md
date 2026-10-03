@@ -6,8 +6,8 @@
 ## コマンド
 
 ```bash
-# devShell (devenv.nix, switch スクリプト等を含む) は direnv (.envrc) で自動的に読み込まれる
-devenv update        # devShell 側の入力 (devenv.lock) を更新 — flake.lock とは別管理
+# devShell (devenv.nix, switch スクリプト等を含む) は flake-parts の devenv.flakeModule で定義され、
+# direnv (.envrc の `use flake`) で自動的に読み込まれる。入力は flake.lock で一元管理
 nix flake check      # 変更を検証
 nix fmt              # コード整形 (alejandra / taplo / shfmt)
 # 以下は管理者権限が必要 — ユーザーが手動で実行

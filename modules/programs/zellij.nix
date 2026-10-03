@@ -7,7 +7,7 @@ delib.module {
     programs.zellij = {
       enable = true;
       settings = {
-        copy_on_select = false;
+        copy_on_select = true;
         show_startup_tips = false;
         move_hover_effects = true;
         focus_follows_mouse = true;

@@ -7,6 +7,20 @@ delib.module {
     programs.zellij = {
       enable = true;
       settings = {
+        keybinds.normal._children = [
+          {
+            bind = {
+              _args = ["Alt f"];
+              ToggleFocusFullscreen = {};
+            };
+          }
+          {
+            bind = {
+              _args = ["Alt t"];
+              ToggleFloatingPanes = {};
+            };
+          }
+        ];
         copy_on_select = true;
         show_startup_tips = false;
         move_hover_effects = true;

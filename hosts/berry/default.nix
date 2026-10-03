@@ -10,12 +10,22 @@ delib.host {
     state-version.home = "25.05";
     agenix-rekey = {
       hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDYQA2MdJUMuWPQSQwv/ABoovP9cyxpq/t0vLUIJgGgs root@berry";
-      secrets = ["forgejo-runner"];
+      secrets = ["forgejo-runner" "restic-password" "restic-env" "uptime-kuma-push"];
     };
     boot.loader = "limine";
     networking.wakeOnLan = true;
 
     services = {
+      vaultwarden = {
+        enable = true;
+        # 初回アカウント作成後に false に戻す
+        signupsAllowed = true;
+        backupRepositories = {
+          pi4 = "rest:http://pi4:8000/vaultwarden";
+          # Cloudflare R2 を用意したら有効化し、`agenix edit restic-env` で API キーを入れる
+          # r2 = "s3:https://<account-id>.r2.cloudflarestorage.com/<bucket>";
+        };
+      };
       immich = {
         enable = true;
         bindHost = "0.0.0.0";

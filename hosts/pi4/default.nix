@@ -16,6 +16,7 @@ delib.host {
       adguardhome = {
         enable = true;
       };
+      resticServer.enable = true;
       rustdesk = {
         enable = true;
         relayHosts = ["pi4"];

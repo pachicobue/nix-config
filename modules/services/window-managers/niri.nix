@@ -73,8 +73,7 @@ delib.module {
         "org.freedesktop.impl.portal.ScreenCast" = ["gnome"];
       };
     };
-    # Authentication agentは固定(こだわりなし)
-    services.hyprpolkitagent.enable = true;
+    services.polkit-gnome.enable = true;
     services.gnome-keyring = {
       enable = true;
       components = ["pkcs11" "secrets"];

@@ -28,7 +28,7 @@ delib.host {
     usb.enableXenoPlusGamepadFix = true;
 
     niri.enable = true;
-    noctalia-shell.enable = true;
+    noctalia.enable = true;
 
     firefox.defaultBrowser = true;
     terminal.alacritty.defaultTerminal = true;

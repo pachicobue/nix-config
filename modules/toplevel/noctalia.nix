@@ -1,6 +1,6 @@
 {delib, ...}:
 delib.module {
-  name = "noctalia-shell";
+  name = "noctalia";
   options = with delib;
     moduleOptions {
       enable = boolOption false;
@@ -8,7 +8,7 @@ delib.module {
     };
 
   myconfig.ifEnabled = {cfg, ...}: {
-    programs.noctalia-shell = {
+    programs.noctalia = {
       enable = true;
       inherit (cfg) defaultLauncher;
     };

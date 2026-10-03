@@ -13,9 +13,6 @@ delib.host {
     networking = {useDHCP = true;};
 
     services = {
-      adguardhome = {
-        enable = true;
-      };
       resticServer.enable = true;
       rustdesk = {
         enable = true;

@@ -1,6 +1,7 @@
 {
   delib,
   host,
+  pkgs,
   ...
 }:
 delib.module {
@@ -21,6 +22,11 @@ delib.module {
         PasswordAuthentication = false;
       };
     };
-    environment.enableAllTerminfo = true;
+    # enableAllTerminfo は壊れやすい端末 (rxvt-unicode 等) まで巻き込むので必要な分だけ入れる
+    environment.systemPackages = with pkgs; [
+      alacritty.terminfo
+      rio.terminfo
+      ghostty.terminfo
+    ];
   };
 }

@@ -34,15 +34,25 @@ delib.module {
         work = {
           layout._children = [
             {
+              # zellij標準のdefaultレイアウトと同じ構成 (上: tab-bar / 下: status-bar)
               default_tab_template._children = [
-                {children = {};}
                 {
                   pane = {
                     _props = {
                       size = 1;
                       borderless = true;
                     };
-                    _children = [{plugin._props.location = "zellij:compact-bar";}];
+                    _children = [{plugin._props.location = "zellij:tab-bar";}];
+                  };
+                }
+                {children = {};}
+                {
+                  pane = {
+                    _props = {
+                      size = 2;
+                      borderless = true;
+                    };
+                    _children = [{plugin._props.location = "zellij:status-bar";}];
                   };
                 }
               ];

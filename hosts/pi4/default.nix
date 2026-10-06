@@ -14,10 +14,6 @@ delib.host {
 
     services = {
       resticServer.enable = true;
-      rustdesk = {
-        enable = true;
-        relayHosts = ["pi4"];
-      };
       wol-server = {
         enable = true;
         broadcastAddress = "192.168.0.255";

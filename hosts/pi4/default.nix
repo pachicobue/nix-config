@@ -11,6 +11,7 @@ delib.host {
       secrets = [
         "vaultwarden-backup-password"
         "vaultwarden-restore-env"
+        "healthchecks-ping-url"
       ];
     };
     state-version.nixos = "25.05";
@@ -27,6 +28,8 @@ delib.host {
           coconut = "08:bf:b8:a5:74:f7";
         };
       };
+      # pi4 自体 (と Uptime Kuma) が落ちたことを外から検知する
+      healthchecks-ping.enable = true;
       uptime-kuma = {
         enable = true;
         bindHost = "0.0.0.0";
